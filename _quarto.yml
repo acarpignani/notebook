@@ -1,0 +1,21 @@
+project:
+  type: website
+
+website:
+  title: "R4DS"
+  navbar:
+    left:
+      - href: index.qmd
+        text: General Introduction
+      - 01-r-basics.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    html-math-method: katex
+
+editor: visual
+        
+date-format: "DD MMMM YYYY"

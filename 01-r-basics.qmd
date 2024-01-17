@@ -1,0 +1,138 @@
+---
+title: "Introduction to R"
+subtitle: "The Bedford Sixth Form"
+author: "Andrea Carpignani"
+date: today
+---
+
+## R's command line
+
+There are several ways to interact with R. The primary one will be through the *command line*, also known as *console*. The command line in RStudio is in the console panel. The name comes from it being the place where one types in *commands*.
+
+In first instance, R is a very powerful and fancy calculator. Typing in the command line numerical expressions with the usual mathematical operations, we get the results we expect:
+
+```{r}
+2 + 3
+```
+
+The four operations in R are `+`, `-`, `*` and `/` and R follows the usual mathematical rules for the priority of the operations (the one that some people call BIDMAS).
+
+```{r}
+5 * 2 - 12 / 4
+```
+
+The order of the operations can be altered using brackets, like so:
+
+```{r}
+(4 + 5 * 2) / (8 / 2 - 3)
+```
+
+Besides the four operations, R has some very useful other operations, such as the integer division `%/%` and the modulo `%%` of two numbers. The integer division gives the quotient of the division and the modulo gives the remainder of the division, like so:
+
+```{r}
+25 %/% 4
+```
+
+```{r}
+25 %% 4
+```
+
+In fact:
+
+$$
+25 = 6 \times 4 + 1
+$$
+
+We can also perform powers with R. The syntax is `a ^ n` to produce $a^n$. For example,
+
+```{r}
+3 ^ 4
+```
+
+### Logical values in R and logical operations
+
+R is also equipped with two special "numbers" that represent "TRUE" and "FALSE". These are `TRUE` or `T` and `FALSE` or `F`. These two special values can be joined together through the **logical operations** which are: **and**, **or**, and **not**. In R, and is represented by `&`, or by `|` and not by `!`. So, for example, we have:
+
+```{r}
+TRUE & FALSE
+TRUE | FALSE
+!FALSE
+```
+
+Again, logical values can be linked together with brackets.
+
+## R Scripts
+
+Before going ahead and introducing variables, it is convenient to start putting our work into an R Script. In RStudio, click File \> New File \> R Script to open a new script. Changing line in the script won't run the code, however. In order to run the line of code you may press Ctrl + ENTER in Windows and cmd + ENTER in Mac. There are also commands to run the whole script, but let's just keep it simple for the time being.
+
+### Variables and assignment
+
+Once started understanding how R works with operations and numbers, we wish to start assigning values to variables and working with variables instead. R provides a special command to assign a value to a variable: `<-`. This is called the **assignment** operator. For example
+
+```{r}
+x <- 10
+y <- 2.5
+
+x * y
+```
+
+You don't have to use a single letter to name a variable. Conversely, it is advisable not to do so, but to use meaningful words that recall the meaning of that variable. For example, to record the height and weight of an individual, we could use
+
+```{r}
+height <- 150
+weight <- 65
+```
+
+::: {.callout-caution title="On the names of variables"}
+A variable name must start with a letter, but it can contain also numbers, full stop, and underscore after the first letter. There are several different schools of thought about which is the best way to denote variables. In the past, I would have probably chosen a notation such as `my.variable` to indicate a variable, but after having coded for a long time alongside the magnificent data scientists and software engineers at Posit (former RStudio), I am now more used to a notation like `my_variable` which I do recommend.
+:::
+
+We can work with variables joining them together with the usual operations. For example:
+
+```{r}
+bank_account <- 100
+deposit <-  30
+
+bank_account <- bank_account + deposit
+
+bank_account
+```
+
+### Vectors
+
+R is a statistical software and in statistics a variable scarcely has only one value, but it is generally given as a list of values (measures). For example, one could have a variable `age` of the ages of all the employees of a small business. To store this in R, we can use the command `c` which stands for **concatenate**. For example
+
+```{r}
+ages <- c(25, 33, 45, 37, 28, 23, 42, 58, 29)
+```
+
+Now the variable `age` is a vector. Let's find out the length of this vector.
+
+```{r}
+length(ages)
+```
+
+We may also want to find out the average age of the employees of the business. This can be done with the command `mean`. E.g.
+
+```{r}
+mean(ages)
+```
+
+Other statistical operations are `median` to calculate the median, `IQR` to find the interquartile range, `sd` to find the standard deviation and `summary` to show a five number summary of the variable, i.e. the minimum, lower quartile, median, upper quartile and maximum in the vector. The function summary also shows the mean.
+
+```{r}
+summary(ages)
+```
+
+It is interesting to immediately notice that R functions may give different outcomes depending on the *type* of the variable. We shall come back to the *type* of a variable, but for the moment let's just say that we consider an employee to be a junior employee if their age is below 33 years. To check whether the ages are below 33 we can use the normal order operations `<` and `>`.
+
+```{r}
+is_junior <- ages <= 33
+is_junior
+```
+
+If we now run the `summary` command on the variable `is_junior` we no longer get a five number summary because the variable `is_junior` is not numeric.
+
+```{r}
+summary(is_junior)
+```
