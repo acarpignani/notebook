@@ -1,9 +1,4 @@
----
-title: "Introduction to R"
-subtitle: "The Bedford Sixth Form"
-author: "Andrea Carpignani"
-date: today
----
+# Introduction to R
 
 ## R's command line
 

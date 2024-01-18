@@ -1,91 +1,7 @@
-/* css styles */
+/* Font and Colors */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
-p.caption {
-  color: #777;
-  margin-top: 10px;
-}
-p code {
-  white-space: inherit;
-}
-pre {
-  word-break: normal;
-  word-wrap: normal;
-}
-pre code {
-  white-space: inherit;
-}
-
-/*----- Toolbar line at top----- */
-
-/* The next two rules make the horizontal line go straight across in top navbar */
-
-.summary > li:first-child {
-	height: 50px;
-	padding-top: 10px;
-	border-bottom: 1px solid transparent;
-}
-
-.book .book-summary ul.summary li.divider {
-	height: 0px;
-}
-
-/* TOC book title */
-
-.summary > li:first-child {
-    font-size: 1em;
-    height: auto;
-    padding: 1em 20px;
-    line-height: 2em;
-}
-
-.summary > li:first-child a {
-    font-size: 12.8px;
-    font-weight: bold;
-    text-transform: uppercase;
-    white-space: normal !important;
-    color: #CA225E !important;
-    padding: 0 !important;
-    border-left: none;
-    letter-spacing: 2pt;
-
-}
-
-.summary > li:first-child a:hover {
-  border-left: none;
-}
-
-.book .book-summary > nav > ul > li > a {
-  border-left: 1pt solid white;
-}
-
-.book-summary .divider + .chapter > a {
-  white-space: normal !important;
-}
-
-li.part:first-child {
-   border-top: none;
-}
-
-/*.book .book-summary ul.summary li.divider {
-    height: 0;
-} */
-
-.book .book-header.fixed {
-  border-bottom: 1px solid transparent;
-}
-
-.book .book-header .btn {
-  color: #1a162d99;
-}
-
-.book .book-header .btn:hover {
-  color: #1a162d;
-}
-
-
-
-/*------------- Body and header text---------------- */
-
+/* Body and Header Text Styling */
 .book.font-family-1 {
   font-family: 'Lato', sans-serif;
   color: #404040;
@@ -96,7 +12,7 @@ h1, h2, h3, h4 {
   font-weight: normal;
 }
 
-h2, h3 {   
+h2, h3 {
   font-family: 'Lato', sans-serif;
   font-size: 1.3em;
   text-transform: uppercase;
@@ -105,7 +21,7 @@ h2, h3 {
 
 h1 {
   color: #CA225E;
-  font-size: 41px !important;
+  font-size: 38px !important;
 }
 
 h2 {
@@ -122,9 +38,7 @@ h4 {
   color: #1a162d90;
 }
 
-h2 code,
-h3 code,
-h4 code {
+h2 code, h3 code, h4 code {
   text-transform: none !important;
   font-size: 1em !important;
 }
@@ -155,39 +69,27 @@ p.author em {
   font-style: normal !important;
 }
 
-
-
-/*-----Body Links-------*/
-
+/* Body Links Styling */
 .book .book-body .page-wrapper .page-inner section.normal a {
   color: #ca225e;
 }
 
 .book .book-body .page-wrapper .page-inner section.normal a:hover {
- color: #ca225e; /* darker color when hovering */
- text-decoration: underline;
+  color: #ca225e;
+  text-decoration: underline;
 }
 
-
-/*------------ TOC --------------*/
-
+/* Table of Contents Styling */
 .book .book-summary {
   background: white;
   border-right: #d9d9d9 solid 1pt;
 }
 
-.summary{
+.summary {
   font-family: 'Lato', sans-serif;
 }
 
-/* numbers */
-
-li a b  {
-  padding-right: 1em;
-}
-
-/* list items*/
-.book .book-summary ul.summary li a, 
+.book .book-summary ul.summary li a,
 .book .book-summary ul.summary li span {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -198,15 +100,13 @@ li a b  {
 
 .summary a:hover {
   color: #1a162dde !important;
-} 
+}
 
-.book .book-summary ul.summary li.active>a { /*active TOC links*/
+.book .book-summary ul.summary li.active>a {
   color: #CA225E !important;
-} 
-    
-/* parts */
+}
 
-li.appendix span, li.part span { 
+li.appendix span, li.part span {
   margin-top: 1.5em;
   color: #1A162D;
   opacity: 1 !important;
@@ -217,29 +117,26 @@ li.appendix span, li.part span {
   white-space: normal !important;
 }
 
-/*------------- CODE --------------*/
-
-.book .book-body .page-wrapper .page-inner section.normal code, 
+/* Code Styling */
+.book .book-body .page-wrapper .page-inner section.normal code,
 .book .book-body .page-wrapper .page-inner section.normal pre {
   font-family: 'Source Code Pro', monospace;
   font-size: 1em;
 }
 
 .sourceCode pre {
-  margin: 0 !important; /* makes space above and below symmetrical*/
+  margin: 0pt !important;
 }
 
 .sourceCode {
-  margin-bottom: 1.5em; /* adds same amount of margin beneath chunk as a <p> would */
+  margin-bottom: 1pt;
 }
 
-/* for numbers in code blocks */
 pre.numberSource code > span > a:first-child::before {
   left: -0.2em;
 }
 
-/*------------- block quotes --------------*/
-
+/* Block Quotes and Div Tips Styling */
 blockquote > p:last-child {
   text-align: right;
 }
@@ -248,11 +145,8 @@ blockquote > p:first-child {
   text-align: inherit;
 }
 
-/* Div tips */
-
-
-div.rmdnote, 
-div.rstudio-tip, 
+div.rmdnote,
+div.rstudio-tip,
 div.rmdwarning {
   padding: 1em;
   margin: 1em 0;
@@ -275,7 +169,7 @@ div.rmdwarning {
   background-color: #eab0c41a !important;
 }
 
-div.rmdnote code, 
+div.rmdnote code,
 div.rstudio-tip code {
   background-color: #91CBD765 !important;
   font-size: 1em;
@@ -286,76 +180,80 @@ div.rmdwarning code {
   font-size: 1em;
 }
 
+/* Navigation Bar Styling */
+.navbar {
+  background-color: #91CBD738; /* navigation bar background colour */
+  color: #404040; /* Text color to match body text */
+  padding: 10px; /* Reduced padding for a thinner bar */
+  font-family: 'Lato', sans-serif;
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center the content vertically */
+}
 
-/* ----- For Large Screens -----*/
+.navbar a.navbar-link {
+  color: #CA225E !important; /* Link color to match h1 text */
+  text-decoration: none;
+  margin: 0px;
+}
+
+.navbar a.navbar-link:hover {
+  color: #1a162d; /* Darker color when hovering */
+  text-decoration: underline;
+}
 
 
+/* Media Queries for Large Screens */
 @media (min-width: 1900px) {
-  
   .book .book-header.fixed {
     left: 500px;
-}
-  
-  /* Content width */
-  .book.with-summary .book-body {
-      left: 500px;
   }
-  
-  /* TOC */
+
+  .book.with-summary .book-body {
+    left: 500px;
+  }
+
   .book .book-summary {
     width: 500px;
     left: -500px;
   }
 
   .book.with-summary .book-header.fixed {
-      left: 500px;
-      
+    left: 500px;
   }
 }
 
-
 @media (min-width: 1500px) {
-  
-  /* Content width */
   .book.with-summary .book-body {
-      left: 400px;
+    left: 400px;
   }
-  
-  /* TOC */
+
   .book .book-summary {
     width: 400px;
     left: -400px;
-
   }
 
   .book.with-summary .book-header.fixed {
-      left: 400px;
+    left: 400px;
   }
 }
 
-
 @media (min-width: 1400px) {
-  
-  /* Content width */
   .book.with-summary .book-body {
-      left: 350px;
+    left: 350px;
   }
-  
-  /* TOC */
+
   .book .book-summary {
-      width: 350px;
-      left: -400px;
+    width: 350px;
+    left: -400px;
   }
 
   .book.with-summary .book-header.fixed {
-      left: 350px;
+    left: 350px;
   }
-} 
+}
 
-/* ----References css bug fix----- */
-
-
-.page-inner+h3 {
+/* References and White Space Styling */
+.page-inner + h3 {
   max-width: 800px;
   margin: 0 auto;
   font-size: 24px;
@@ -363,7 +261,7 @@ div.rmdwarning code {
   padding-right: 15px;
 }
 
-.page-inner + h3 + .references, 
+.page-inner + h3 + .references,
 .page-inner + h3 + .references + .footnotes {
   max-width: 800px;
   margin: 0 auto;
@@ -386,17 +284,7 @@ div.rmdwarning code {
   color: #CA225E;
 }
 
-
-/* Package Names */
-
-span.pkg {  
-  font-weight: bold;
-  letter-spacing: 0.5pt;
-  color: #0080a4;
-}
-
 /* White space */
-
 p, ul, ol, dl, blockquote, table, pre {
   margin-bottom: 1.5em !important;
 }
@@ -406,7 +294,6 @@ li p {
 }
 
 /* Cover image */
-
 img.cover {
   float: right;
   margin: 0 1rem 0 1rem;

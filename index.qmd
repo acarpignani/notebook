@@ -3,6 +3,8 @@ title: "R for Data Science"
 subtitle: "The Bedford Sixth Form"
 author: "Andrea Carpignani"
 date: today
+site: acarpignani.github.io/notebook/
+github-repo: acarpignani/notebook/
 ---
 
 # Introduction
