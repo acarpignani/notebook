@@ -1,15 +1,15 @@
 project:
   type: website
 
+page-navigation: true
+
 website:
-  page-navigation: true
   navbar:
     search: true
     left:
-        - text: "R for Data Science"
+        - text: "Introduction"
           file: index.qmd
-        - text: "Introduction to R"
-          file: 01-r-basics.qmd
+        - r-basics.qmd
 
 format:
   html:
