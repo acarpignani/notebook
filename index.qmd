@@ -9,7 +9,7 @@ github-repo: acarpignani/notebook/
 
 # Introduction
 
-Welcome to the public repository of the enhancement class on R for Data Science offered at The **Bedford Sixth Form**. In this page you will find the list of all data set that are going to be used in the course, as well as useful information, and a brief note of all the topics covered in each lesson.
+Welcome to the public repository of the enhancement class on R for Data Science offered at The Bedford Sixth Form. In this page you will find the list of all data set that are going to be used in the course, as well as useful information, and a brief note of all the topics covered in each lesson.
 
 ### Aim of this course
 
