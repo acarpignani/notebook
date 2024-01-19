@@ -1,74 +1,3 @@
-/* Font and Colors */
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
-/* Body and Header Text Styling */
-.book.font-family-1 {
-  font-family: 'Lato', sans-serif;
-  color: #404040;
-}
-
-h1, h2, h3, h4 {
-  font-family: 'Lato', sans-serif;
-  font-weight: normal;
-}
-
-h2, h3 {
-  font-family: 'Lato', sans-serif;
-  font-size: 1.3em;
-  text-transform: uppercase;
-  letter-spacing: 1.5pt;
-}
-
-h1 {
-  color: #CA225E;
-  font-size: 38px !important;
-}
-
-h2 {
-  color: #1a162d;
-}
-
-h3 {
-  font-size: 1.1em;
-  color: #1a162d90;
-}
-
-h4 {
-  font-size: 1.1em;
-  color: #1a162d90;
-}
-
-h2 code, h3 code, h4 code {
-  text-transform: none !important;
-  font-size: 1em !important;
-}
-
-.title {
-  font-family: 'Lato', sans-serif;
-  font-size: 3em !important;
-  color: #CA225E;
-  text-transform: none !important;
-}
-
-.subtitle {
-  font-family: 'Lato', sans-serif;
-  color: #CA225E !important;
-}
-
-.subtitle em {
-  font-style: normal !important;
-}
-
-.author {
-  color: #1A162D !important;
-  text-transform: uppercase;
-  letter-spacing: 2pt;
-}
-
-p.author em {
-  font-style: normal !important;
-}
-
 /* Body Links Styling */
 .book .book-body .page-wrapper .page-inner section.normal a {
   color: #ca225e;
@@ -118,20 +47,6 @@ li.appendix span, li.part span {
 }
 
 /* Code Styling */
-.book .book-body .page-wrapper .page-inner section.normal code,
-.book .book-body .page-wrapper .page-inner section.normal pre {
-  font-family: 'Source Code Pro', monospace;
-  font-size: 1em;
-}
-
-.sourceCode pre {
-  margin: 0pt !important;
-}
-
-.sourceCode {
-  margin-bottom: 1pt;
-}
-
 pre.numberSource code > span > a:first-child::before {
   left: -0.2em;
 }
@@ -190,67 +105,6 @@ div.rmdwarning code {
   align-items: center; /* Center the content vertically */
 }
 
-.navbar a.navbar-link {
-  color: #CA225E !important; /* Link color to match h1 text */
-  text-decoration: none;
-  margin: 0px;
-}
-
-.navbar a.navbar-link:hover {
-  color: #1a162d; /* Darker color when hovering */
-  text-decoration: underline;
-}
-
-
-/* Media Queries for Large Screens */
-@media (min-width: 1900px) {
-  .book .book-header.fixed {
-    left: 500px;
-  }
-
-  .book.with-summary .book-body {
-    left: 500px;
-  }
-
-  .book .book-summary {
-    width: 500px;
-    left: -500px;
-  }
-
-  .book.with-summary .book-header.fixed {
-    left: 500px;
-  }
-}
-
-@media (min-width: 1500px) {
-  .book.with-summary .book-body {
-    left: 400px;
-  }
-
-  .book .book-summary {
-    width: 400px;
-    left: -400px;
-  }
-
-  .book.with-summary .book-header.fixed {
-    left: 400px;
-  }
-}
-
-@media (min-width: 1400px) {
-  .book.with-summary .book-body {
-    left: 350px;
-  }
-
-  .book .book-summary {
-    width: 350px;
-    left: -400px;
-  }
-
-  .book.with-summary .book-header.fixed {
-    left: 350px;
-  }
-}
 
 /* References and White Space Styling */
 .page-inner + h3 {
@@ -293,17 +147,5 @@ li p {
   margin-bottom: 1em !important;
 }
 
-/* Cover image */
-img.cover {
-  float: right;
-  margin: 0 1rem 0 1rem;
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-}
 
-@media (max-width: 767.98px) {
-  img.cover {
-    float: none;
-    display: block;
-    margin: 0 auto 1rem auto;
-  }
-}
+

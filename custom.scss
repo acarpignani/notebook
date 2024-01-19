@@ -1,0 +1,78 @@
+/*-- scss:functions --*/
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+/*-- scss:defaults --*/
+$font-family-lato: "Lato", sans-serif !default;
+$font-color-body: #404040 !default;
+$font-color-h1: #CA225E !default;
+$font-color-h2: #1a162d !default;
+$font-color-h3: #1a162d90 !default;
+$font-color-h4: #1a162d90 !default;
+$subtitle-color: #CA225E !important;
+$author-color: #1A162D !important;
+$h2-font-size: 1.6rem !default;
+$headings-font-weight: 500 !default;
+
+/*-- scss:rules --*/
+body {
+    font-family: $font-family-lato;
+    color: $font-color-body;
+}
+
+h1, h2, h3, h4 {
+    font-family: $font-family-lato;
+    font-weight: normal;
+  }
+
+h2, h3 {
+    font-family: $font-family-lato;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    letter-spacing: 1.5pt;
+  }
+
+h1 {
+  color: $font-color-h1;
+  font-size: 38px !important;
+}
+
+h2 {
+  font-size: $h2-font-size;
+  color: $font-color-h2;
+}
+
+h3 {
+  font-size: 1.1em;
+  color: $font-color-h3;
+}
+
+h4 {
+  font-size: 1.1em;
+  color: $font-color-h4;
+}
+
+.title {
+  font-family: $font-family-lato;
+  font-size: 3em !important;
+  color: $subtitle-color;
+  text-transform: none !important;
+}
+
+.subtitle {
+  font-family: $font-family-lato;
+  color: $subtitle-color;
+}
+
+.subtitle em {
+  font-style: normal !important;
+}
+
+.author {
+  color: $author-color;
+  text-transform: uppercase;
+  letter-spacing: 2pt;
+}
+
+p.author em {
+  font-style: normal !important;
+}
