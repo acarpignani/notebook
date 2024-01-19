@@ -5,6 +5,7 @@ project:
 page-navigation: true
 
 website:
+  title: "R for Data Science Bootcamp"
   navbar:
     search: true
     left:
