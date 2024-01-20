@@ -116,18 +116,18 @@ Let's come back to the example of the age of the employees of a business, `ages`
 
 Similarly, we could find the median, the standard deviation, the interquartile range (IQR), etc, with similar functions. The following table contains some of the most common mathematical functions in R. A more comprehensive list of functions can be find in the [R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf) published on CRAN.
 
-| Function                | Meaning                                                                                        |
-|-----------------------|-------------------------------------------------|
-| `sum(x)`                | sum of the elements of `x`                                                                     |
-| `min(x)`                | minimum of the elements of `x`                                                                 |
-| `max(x)`                | maximum of the elements of `x`                                                                 |
-| `mean(x)`               | mean of the elements of `x`                                                                    |
-| `median(x)`             | median of the elements of `x`                                                                  |
-| `quantile(x, probs = )` | sample quantiles corresponding to the given probabilities (defaults to 0, 0.25, 0.5, 0.75, 1)  |
-| `var(x)`                | or `cov(x)` variance of the elements of `x` (calculated on $n-1$                               |
-| `sd(x)`                 | standard deviation of `x` (square root of the variance)                                        |
-| `IQR(x)`                | interquartile range of `x`                                                                     |
-| `log(x, base)`          | computes the logarithm of `x` with base `base` (default $e$, the natural logarithm)            |
+| Function                | Meaning                                                                                       |
+|-------------------------|-----------------------------------------------------------------------------------------------|
+| `sum(x)`                | sum of the elements of `x`                                                                    |
+| `min(x)`                | minimum of the elements of `x`                                                                |
+| `max(x)`                | maximum of the elements of `x`                                                                |
+| `mean(x)`               | mean of the elements of `x`                                                                   |
+| `median(x)`             | median of the elements of `x`                                                                 |
+| `quantile(x, probs = )` | sample quantiles corresponding to the given probabilities (defaults to 0, 0.25, 0.5, 0.75, 1) |
+| `var(x)`                | or `cov(x)` variance of the elements of `x` (calculated on $n-1$                              |
+| `sd(x)`                 | standard deviation of `x` (square root of the variance)                                       |
+| `IQR(x)`                | interquartile range of `x`                                                                    |
+| `log(x, base)`          | computes the logarithm of `x` with base `base` (default $e$, the natural logarithm)           |
 
 Another very nice function is `summary()` which returns a summary statistics of the vector, i.e. the minimum, lower quartile, median, mean, upper quartile and maximum of the vector. For example,
 

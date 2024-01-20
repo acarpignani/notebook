@@ -6,7 +6,7 @@ There are several ways to interact with R. The primary one will be through the *
 
 ### R scripts
 
-Before going ahead and introducing variables, it is convenient to start putting our work into an R Script. In RStudio, click File \> New File \> R Script to open a new script. Changing line in the script won't run the code, however. In order to run the line of code you may press Ctrl + ENTER in Windows and cmd + ENTER in Mac. There are also commands to run the whole script, but let's just keep it simple for the time being.
+An alternative way to interact with R is by typing all the code in an R script. In RStudio, click File \> New File \> R Script to open a new script. Changing line in the script won't run the code, however. In order to run the line of code you need to press Ctrl + ENTER in Windows and cmd + ENTER in Mac. There are also commands to run the whole script, but let's just keep it simple for the time being.
 
 ## Arithmetic with R
 
