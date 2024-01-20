@@ -94,6 +94,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -149,7 +165,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#vector-class" id="toc-vector-class" class="nav-link" data-scroll-target="#vector-class">Vector class</a></li>
   <li><a href="#vector-names" id="toc-vector-names" class="nav-link" data-scroll-target="#vector-names">Vector names</a></li>
   </ul></li>
-  <li><a href="#operations-with-vectors" id="toc-operations-with-vectors" class="nav-link" data-scroll-target="#operations-with-vectors">Operations with vectors</a></li>
+  <li><a href="#operations-with-vectors" id="toc-operations-with-vectors" class="nav-link" data-scroll-target="#operations-with-vectors">Operations with vectors</a>
+  <ul class="collapse">
+  <li><a href="#comparison-operations-with-vectors" id="toc-comparison-operations-with-vectors" class="nav-link" data-scroll-target="#comparison-operations-with-vectors">Comparison operations with vectors</a></li>
+  <li><a href="#functions-with-vectors" id="toc-functions-with-vectors" class="nav-link" data-scroll-target="#functions-with-vectors">Functions with vectors</a></li>
+  </ul></li>
+  <li><a href="#vector-indexing-and-slicing" id="toc-vector-indexing-and-slicing" class="nav-link" data-scroll-target="#vector-indexing-and-slicing">Vector indexing and slicing</a>
+  <ul class="collapse">
+  <li><a href="#slicing-vectors" id="toc-slicing-vectors" class="nav-link" data-scroll-target="#slicing-vectors">Slicing vectors</a></li>
+  <li><a href="#indexing-with-names" id="toc-indexing-with-names" class="nav-link" data-scroll-target="#indexing-with-names">Indexing with names</a></li>
+  <li><a href="#comparison-operators-and-selection" id="toc-comparison-operators-and-selection" class="nav-link" data-scroll-target="#comparison-operators-and-selection">Comparison operators and selection</a></li>
+  </ul></li>
+  <li><a href="#two-useful-functions-to-generate-vectors" id="toc-two-useful-functions-to-generate-vectors" class="nav-link" data-scroll-target="#two-useful-functions-to-generate-vectors">Two useful functions to generate vectors</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -263,6 +290,266 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>vec_1 <span class="sc">-</span> vec_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -4 -4 -4</code></pre>
+</div>
+</div>
+<p>Multiplying vectors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>vec_1 <span class="sc">*</span> vec_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  5 12 21</code></pre>
+</div>
+</div>
+<p>Dividing vectors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>vec_1 <span class="sc">/</span> vec_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2000000 0.3333333 0.4285714</code></pre>
+</div>
+</div>
+<section id="comparison-operations-with-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-operations-with-vectors">Comparison operations with vectors</h3>
+<p>We can apply comparison operations of a single number to an entire vector. R will apply the comparison to every element of the vector, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>vec <span class="sc">&lt;</span> <span class="fl">3.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>vec <span class="sc">==</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE FALSE FALSE FALSE FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="functions-with-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="functions-with-vectors">Functions with vectors</h3>
+<p>Let’s come back to the example of the age of the employees of a business, <code>ages</code>. Imagine we wish to find the mean of the ages. To do so, we can use the function <code>mean()</code>, like so:</p>
+<p><code>mean(ages)</code></p>
+<p>Similarly, we could find the median, the standard deviation, the interquartile range (IQR), etc, with similar functions. The following table contains some of the most common mathematical functions in R. A more comprehensive list of functions can be find in the <a href="https://cran.r-project.org/doc/contrib/Short-refcard.pdf">R Reference Card</a> published on CRAN.</p>
+<table class="table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sum(x)</code></td>
+<td>sum of the elements of <code>x</code></td>
+</tr>
+<tr class="even">
+<td><code>min(x)</code></td>
+<td>minimum of the elements of <code>x</code></td>
+</tr>
+<tr class="odd">
+<td><code>max(x)</code></td>
+<td>maximum of the elements of <code>x</code></td>
+</tr>
+<tr class="even">
+<td><code>mean(x)</code></td>
+<td>mean of the elements of <code>x</code></td>
+</tr>
+<tr class="odd">
+<td><code>median(x)</code></td>
+<td>median of the elements of <code>x</code></td>
+</tr>
+<tr class="even">
+<td><code>quantile(x, probs = )</code></td>
+<td>sample quantiles corresponding to the given probabilities (defaults to 0, 0.25, 0.5, 0.75, 1)</td>
+</tr>
+<tr class="odd">
+<td><code>var(x)</code></td>
+<td>or <code>cov(x)</code> variance of the elements of <code>x</code> (calculated on <span class="math inline">n-1</span></td>
+</tr>
+<tr class="even">
+<td><code>sd(x)</code></td>
+<td>standard deviation of <code>x</code> (square root of the variance)</td>
+</tr>
+<tr class="odd">
+<td><code>IQR(x)</code></td>
+<td>interquartile range of <code>x</code></td>
+</tr>
+<tr class="even">
+<td><code>log(x, base)</code></td>
+<td>computes the logarithm of <code>x</code> with base <code>base</code> (default <span class="math inline">e</span>, the natural logarithm)</td>
+</tr>
+</tbody>
+</table>
+<p>Another very nice function is <code>summary()</code> which returns a summary statistics of the vector, i.e.&nbsp;the minimum, lower quartile, median, mean, upper quartile and maximum of the vector. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  23.00   28.00   33.00   35.56   42.00   58.00 </code></pre>
+</div>
+</div>
+<p>It is interesting to notice that R functions may give different outcomes depending on the type of the variable. We shall come back to the type of a variable, but for the moment let’s just say that we consider an employee to be a junior employee if their age is below 33 years. To check whether the ages are below 33 we can use the comparison operators, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>is_junior <span class="ot">&lt;-</span> ages <span class="sc">&lt;=</span> <span class="dv">33</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>is_junior</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE</code></pre>
+</div>
+</div>
+<p>If we now run the <code>summary</code> command on the variable <code>is_junior</code> we no longer get a five number summary because the variable <code>is_junior</code> is not numeric.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(is_junior)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Mode   FALSE    TRUE 
+logical       4       5 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="vector-indexing-and-slicing" class="level2">
+<h2 class="anchored" data-anchor-id="vector-indexing-and-slicing">Vector indexing and slicing</h2>
+<p>It is sometimes important to be able to access a particular element of a given vector. For example, consider the following vector:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">40</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can use the square brackets <code>[ ]</code> to access the individual elements of the vector. This can be done by <strong>indexing</strong>. In its simplest form, indexing works by using the brackets to pass the index position corresponding to the element as a number. Keep in mind that, unlike python, in R the index position starts at 1. So, for example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+<p>Sometimes, however, we wish to access multiple elements at the same time. This can be done passing a vector of indices inside the square brackets; like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 15 25</code></pre>
+</div>
+</div>
+<p>If we pass a negative index to the vector, R will instead return the vector with <em>all but</em> the index passed. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="sc">-</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  5 10 20 25 30 35 40</code></pre>
+</div>
+</div>
+<section id="slicing-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="slicing-vectors">Slicing vectors</h3>
+<p>We can also use the colon (<code>:</code>) to indicate a slice of vector. The colon operator <code>from:to</code> creates a vector of numbers that starts from <code>from</code> and ends at <code>to</code>, increasing by 1 unit every time. So, for example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">:</span><span class="dv">7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 4 5 6 7</code></pre>
+</div>
+</div>
+<p>Notice that if decimal numbers are given, it is possible that the second number is not necessarily part of the list, because the sequence terminates with the bigger number smaller than <code>to</code>, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fl">3.5</span><span class="sc">:</span><span class="fl">7.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.5 4.5 5.5 6.5</code></pre>
+</div>
+</div>
+<p>So, using the colon, we can get a slice of a vector, using the following syntax:</p>
+<p><code>vector[start_index:stop_index]</code></p>
+<p>For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 15 20</code></pre>
+</div>
+</div>
+<p>Notice how the elements both at the starting and stopping index are included.</p>
+</section>
+<section id="indexing-with-names" class="level3">
+<h3 class="anchored" data-anchor-id="indexing-with-names">Indexing with names</h3>
+<p>We have previously seen that we can assign names to the elements of a vector. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(vec) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span>)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> a  b  c  d  e 
+ 5 10 15 20 25 </code></pre>
+</div>
+</div>
+<p>We can then use the name along with the indexing brackets to grab the individual elements from the vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="st">"c"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> c 
+15 </code></pre>
+</div>
+</div>
+<p>Again, we can also pass a vector of names to grab more than one vector at the same time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"e"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> a  c  e 
+ 5 15 25 </code></pre>
+</div>
+</div>
+</section>
+<section id="comparison-operators-and-selection" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-operators-and-selection">Comparison operators and selection</h3>
+<p>As we have mentioned before, talking about the comparison operators with vectors, we can use comparison operators to filter out elements from a vector. Sometimes this is referred to as boolean/logical masking, because we are creating a vector of logicals to filter out results you want.</p>
+<p>Let’s see an example of this. Take the vector</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<p>We can pass to the brackets a logical statement.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>vec[vec <span class="sc">&gt;</span> <span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  7  8  9 10</code></pre>
+</div>
+</div>
+<p>Let’s break this down to see how it works. First, let’s have a look at the vector</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>vec <span class="sc">&gt;</span> <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE</code></pre>
+</div>
+</div>
+<p>As we can see, it returns a logical vector with the same length as <code>vec</code> whose elements says whether it is true or false that the element in that position is greater than 6. When we pass a logical vector, such as this, to another vector through the brackets, R will return only the elements of the vector corresponding to a true value in the logical vector.</p>
+<p>To make this more clear, we could even assign a name to this logical vector and pass the name to the vector, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> vec <span class="sc">&gt;</span> <span class="dv">6</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>filter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>vec[filter]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  7  8  9 10</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="two-useful-functions-to-generate-vectors" class="level2">
+<h2 class="anchored" data-anchor-id="two-useful-functions-to-generate-vectors">Two useful functions to generate vectors</h2>
+<p>Besides the function <code>c()</code> we have already seen that the colon operator <code>from:to</code> generates a sequence starting at <code>from</code> and ending at <code>to</code>. Another function that does the same job is <code>seq(from, to, by = )</code>. The parameter <code>by</code> specifies the increment of the sequence and its default value is 1. So, for example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">16</span>, <span class="at">by =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  5  7  9 11 13 15</code></pre>
+</div>
+</div>
+<p>Another function that creates a vector is <code>rep(x, times)</code> which repeats the vector <code>x</code> <code>times</code> times.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">times =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 1 2 1 2</code></pre>
+</div>
+</div>
+<p>The function <code>rep</code> has an alternative parameter <code>each</code> which repeats ‘each’ element of <code>x</code> <code>each</code> times. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">each =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 1 1 2 2 2 3 3 3</code></pre>
 </div>
 </div>
 

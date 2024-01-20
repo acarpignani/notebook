@@ -85,3 +85,192 @@ Subtracting vectors:
 ```{r}
 vec_1 - vec_2
 ```
+
+Multiplying vectors:
+
+```{r}
+vec_1 * vec_2
+```
+
+Dividing vectors:
+
+```{r}
+vec_1 / vec_2
+```
+
+### Comparison operations with vectors
+
+We can apply comparison operations of a single number to an entire vector. R will apply the comparison to every element of the vector, like so:
+
+```{r}
+vec <- c(1, 2, 3, 4, 5, 6)
+vec < 3.5
+vec == 2
+```
+
+### Functions with vectors
+
+Let's come back to the example of the age of the employees of a business, `ages`. Imagine we wish to find the mean of the ages. To do so, we can use the function `mean()`, like so:
+
+`mean(ages)`
+
+Similarly, we could find the median, the standard deviation, the interquartile range (IQR), etc, with similar functions. The following table contains some of the most common mathematical functions in R. A more comprehensive list of functions can be find in the [R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf) published on CRAN.
+
+| Function                | Meaning                                                                                        |
+|-----------------------|-------------------------------------------------|
+| `sum(x)`                | sum of the elements of `x`                                                                     |
+| `min(x)`                | minimum of the elements of `x`                                                                 |
+| `max(x)`                | maximum of the elements of `x`                                                                 |
+| `mean(x)`               | mean of the elements of `x`                                                                    |
+| `median(x)`             | median of the elements of `x`                                                                  |
+| `quantile(x, probs = )` | sample quantiles corresponding to the given probabilities (defaults to 0, 0.25, 0.5, 0.75, 1)  |
+| `var(x)`                | or `cov(x)` variance of the elements of `x` (calculated on $n-1$                               |
+| `sd(x)`                 | standard deviation of `x` (square root of the variance)                                        |
+| `IQR(x)`                | interquartile range of `x`                                                                     |
+| `log(x, base)`          | computes the logarithm of `x` with base `base` (default $e$, the natural logarithm)            |
+
+Another very nice function is `summary()` which returns a summary statistics of the vector, i.e. the minimum, lower quartile, median, mean, upper quartile and maximum of the vector. For example,
+
+```{r}
+summary(ages)
+```
+
+It is interesting to notice that R functions may give different outcomes depending on the type of the variable. We shall come back to the type of a variable, but for the moment let's just say that we consider an employee to be a junior employee if their age is below 33 years. To check whether the ages are below 33 we can use the comparison operators, like so:
+
+```{r}
+is_junior <- ages <= 33
+is_junior
+```
+
+If we now run the `summary` command on the variable `is_junior` we no longer get a five number summary because the variable `is_junior` is not numeric.
+
+```{r}
+summary(is_junior)
+```
+
+## Vector indexing and slicing
+
+It is sometimes important to be able to access a particular element of a given vector. For example, consider the following vector:
+
+```{r}
+vec <- c(5, 10, 15, 20, 25, 30, 35, 40)
+```
+
+We can use the square brackets `[ ]` to access the individual elements of the vector. This can be done by **indexing**. In its simplest form, indexing works by using the brackets to pass the index position corresponding to the element as a number. Keep in mind that, unlike python, in R the index position starts at 1. So, for example,
+
+```{r}
+vec[3]
+```
+
+Sometimes, however, we wish to access multiple elements at the same time. This can be done passing a vector of indices inside the square brackets; like so:
+
+```{r}
+vec[c(2, 3, 5)]
+```
+
+If we pass a negative index to the vector, R will instead return the vector with *all but* the index passed. For example,
+
+```{r}
+vec[-3]
+```
+
+### Slicing vectors
+
+We can also use the colon (`:`) to indicate a slice of vector. The colon operator `from:to` creates a vector of numbers that starts from `from` and ends at `to`, increasing by 1 unit every time. So, for example,
+
+```{r}
+3:7
+```
+
+Notice that if decimal numbers are given, it is possible that the second number is not necessarily part of the list, because the sequence terminates with the bigger number smaller than `to`, like so:
+
+```{r}
+3.5:7.2
+```
+
+So, using the colon, we can get a slice of a vector, using the following syntax:
+
+`vector[start_index:stop_index]`
+
+For example,
+
+```{r}
+vec[2:4]
+```
+
+Notice how the elements both at the starting and stopping index are included.
+
+### Indexing with names
+
+We have previously seen that we can assign names to the elements of a vector. For example,
+
+```{r}
+vec <- c(5, 10, 15, 20, 25)
+names(vec) <- c("a", "b", "c", "d", "e")
+vec
+```
+
+We can then use the name along with the indexing brackets to grab the individual elements from the vector.
+
+```{r}
+vec["c"]
+```
+
+Again, we can also pass a vector of names to grab more than one vector at the same time.
+
+```{r}
+vec[c("a", "c", "e")]
+```
+
+### Comparison operators and selection
+
+As we have mentioned before, talking about the comparison operators with vectors, we can use comparison operators to filter out elements from a vector. Sometimes this is referred to as boolean/logical masking, because we are creating a vector of logicals to filter out results you want.
+
+Let's see an example of this. Take the vector
+
+```{r}
+vec <- 1:10
+vec
+```
+
+We can pass to the brackets a logical statement.
+
+```{r}
+vec[vec > 6]
+```
+
+Let's break this down to see how it works. First, let's have a look at the vector
+
+```{r}
+vec > 6
+```
+
+As we can see, it returns a logical vector with the same length as `vec` whose elements says whether it is true or false that the element in that position is greater than 6. When we pass a logical vector, such as this, to another vector through the brackets, R will return only the elements of the vector corresponding to a true value in the logical vector.
+
+To make this more clear, we could even assign a name to this logical vector and pass the name to the vector, like so:
+
+```{r}
+filter <- vec > 6
+filter
+vec[filter]
+```
+
+## Two useful functions to generate vectors
+
+Besides the function `c()` we have already seen that the colon operator `from:to` generates a sequence starting at `from` and ending at `to`. Another function that does the same job is `seq(from, to, by = )`. The parameter `by` specifies the increment of the sequence and its default value is 1. So, for example,
+
+```{r}
+seq(5, 16, by = 2)
+```
+
+Another function that creates a vector is `rep(x, times)` which repeats the vector `x` `times` times.
+
+```{r}
+rep(c(1, 2), times = 3)
+```
+
+The function `rep` has an alternative parameter `each` which repeats 'each' element of `x` `each` times. For example,
+
+```{r}
+rep(c(1, 2, 3), each = 3)
+```

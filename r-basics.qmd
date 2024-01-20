@@ -172,14 +172,14 @@ Beside `typeof`, there is another command that shows the type of a variable: `cl
 
 In R we can use comparison operators to compare variables and return a logical value. The comparison operators are
 
-| Operator | Name                      | Syntax    |
-|----------|---------------------------|-----------|
-| `==`     | equal                     | `a == b`  |
-| `!=`     | different                 | `a != b`  |
-| `<=`     | smaller than, or equal to | `a <= b`  |
-| `<`      | smaller than              | `a < b`   |
-| `>=`     | greater than, or equal to | `a >= b`  |
-| `>`      | greater than              | `a > b`   |
+| Operator | Name                      | Syntax   |
+|----------|---------------------------|----------|
+| `==`     | equal                     | `a == b` |
+| `!=`     | different                 | `a != b` |
+| `<=`     | smaller than, or equal to | `a <= b` |
+| `<`      | smaller than              | `a < b`  |
+| `>=`     | greater than, or equal to | `a >= b` |
+| `>`      | greater than              | `a > b`  |
 
 For example,
 
@@ -187,3 +187,13 @@ For example,
 5 > 3
 6 < 3
 ```
+
+## Getting help with R
+
+Besides google searching and visiting [Stack Overflow](https://stackoverflow.com/), there are some build-in functions to get help from R. In fact, most of the R functions have documentation and examples. To access the documentation of a function `foo` we can either use `?foo` or `help(foo)`. For example,
+
+```{r}
+help(vector)
+```
+
+opens the documentation with title **Vectors - Creation, Coercion, etc**.
