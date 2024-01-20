@@ -12,11 +12,12 @@ website:
         - text: "Introduction"
           file: index.qmd
         - r-basics.qmd
+        - vectors.qmd
 
 format:
   html:
     theme: [cosmo, custom.scss]
-    toc: false
+    toc: true
     html-math-method: katex
 
 editor: visual

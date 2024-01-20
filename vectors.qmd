@@ -1,0 +1,87 @@
+# Vectors
+
+## Vector basics
+
+R is a statistical software and in statistics a variable scarcely has only one value, but it is generally given as a list of values (measurements). For example, one could have a variable `age` of the ages of all the employees of a small business. To store this in R, we can use the function `c()` which stands for **concatenate**. To use this function, we pass the values of the vector as a list, separated by a comma. For example
+
+```{r}
+ages <- c(25, 33, 45, 37, 28, 23, 42, 58, 29)
+ages
+```
+
+Now the variable `age` is a vector. Let's find out the length of this vector.
+
+```{r}
+length(ages)
+```
+
+### Vector class
+
+We can create vectors with any data type. For example,
+
+```{r}
+nvec <- c(1, 2, 3, 4, 5)
+typeof(nvec)
+cvec <- c("G", "C", "S", "E")
+typeof(cvec)
+lvec <- c(TRUE, FALSE)
+typeof(lvec)
+```
+
+It is important to note now that all the elements of a vector must all have the same type. In fact, if we attempt to mix data types in a vector, R will convert them to force them to have all the same data type. For example,
+
+```{r}
+v <- c(FALSE, 3, TRUE, 6)
+typeof(v)
+```
+
+In fact, R will convert `TRUE` as `1` and `FALSE` as `0`.
+
+```{r}
+w <- c("A", 1)
+typeof(w)
+```
+
+In this case, as we could imagine, R converts everything to be a character.
+
+```{r}
+w
+```
+
+### Vector names
+
+An interesting feature of R is that each element in a vector can be named. Precisely, we can use the function `name()` to assign to each element of a vector a name. For example, imagine the following vector contains a week of temperatures:
+
+```{r}
+temp <- c(18, 16, 17, 17, 18, 16, 15)
+temp
+```
+
+We know that we have 7 temperatures for the 7 days of the week, but which temperature corresponds to which day? Does it start from Monday or from Sunday, or another day of the week? This is where the function `name()` can be used to assign a label to each value of the vector `temp`, as follows:
+
+```{r}
+days <- c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+names(temp) <- days
+temp
+```
+
+## Operations with vectors
+
+As we have mentioned a couple of times already, R is a statistical software. This means that all aspects of R are centred on working with statistical data. Therefore, performing operations in R is specifically designed to make working with data as simple as possible. In particular, all arithmetic operations are **vectorised**, which means that the operations occur on an element by element basis. for example, take the following two vectors:
+
+```{r}
+vec_1 <- c(1, 2, 3)
+vec_2 <- c(5, 6, 7)
+```
+
+Adding vectors:
+
+```{r}
+vec_1 + vec_2
+```
+
+Subtracting vectors:
+
+```{r}
+vec_1 - vec_2
+```
