@@ -190,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Vectors</h1>
 <section id="vector-basics" class="level2">
 <h2 class="anchored" data-anchor-id="vector-basics">Vector basics</h2>
-<p>R is a statistical software and in statistics a variable scarcely has only one value, but it is generally given as a list of values (measurements). For example, one could have a variable <code>age</code> of the ages of all the employees of a small business. To store this in R, we can use the function <code>c()</code> which stands for <strong>concatenate</strong>. To use this function, we pass the values of the vector as a list, separated by a comma. For example</p>
+<p>R is a statistical software and in statistics a variable scarcely has only one value, but it is generally given as a list of values (measurements). For example, one could have a variable <code>ages</code> of the ages of all the employees of a small business. To store this in R, we can use the function <code>c()</code> which stands for <strong>concatenate</strong>. To use this function, we pass the values of the vector as a list, separated by a comma. For example</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">33</span>, <span class="dv">45</span>, <span class="dv">37</span>, <span class="dv">28</span>, <span class="dv">23</span>, <span class="dv">42</span>, <span class="dv">58</span>, <span class="dv">29</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -198,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 25 33 45 37 28 23 42 58 29</code></pre>
 </div>
 </div>
-<p>Now the variable <code>age</code> is a vector. Let’s find out the length of this vector.</p>
+<p>Now the variable <code>ages</code> is a vector. Let’s find out the length of this vector.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -328,8 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Similarly, we could find the median, the standard deviation, the interquartile range (IQR), etc, with similar functions. The following table contains some of the most common mathematical functions in R. A more comprehensive list of functions can be find in the <a href="https://cran.r-project.org/doc/contrib/Short-refcard.pdf">R Reference Card</a> published on CRAN.</p>
 <table class="table">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 79%">
+<col style="width: 35%">
+<col style="width: 64%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -547,9 +547,9 @@ logical       4       5 </code></pre>
 </div>
 <p>The function <code>rep</code> has an alternative parameter <code>each</code> which repeats ‘each’ element of <code>x</code> <code>each</code> times. For example,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">each =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">each =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 1 1 2 2 2 3 3 3</code></pre>
+<pre><code>[1] 1 1 1 2 2 2</code></pre>
 </div>
 </div>
 

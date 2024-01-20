@@ -2,14 +2,14 @@
 
 ## Vector basics
 
-R is a statistical software and in statistics a variable scarcely has only one value, but it is generally given as a list of values (measurements). For example, one could have a variable `age` of the ages of all the employees of a small business. To store this in R, we can use the function `c()` which stands for **concatenate**. To use this function, we pass the values of the vector as a list, separated by a comma. For example
+R is a statistical software and in statistics a variable scarcely has only one value, but it is generally given as a list of values (measurements). For example, one could have a variable `ages` of the ages of all the employees of a small business. To store this in R, we can use the function `c()` which stands for **concatenate**. To use this function, we pass the values of the vector as a list, separated by a comma. For example
 
 ```{r}
 ages <- c(25, 33, 45, 37, 28, 23, 42, 58, 29)
 ages
 ```
 
-Now the variable `age` is a vector. Let's find out the length of this vector.
+Now the variable `ages` is a vector. Let's find out the length of this vector.
 
 ```{r}
 length(ages)
@@ -117,7 +117,7 @@ Let's come back to the example of the age of the employees of a business, `ages`
 Similarly, we could find the median, the standard deviation, the interquartile range (IQR), etc, with similar functions. The following table contains some of the most common mathematical functions in R. A more comprehensive list of functions can be find in the [R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf) published on CRAN.
 
 | Function                | Meaning                                                                                       |
-|-------------------------|-----------------------------------------------------------------------------------------------|
+|--------------------------|------------------------------------------------|
 | `sum(x)`                | sum of the elements of `x`                                                                    |
 | `min(x)`                | minimum of the elements of `x`                                                                |
 | `max(x)`                | maximum of the elements of `x`                                                                |
@@ -272,5 +272,5 @@ rep(c(1, 2), times = 3)
 The function `rep` has an alternative parameter `each` which repeats 'each' element of `x` `each` times. For example,
 
 ```{r}
-rep(c(1, 2, 3), each = 3)
+rep(c(1, 2), each = 3)
 ```
