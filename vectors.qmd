@@ -116,18 +116,18 @@ Let's come back to the example of the age of the employees of a business, `ages`
 
 Similarly, we could find the median, the standard deviation, the interquartile range (IQR), etc, with similar functions. The following table contains some of the most common mathematical functions in R. A more comprehensive list of functions can be find in the [R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf) published on CRAN.
 
-| Function                | Meaning                                                                                       |
-|-------------------------|-----------------------------------------------------------------------------------------------|
-| `sum(x)`                | sum of the elements of `x`                                                                    |
-| `min(x)`                | minimum of the elements of `x`                                                                |
-| `max(x)`                | maximum of the elements of `x`                                                                |
-| `mean(x)`               | mean of the elements of `x`                                                                   |
-| `median(x)`             | median of the elements of `x`                                                                 |
-| `quantile(x, probs = )` | sample quantiles corresponding to the given probabilities (defaults to 0, 0.25, 0.5, 0.75, 1) |
-| `var(x)`                | variance of the elements of `x` (calculated on $n-1$)                                         |
-| `sd(x)`                 | standard deviation of `x` (square root of the variance)                                       |
-| `IQR(x)`                | interquartile range of `x`                                                                    |
-| `log(x, base)`          | computes the logarithm of `x` with base `base` (default $e$, the natural logarithm)           |
+| Function             | Meaning                                                                                       |
+|-------------------|-------------------------------------------------------|
+| `sum(x)`             | sum of the elements of `x`                                                                    |
+| `min(x)`             | minimum of the elements of `x`                                                                |
+| `max(x)`             | maximum of the elements of `x`                                                                |
+| `mean(x)`            | mean of the elements of `x`                                                                   |
+| `median(x)`          | median of the elements of `x`                                                                 |
+| `quantile(x, probs)` | sample quantiles corresponding to the given probabilities (defaults to 0, 0.25, 0.5, 0.75, 1) |
+| `var(x)`             | variance of the elements of `x` (calculated on $n-1$)                                         |
+| `sd(x)`              | standard deviation of `x` (square root of the variance)                                       |
+| `IQR(x)`             | interquartile range of `x`                                                                    |
+| `log(x, base)`       | computes the logarithm of `x` with base `base` (default $e$, the natural logarithm)           |
 
 Another very nice function is `summary()` which returns a summary statistics of the vector, i.e. the minimum, lower quartile, median, mean, upper quartile and maximum of the vector. For example,
 
@@ -275,15 +275,15 @@ The function `rep` has an alternative parameter `each` which repeats 'each' elem
 rep(c(1, 2), each = 3)
 ```
 
-## First step in data simulation
+## First steps in data simulation
 
-Sometimes instead of generating data with a pattern, we would like to simulate data. R is perfect for this job, as it has a very good implementation of all the most common and important statistical distributions needed. However, before we can simulate data, it is vital to say a few words about **random data generation** and **replicability**.
+Sometimes instead of generating data with a pattern, we would like to simulate data. R is perfect for this job, as it has a very good implementation of all the most common and important statistical distributions needed. However, before we can simulate data, it is vital to say a few words about **random data generation** and **reproducibility**.
 
 ### Random Number Generator (RGN)
 
-According to Wikipedia, **random number generation** is a process by which, often by means of a **random number generator (RGN)**, a sequence of numbers or symbols that cannot be reasonably predicted better than by random chance is generated. True random number generators are generally hardware based (for example by rolling a die). Software typically use a **pseudorandom number generator (PRNG)** which is an algorithm that generates a sequence of numbers that only looks random but that is in fact pre-determined. On Wikipedia there is long list of PRNGs, but for our scope, suffices it to say that the numbers that can be generated by R are in actual facts not random, but they would pass a **random test**, which means that they would look random from a mathematical point of view. If you want to know more about how R generates random numbers, you may wish to type `help("RNG")` on your console.
+According to Wikipedia, **random number generation** is a process by which, often by means of a **random number generator (RGN)**, a sequence of numbers or symbols that cannot be reasonably predicted better than by random chance is generated. True random number generators are generally hardware based (for example by rolling a die). Software typically use a **pseudo-random number generator (PRNG)** which is an algorithm that generates a sequence of numbers that only looks random but that is in fact pre-determined. On Wikipedia there is long list of PRNGs, but for our scope, suffices it to say that the numbers that can be generated by R are in actual facts not random, but they would pass a **random test**, which means that they would look random from a mathematical point of view. If you want to know more about how R generates random numbers, you may wish to type `help("RNG")` on your console.
 
-### Replicability
+### Reproducibility
 
 This may look like a disadvantage, but it is actually a very important aspect of simulation. By means of the fact that random numbers are not-random after all, this means that if we "set a seed" we can then reproduce the exact random sequence again. This means that different user can perform the same simulation, obtaining the same result, as long as they use the same PRNG and they set the same seed.
 
@@ -310,7 +310,7 @@ sample(1:6, 10, replace = TRUE)
 We may notice that having set the same seed, the first number is exactly the same as before.
 
 ::: callout-caution
-A note of caution here: it is a good practice to set the seed **every** time we use a random generator function. In fact, once the seed has been set, the random function will use the PRGN in a specific way and different versions of the same function might use the PRNG in different ways. So once we access the PRNG again, it is good to always maintain control by choosing the seed, to ensure replicability.
+A note of caution here: it is a good practice to set the seed **every** time we use a random generator function. In fact, once the seed has been set, the random function will use the PRGN in a specific way and different versions of the same function might use the PRNG in different ways. So once we access the PRNG again, it is good to always maintain control by choosing the seed, to ensure reproducibility.
 :::
 
 ### Simulating data from a distribution
@@ -341,7 +341,7 @@ runif(100)
 The table below shows the most common distributions with their syntax and a brief explanation.
 
 | Name                     | Synatx                       | Example of usage                                                                                                                                                                                      |
-|--------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|------------|---------------------------|------------------------------------------------|
 | Normal distribution      | `rnorm(n, mean = 0, sd = 1)` | The normal distribution models measurements with mean `mean` and error `sd`                                                                                                                           |
 | Uniform distribution     | `runif(n, min = 0, max = 1)` | The uniform distribution is generally used to generate a sequence of random numbers                                                                                                                   |
 | Binomial distribution    | `rbinom(n, size, prob)`      | The binomial distribution models the number of successes in `size` trials with probability of success `prob`                                                                                          |
