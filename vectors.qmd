@@ -117,7 +117,7 @@ Let's come back to the example of the age of the employees of a business, `ages`
 Similarly, we could find the median, the standard deviation, the interquartile range (IQR), etc, with similar functions. The following table contains some of the most common mathematical functions in R. A more comprehensive list of functions can be find in the [R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf) published on CRAN.
 
 | Function                | Meaning                                                                                       |
-|-----------------|-------------------------------------------------------|
+|-------------------------|-----------------------------------------------------------------------------------------------|
 | `sum(x)`                | sum of the elements of `x`                                                                    |
 | `min(x)`                | minimum of the elements of `x`                                                                |
 | `max(x)`                | maximum of the elements of `x`                                                                |
@@ -340,11 +340,11 @@ runif(100)
 
 The table below shows the most common distributions with their syntax and a brief explanation.
 
-| Name                     | Synatx                        | Example of usage                                                                                                                                                                                      |
-|--------------|---------------------------|-------------------------------|
-| Normal distribution      | `rnorm(n, mean = 0, sd = 1)`  | The normal distribution models measurements with mean `mean` and error `sd`                                                                                                                           |
-| Uniform distribution     | `runif(n, min = 0, max = 1)`  | The uniform distribution is generally used to generate a sequence of random numbers                                                                                                                   |
-| Binomial distribution    | `rbinom(n, size, prob)`       | The binomial distribution models the number of successes in `size` trials with probability of success `prob`                                                                                          |
-| Poisson distribution     | `rpois(n, lambda)`            | The Poisson distribution is also called the "count" distribution: it models the number of events occurring at a constant rate in a given time frame. `lambda` is the mean number of events occurring. |
-| Exponential distribution | `rexp(n, rate = 1)`           | The exponential distribution models the time to wait until the next event occurs, such as a failure or a success. `rate` is the average rate at which the events occur.                               |
-| Geometric distribution   | `rgeom(n, prob)`              | The geometric distribution models the instant of first success in a sequence of trials with probability of success `prob`                                                                             |
+| Name                     | Synatx                       | Example of usage                                                                                                                                                                                      |
+|--------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Normal distribution      | `rnorm(n, mean = 0, sd = 1)` | The normal distribution models measurements with mean `mean` and error `sd`                                                                                                                           |
+| Uniform distribution     | `runif(n, min = 0, max = 1)` | The uniform distribution is generally used to generate a sequence of random numbers                                                                                                                   |
+| Binomial distribution    | `rbinom(n, size, prob)`      | The binomial distribution models the number of successes in `size` trials with probability of success `prob`                                                                                          |
+| Poisson distribution     | `rpois(n, lambda)`           | The Poisson distribution is also called the "count" distribution: it models the number of events occurring at a constant rate in a given time frame. `lambda` is the mean number of events occurring. |
+| Exponential distribution | `rexp(n, rate = 1)`          | The exponential distribution models the time to wait until the next event occurs, such as a failure or a success. `rate` is the average rate at which the events occur.                               |
+| Geometric distribution   | `rgeom(n, prob)`             | The geometric distribution models the instant of first success in a sequence of trials with probability of success `prob`                                                                             |
