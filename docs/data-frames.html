@@ -290,7 +290,7 @@ Tip
 </section>
 <section id="examples-of-data-sets" class="level2">
 <h2 class="anchored" data-anchor-id="examples-of-data-sets">Examples of data sets</h2>
-<p>R contains several examples of data sets, some of which particularly interesting because they are data sets of historical value, like the <strong>iris</strong> data set. To see which data sets are included in R, we can use the command <code>data()</code>. This opens a new tab in RStudio showing the list of data sets included in base R.</p>
+<p>R contains several examples of data sets, some of which particularly interesting because they are data sets of historical value, like Edgar Anderson’s <strong>Iris</strong> data set. To see which data sets are included in R, we can use the command <code>data()</code>. This opens a new tab in RStudio showing the list of data sets included in base R.</p>
 <p>Any of these data sets can be called simply typing their name on the console (or running the corresponding code in the R script). However, data sets stored in R cannot be changed, and in order to have the flexibility to make changes, we may wish to save a copy in the memory. However, since the base R saves data sets as <code>data.frame</code> type, we may wish to transform them into a tibble, with the command <code>as_tibble()</code>, like so:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span>
@@ -561,7 +561,7 @@ $ class        &lt;fct&gt; compact, compact, compact, compact, compact, compact,
 <section id="getting-data-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="getting-data-in-r">Getting data in R</h2>
 <p>There are useful base R functions to read data from external files or internet addresses, but we shall learn how to use their enhanced counterparts stored in the package <code>readr</code> which is one of the core packages of the tidyverse.</p>
-<p>Usually data are stored either in excel files or in CSV files (comma separated variable). Let’s start with the latter and suppose we want to store in R the content of the <strong>sheep</strong> data set on the course repository. This contains the height (in cm) and the weight (in kg) of a sample of sheep. To do so, providing the tidyverse is loaded, it suffices to run the command</p>
+<p>Usually data are stored either in excel files or in CSV files (comma separated variable). Let’s start with the latter and suppose we want to store in R the content of the <a href="https://github.com/acarpignani/R4DS/blob/main/datasets/sheep.csv"><strong>sheep</strong> data set</a> on the course repository. This contains the height (in cm) and the weight (in kg) of a sample of sheep. To do so, providing the tidyverse is loaded, it suffices to run the command</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>sheep <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/acarpignani/R4DS/main/datasets/sheep.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -591,7 +591,7 @@ dbl (2): weight, height
 # ℹ 90 more rows</code></pre>
 </div>
 </div>
-<p>Let’s see what the mean values for these variables are with the <code>summary()</code> function:</p>
+<p>What is the average weight and height of these sheep? We have now all the elements to respond. For example, we can call the function <code>summary()</code>. As we have seen this is an adaptable function and when we pass a tibble to it, it returns a summary of every variable in the tibble, like so:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sheep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -602,6 +602,88 @@ dbl (2): weight, height
  Mean   : 82.75   Mean   :65.02  
  3rd Qu.: 91.02   3rd Qu.:72.19  
  Max.   :119.50   Max.   :90.05  </code></pre>
+</div>
+</div>
+<p>Let’s load another data set, from our repository. This time we are interested in the data set containing information about the <a href="https://github.com/acarpignani/R4DS/blob/main/datasets/worms.csv">density of worms</a> in some fields. Let’s call this data frame <code>worms</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>worms <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/acarpignani/R4DS/main/datasets/worms.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 20 Columns: 7
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Field.Name, Vegetation
+dbl (4): Area, Slope, Soil.pH, Worm.density
+lgl (1): Damp
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>worms</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 7
+   Field.Name         Area Slope Vegetation Soil.pH Damp  Worm.density
+   &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;        &lt;dbl&gt;
+ 1 Nashs.Field         3.6    11 Grassland      4.1 FALSE            4
+ 2 Silwood.Bottom      5.1     2 Arable         5.2 FALSE            7
+ 3 Nursery.Field       2.8     3 Grassland      4.3 FALSE            2
+ 4 Rush.Meadow         2.4     5 Meadow         4.9 TRUE             5
+ 5 Gunness.Thicket     3.8     0 Scrub          4.2 FALSE            6
+ 6 Oak.Mead            3.1     2 Grassland      3.9 FALSE            2
+ 7 Church.Field        3.5     3 Grassland      4.2 FALSE            3
+ 8 Ashurst             2.1     0 Arable         4.8 FALSE            4
+ 9 The.Orchard         1.9     0 Orchard        5.7 FALSE            9
+10 Rookery.Slope       1.5     4 Grassland      5   TRUE             7
+11 Garden.Wood         2.9    10 Scrub          5.2 FALSE            8
+12 North.Gravel        3.3     1 Grassland      4.1 FALSE            1
+13 South.Gravel        3.7     2 Grassland      4   FALSE            2
+14 Observatory.Ridge   1.8     6 Grassland      3.8 FALSE            0
+15 Pond.Field          4.1     0 Meadow         5   TRUE             6
+16 Water.Meadow        3.9     0 Meadow         4.9 TRUE             8
+17 Cheapside           2.2     8 Scrub          4.7 TRUE             4
+18 Pound.Hill          4.4     2 Arable         4.5 FALSE            5
+19 Gravel.Pit          2.9     1 Grassland      3.5 FALSE            1
+20 Farm.Wood           0.8    10 Scrub          5.1 TRUE             3</code></pre>
+</div>
+</div>
+<p>Let’s try now to apply the <code>summary()</code> to this data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(worms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Field.Name             Area           Slope        Vegetation       
+ Length:20          Min.   :0.800   Min.   : 0.00   Length:20         
+ Class :character   1st Qu.:2.175   1st Qu.: 0.75   Class :character  
+ Mode  :character   Median :3.000   Median : 2.00   Mode  :character  
+                    Mean   :2.990   Mean   : 3.50                     
+                    3rd Qu.:3.725   3rd Qu.: 5.25                     
+                    Max.   :5.100   Max.   :11.00                     
+    Soil.pH         Damp          Worm.density 
+ Min.   :3.500   Mode :logical   Min.   :0.00  
+ 1st Qu.:4.100   FALSE:14        1st Qu.:2.00  
+ Median :4.600   TRUE :6         Median :4.00  
+ Mean   :4.555                   Mean   :4.35  
+ 3rd Qu.:5.000                   3rd Qu.:6.25  
+ Max.   :5.700                   Max.   :9.00  </code></pre>
+</div>
+</div>
+<p>The variable <code>Vegetation</code> is another factor, so let’s transform it into a factor using again the <code>mutate()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>worms <span class="ot">&lt;-</span> <span class="fu">mutate</span>(worms, <span class="at">Vegetation =</span> <span class="fu">factor</span>(Vegetation))</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(worms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Field.Name             Area           Slope           Vegetation
+ Length:20          Min.   :0.800   Min.   : 0.00   Arable   :3   
+ Class :character   1st Qu.:2.175   1st Qu.: 0.75   Grassland:9   
+ Mode  :character   Median :3.000   Median : 2.00   Meadow   :3   
+                    Mean   :2.990   Mean   : 3.50   Orchard  :1   
+                    3rd Qu.:3.725   3rd Qu.: 5.25   Scrub    :4   
+                    Max.   :5.100   Max.   :11.00                 
+    Soil.pH         Damp          Worm.density 
+ Min.   :3.500   Mode :logical   Min.   :0.00  
+ 1st Qu.:4.100   FALSE:14        1st Qu.:2.00  
+ Median :4.600   TRUE :6         Median :4.00  
+ Mean   :4.555                   Mean   :4.35  
+ 3rd Qu.:5.000                   3rd Qu.:6.25  
+ Max.   :5.700                   Max.   :9.00  </code></pre>
 </div>
 </div>
 
