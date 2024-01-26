@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R for Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">R for Data Science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Introduction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./r-basics.html"> 
+<span class="menu-text">Introduction to R</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./vectors.html"> 
+<span class="menu-text">Vectors</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./data-frames.html" aria-current="page"> 
+<span class="menu-text">Data Frames</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-frames" id="toc-data-frames" class="nav-link active" data-scroll-target="#data-frames">Data Frames</a>
+  <ul class="collapse">
+  <li><a href="#installing-and-loading-packages-in-r" id="toc-installing-and-loading-packages-in-r" class="nav-link" data-scroll-target="#installing-and-loading-packages-in-r">Installing and loading packages in R</a>
+  <ul class="collapse">
+  <li><a href="#long-names-versus-short-names" id="toc-long-names-versus-short-names" class="nav-link" data-scroll-target="#long-names-versus-short-names">Long names versus short names</a></li>
+  </ul></li>
+  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse">The tidyverse</a></li>
+  <li><a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles">Tibbles</a></li>
+  <li><a href="#examples-of-data-sets" id="toc-examples-of-data-sets" class="nav-link" data-scroll-target="#examples-of-data-sets">Examples of data sets</a></li>
+  <li><a href="#factors" id="toc-factors" class="nav-link" data-scroll-target="#factors">Factors</a></li>
+  <li><a href="#some-advanced-features-of-tidyverse" id="toc-some-advanced-features-of-tidyverse" class="nav-link" data-scroll-target="#some-advanced-features-of-tidyverse">Some advanced features of tidyverse</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="data-frames" class="level1">
+<h1>Data Frames</h1>
+<p>Data frames are used to store tabular data in R. They are an important type of object and are used in a variety of statistical modelling applications. The <strong>tidyverse</strong> meta-package has an enhanced version of data frame, called a <strong>tibble</strong> and an optimised set of functions designed to work effectively with data frames and tibbles.</p>
+<p>Before we continue, it is therefore necessary to install, and load, the <strong>tidyverse</strong>.</p>
+<section id="installing-and-loading-packages-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="installing-and-loading-packages-in-r">Installing and loading packages in R</h2>
+<p>Anyone can create new R packages, but only when packages satisfy certain strict rules are stored on CRAN. This ensures that packages stores on CRAN are reliable, have documentation and there is a support in place for the users. To install a package that lives on CRAN it suffices to type on the console <code>install.packages("package_name")</code>. R will then install the package and all the dependencies needed to run the package.</p>
+<p>So, to install the whole <strong>tidyverse</strong> we just have to type <code>install.packages("tidyverse")</code>.</p>
+<p>To load a package (regardless of where it comes from), we need to use the command <code>library()</code>. So, to load the <strong>tidyverse</strong> we can just type in out script and run the code</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+<p>The outcome is pretty overwhelming! First we are informed that all the core tidyverse packages are correctly loaded: <strong>dplyr</strong>, <strong>forecats</strong>, <strong>ggplot2</strong>, <strong>lubridate</strong>, <strong>purrr</strong>, <strong>readr</strong>, <strong>stringr</strong>, <strong>tibble</strong> and <strong>tidyr</strong>. Then we are also informed that there are two functions that were already loaded from the package <code>stats</code> (a core package automatically loaded by R), and they are now substituted by the homonym functions from <strong>dplyr</strong>. This might seem like a loss, but the <code>stats</code> functions are not lost, we only need to call them via their “long name”.</p>
+<section id="long-names-versus-short-names" class="level3">
+<h3 class="anchored" data-anchor-id="long-names-versus-short-names">Long names versus short names</h3>
+<p>The <strong>long name</strong> of a function is composed by the name of the package where the function is stored, two colons (<code>::</code>) and the name of the function. So, to use the function <code>filter()</code> in <code>stats</code> we can type <code>stats::filter()</code>. Similarly, if we wanted to use the function <code>read_csv()</code> which lies in the package <code>readr</code>, we could just type <code>readr::read_csv()</code> without the needs to load the package <code>readr</code> in advance.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is good practice to always load at the beginning of the script code the packages that are going to be used, even though, sometimes, we may end up using the long name for the sake of clarity, or to avoid conflicts between packages.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="the-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="the-tidyverse">The tidyverse</h2>
+<p>Quoting from the <a href="https://www.tidyverse.org/">tidyverse</a> home page:</p>
+<p><strong><em>The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.</em></strong></p>
+<p>As we have seen by loading the tidyverse, this meta-package is composed of 9 packages, each with a specific function, to make the code more readable, effective and data analysis more enjoyable.</p>
+<p>The first feature of the tidyverse that we want to get acquainted with is a <strong>tibble</strong>. Again, quoting from the tidyverse home page: “A tibble is a modern re-imagining of the data frame, keeping what time has proven to be effective, and throwing out what it has not. Tibbles are data.frames that are lazy and surly: they do less and complain more forcing you to confront problems earlier, typically leading to cleaner, more expressive code.”</p>
+</section>
+<section id="tibbles" class="level2">
+<h2 class="anchored" data-anchor-id="tibbles">Tibbles</h2>
+<p>Tibbles are represented as a special type of bivariate data sets, where every column may store different type of objects, but the overall length of each column must be the same. Tibbles may be thought of as two-by-two matrices, where the rows represent different items, and each column represents the variables that are recorded, or measured, for each item. Thus tibbles are the object that correctly represents a data set.</p>
+<p>Tibbles are generally created by reading in a data set using the <code>readr</code> functions such as <code>read_csv()</code> or <code>read_delim()</code>. However, tibbles can also be created explicitly using the <code>tibble()</code> function. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">31</span>, <span class="dv">36</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">salary =</span> <span class="fu">c</span>(<span class="dv">14000</span>, <span class="dv">18000</span>, <span class="dv">25000</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name      age salary
+  &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1 Alice      25  14000
+2 Bob        31  18000
+3 Charlie    36  25000</code></pre>
+</div>
+</div>
+<p>This is easy however, only when the variables (<code>name</code>, <code>age</code> and <code>salary</code> are already stored in some vectors, and we wish to collate them together into a data frame). When we try to store them one by one, it is often more logical to give the data row by row. This can be done with a variant of tibble called <code>tribble()</code>, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> name, <span class="sc">~</span> age, <span class="sc">~</span> salary,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Alice"</span>, <span class="dv">25</span>, <span class="dv">14000</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bob"</span>, <span class="dv">21</span>, <span class="dv">18000</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Charlie"</span>, <span class="dv">56</span>, <span class="dv">25000</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name      age salary
+  &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1 Alice      25  14000
+2 Bob        21  18000
+3 Charlie    56  25000</code></pre>
+</div>
+</div>
+<p>Note the presence of the symbol <code>~</code> before the names of the columns (i.e.&nbsp;the names of the variables) when defined using the <code>tribble()</code> function.</p>
+<p>Generally speaking, the <code>tribble()</code> function works well when one wishes to write down the data directly, while the <code>tibble()</code> function works well to collect into a tibble different variables already stored into single vectors. For example, assume we have recorded the height (in cm) and the weight (in kg) of a sample of students and we have stored this information into the variables <code>height</code> and <code>weight</code>, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">163</span>, <span class="dv">171</span>, <span class="dv">159</span>, <span class="dv">162</span>, <span class="dv">161</span>, <span class="dv">174</span>, <span class="dv">177</span>, <span class="dv">158</span>, <span class="dv">164</span>, <span class="dv">177</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">65</span>, <span class="dv">78</span>, <span class="dv">73</span>, <span class="dv">81</span>, <span class="dv">83</span>, <span class="dv">79</span>, <span class="dv">80</span>, <span class="dv">76</span>, <span class="dv">82</span>, <span class="dv">88</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then we can collect these variables into a tibble, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">tibble</span>(height, weight)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>students</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   height weight
+    &lt;dbl&gt;  &lt;dbl&gt;
+ 1    163     65
+ 2    171     78
+ 3    159     73
+ 4    162     81
+ 5    161     83
+ 6    174     79
+ 7    177     80
+ 8    158     76
+ 9    164     82
+10    177     88</code></pre>
+</div>
+</div>
+<p>Nevertheless, it should be quite evident that when the data set is big, this is not the best way to create a data set. Before exploring how to import data sets into R, however, it may be worth exploring a few data sets.</p>
+</section>
+<section id="examples-of-data-sets" class="level2">
+<h2 class="anchored" data-anchor-id="examples-of-data-sets">Examples of data sets</h2>
+<p>R contains several examples of data sets, some of which particularly interesting because they are data sets of historical value, like the <strong>iris</strong> data set. To see which data sets are included in R, we can use the command <code>data()</code>. This opens a new tab in RStudio showing the list of data sets included in base R.</p>
+<p>Any of these data sets can be called simply typing their name on the console (or running the corresponding code in the R script). However, data sets stored in R cannot be changed, and in order to have the flexibility to make changes, we may wish to save a copy in the memory. However, since the base R saves data sets as <code>data.frame</code> type, we may wish to transform them into a tibble, with the command <code>as_tibble()</code>, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 150 × 5
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+ 1          5.1         3.5          1.4         0.2 setosa 
+ 2          4.9         3            1.4         0.2 setosa 
+ 3          4.7         3.2          1.3         0.2 setosa 
+ 4          4.6         3.1          1.5         0.2 setosa 
+ 5          5           3.6          1.4         0.2 setosa 
+ 6          5.4         3.9          1.7         0.4 setosa 
+ 7          4.6         3.4          1.4         0.3 setosa 
+ 8          5           3.4          1.5         0.2 setosa 
+ 9          4.4         2.9          1.4         0.2 setosa 
+10          4.9         3.1          1.5         0.1 setosa 
+# ℹ 140 more rows</code></pre>
+</div>
+</div>
+<p>Note that the data sets contains 150 rows, but one of the features of a tibble is that it shows only the first 10 rows. If we wish to see more (or less) rows, we can pass the tibble to the function <code>print()</code> and state the numbers of rows to print. For instance, to see the first three rows, we can use</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(iris, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 150 × 5
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+         &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+1          5.1         3.5          1.4         0.2 setosa 
+2          4.9         3            1.4         0.2 setosa 
+3          4.7         3.2          1.3         0.2 setosa 
+# ℹ 147 more rows</code></pre>
+</div>
+</div>
+<p>If we wish to see the structure of the variables of this data set, we can use the <code>glimpse()</code> function, which shows the list of the variables together with their type and the first few values of each of them. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 150
+Columns: 5
+$ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.…
+$ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.…
+$ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.…
+$ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.…
+$ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, s…</code></pre>
+</div>
+</div>
+<p>We have also already established that the function <code>summary()</code> is adaptable and its outcome depends on the type of object that we pass to it. Let’s see what happens when we pass a tibble to this function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+       Species  
+ setosa    :50  
+ versicolor:50  
+ virginica :50  
+                
+                
+                </code></pre>
+</div>
+</div>
+<p>Nicely, <code>summary()</code> returns a summary of each variable in the tibble, and each summary depends on the type of the variable.</p>
+<p>Another nice data set stored in R is <code>airquality</code>, which shows the <em>Daily air quality measurements in New York, May to September 1973.</em> To store it as a tibble, let’s run the following</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>airquality <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(airquality)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>airquality</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 153 × 6
+   Ozone Solar.R  Wind  Temp Month   Day
+   &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1    41     190   7.4    67     5     1
+ 2    36     118   8      72     5     2
+ 3    12     149  12.6    74     5     3
+ 4    18     313  11.5    62     5     4
+ 5    NA      NA  14.3    56     5     5
+ 6    28      NA  14.9    66     5     6
+ 7    23     299   8.6    65     5     7
+ 8    19      99  13.8    59     5     8
+ 9     8      19  20.1    61     5     9
+10    NA     194   8.6    69     5    10
+# ℹ 143 more rows</code></pre>
+</div>
+</div>
+<p>Here we can notice a feature that we have not seen before: the presence of <code>NA</code>’s into the data set. <code>NA</code> is a special type of logical value which stands for “Not Available”. This represents a <strong>missing value</strong>. It is often the case that a data set is incomplete, i.e.&nbsp;that some of the data is not recorded, or it is lost. If these situations are saved as <code>NA</code>, R can keep track of the missing value and handle it accordingly. There are several functions in R that help dealing with missing values.</p>
+<p>Another example of data set comes from the package <code>ggplot2</code> (one of the tidyverse core packages) and it is called <code>mpg</code>; it contains the <em>Fuel economy data from 1999 to 2008 for 38 popular models of cars</em>. This is a data set stored into the tidyverse so it is already a tibble. To see it we can just call it, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 234 × 11
+   manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
+   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 audi         a4           1.8  1999     4 auto… f        18    29 p     comp…
+ 2 audi         a4           1.8  1999     4 manu… f        21    29 p     comp…
+ 3 audi         a4           2    2008     4 manu… f        20    31 p     comp…
+ 4 audi         a4           2    2008     4 auto… f        21    30 p     comp…
+ 5 audi         a4           2.8  1999     6 auto… f        16    26 p     comp…
+ 6 audi         a4           2.8  1999     6 manu… f        18    26 p     comp…
+ 7 audi         a4           3.1  2008     6 auto… f        18    27 p     comp…
+ 8 audi         a4 quattro   1.8  1999     4 manu… 4        18    26 p     comp…
+ 9 audi         a4 quattro   1.8  1999     4 auto… 4        16    25 p     comp…
+10 audi         a4 quattro   2    2008     4 manu… 4        20    28 p     comp…
+# ℹ 224 more rows</code></pre>
+</div>
+</div>
+<p>An interesting fact about this data set is the variety of variables stored in it. Let’s have a proper look with <code>glimpse()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 234
+Columns: 11
+$ manufacturer &lt;chr&gt; "audi", "audi", "audi", "audi", "audi", "audi", "audi", "…
+$ model        &lt;chr&gt; "a4", "a4", "a4", "a4", "a4", "a4", "a4", "a4 quattro", "…
+$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…
+$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…
+$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …
+$ trans        &lt;chr&gt; "auto(l5)", "manual(m5)", "manual(m6)", "auto(av)", "auto…
+$ drv          &lt;chr&gt; "f", "f", "f", "f", "f", "f", "f", "4", "4", "4", "4", "4…
+$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…
+$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…
+$ fl           &lt;chr&gt; "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p…
+$ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact", "c…</code></pre>
+</div>
+</div>
+<p>Let’s also use <code>summary()</code> to have a look at a summary of these values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> manufacturer          model               displ            year     
+ Length:234         Length:234         Min.   :1.600   Min.   :1999  
+ Class :character   Class :character   1st Qu.:2.400   1st Qu.:1999  
+ Mode  :character   Mode  :character   Median :3.300   Median :2004  
+                                       Mean   :3.472   Mean   :2004  
+                                       3rd Qu.:4.600   3rd Qu.:2008  
+                                       Max.   :7.000   Max.   :2008  
+      cyl           trans               drv                 cty       
+ Min.   :4.000   Length:234         Length:234         Min.   : 9.00  
+ 1st Qu.:4.000   Class :character   Class :character   1st Qu.:14.00  
+ Median :6.000   Mode  :character   Mode  :character   Median :17.00  
+ Mean   :5.889                                         Mean   :16.86  
+ 3rd Qu.:8.000                                         3rd Qu.:19.00  
+ Max.   :8.000                                         Max.   :35.00  
+      hwy             fl               class          
+ Min.   :12.00   Length:234         Length:234        
+ 1st Qu.:18.00   Class :character   Class :character  
+ Median :24.00   Mode  :character   Mode  :character  
+ Mean   :23.44                                        
+ 3rd Qu.:27.00                                        
+ Max.   :44.00                                        </code></pre>
+</div>
+</div>
+<p>A quick look shows that most of these summaries is little informative. For example, the number of cylinders, <code>cyl</code>, really not helpful to understand what is going on. Same for the model, which only tells us that there are 234 data, bat what is the distribution of the models?</p>
+<p>To answer that, we need to explain R that some of these data are not just characters (or numbers), but they are “categorical data”, which R calls <strong>factors</strong>.</p>
+</section>
+<section id="factors" class="level2">
+<h2 class="anchored" data-anchor-id="factors">Factors</h2>
+<p>Factors are categorical data, i.e.&nbsp;qualitative or non-numerical data. For instance, social class, primary diagnosis, tumor stage, Tanner stage of puberty, etc are all examples of categorical data. They are typically input using a numeric code, but they can also be stored as characters.</p>
+<p>Such variables should always be specified as <strong>factor</strong> in R. This is the data structure that (among other things) makes it possible to assign meaningful names to the categories, instead of reading them as mere strings of characters (such as IDs).</p>
+<p>The terminology is that a factor has a set of <strong>levels</strong> — say four levels for concreteness. Internally, a four-level factor consists of two items: (a) a vector of integers between 1 and 4, and (b) a character vector of length 4 containing strings describing what the four levels are. Let’s look at an example, before going back to the <code>mpg</code> data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pain <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>fpain <span class="ot">&lt;-</span> <span class="fu">factor</span>(pain, <span class="at">levels =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(fpain) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"mild"</span>, <span class="st">"medium"</span>, <span class="st">"severe"</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>pain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0 3 2 2 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fpain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] none   severe medium medium mild  
+Levels: none mild medium severe</code></pre>
+</div>
+</div>
+<p>The first command creates a numeric vector <code>pain</code>, encoding the pain levels of five patients. We wish to treat this as categorical variable, so we create a factor <code>fpain</code> from it using the function <code>factor()</code>. This is called with one argument in addition to <code>pain</code>, namely <code>levels = 0:3</code>, which indicates that the <em>input</em> coding uses the values 0 to 3. The latter can in principle be left out since R by default uses the values in <code>pain</code>, suitably sorted, but it is a good habit to retain it. The effect of the final line is that the level names are changed to the four specified character strings.</p>
+<p>Now let’s return to the <code>mpg</code> data set. We wish to convert the variable <code>cyl</code> to factor. To do so, let’s use some powerful features of the tidyverse, and in particular of the package <strong>dplyr</strong>. Precisely, we can “mutate” the variable <code>cyl</code> transforming it into a factor, using the function <code>mutate()</code>, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> <span class="fu">mutate</span>(mpg, <span class="at">cyl =</span> <span class="fu">factor</span>(cyl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now see what happens calling the <code>summary()</code> again.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> manufacturer          model               displ            year      cyl   
+ Length:234         Length:234         Min.   :1.600   Min.   :1999   4:81  
+ Class :character   Class :character   1st Qu.:2.400   1st Qu.:1999   5: 4  
+ Mode  :character   Mode  :character   Median :3.300   Median :2004   6:79  
+                                       Mean   :3.472   Mean   :2004   8:70  
+                                       3rd Qu.:4.600   3rd Qu.:2008         
+                                       Max.   :7.000   Max.   :2008         
+    trans               drv                 cty             hwy       
+ Length:234         Length:234         Min.   : 9.00   Min.   :12.00  
+ Class :character   Class :character   1st Qu.:14.00   1st Qu.:18.00  
+ Mode  :character   Mode  :character   Median :17.00   Median :24.00  
+                                       Mean   :16.86   Mean   :23.44  
+                                       3rd Qu.:19.00   3rd Qu.:27.00  
+                                       Max.   :35.00   Max.   :44.00  
+      fl               class          
+ Length:234         Length:234        
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  
+                                      
+                                      
+                                      </code></pre>
+</div>
+</div>
+<p>Now, correctly, R recognises that the number of cylinders are not just numbers, but they are actually factors, so instead of working out the median and the five-number summary, it counts how many times each of these level occurs.</p>
+<p>If we wish to do the same to <code>model</code>, <code>trans</code>, <code>drv</code>, <code>fl</code> and <code>class</code>, we can use a lovely convenience function called <code>across()</code>, which will apply the same function to all variables that we are stating, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> <span class="fu">mutate</span>(mpg, <span class="fu">across</span>(<span class="fu">c</span>(model, trans, drv, fl, class), factor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s see the result with <code>glimpse()</code> first and <code>summary()</code> as well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 234
+Columns: 11
+$ manufacturer &lt;chr&gt; "audi", "audi", "audi", "audi", "audi", "audi", "audi", "…
+$ model        &lt;fct&gt; a4, a4, a4, a4, a4, a4, a4, a4 quattro, a4 quattro, a4 qu…
+$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…
+$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…
+$ cyl          &lt;fct&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …
+$ trans        &lt;fct&gt; auto(l5), manual(m5), manual(m6), auto(av), auto(l5), man…
+$ drv          &lt;fct&gt; f, f, f, f, f, f, f, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, r, …
+$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…
+$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…
+$ fl           &lt;fct&gt; p, p, p, p, p, p, p, p, p, p, p, p, p, p, p, p, p, p, r, …
+$ class        &lt;fct&gt; compact, compact, compact, compact, compact, compact, com…</code></pre>
+</div>
+</div>
+<p>We can see here that the variables we have mutated across now are all labelled as “factors” (<code>fct</code>). Let’s see the summary as well now:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> manufacturer                       model         displ            year     
+ Length:234         caravan 2wd        : 11   Min.   :1.600   Min.   :1999  
+ Class :character   ram 1500 pickup 4wd: 10   1st Qu.:2.400   1st Qu.:1999  
+ Mode  :character   civic              :  9   Median :3.300   Median :2004  
+                    dakota pickup 4wd  :  9   Mean   :3.472   Mean   :2004  
+                    jetta              :  9   3rd Qu.:4.600   3rd Qu.:2008  
+                    mustang            :  9   Max.   :7.000   Max.   :2008  
+                    (Other)            :177                                 
+ cyl           trans    drv          cty             hwy        fl     
+ 4:81   auto(l4)  :83   4:103   Min.   : 9.00   Min.   :12.00   c:  1  
+ 5: 4   manual(m5):58   f:106   1st Qu.:14.00   1st Qu.:18.00   d:  5  
+ 6:79   auto(l5)  :39   r: 25   Median :17.00   Median :24.00   e:  8  
+ 8:70   manual(m6):19           Mean   :16.86   Mean   :23.44   p: 52  
+        auto(s6)  :16           3rd Qu.:19.00   3rd Qu.:27.00   r:168  
+        auto(l6)  : 6           Max.   :35.00   Max.   :44.00          
+        (Other)   :13                                                  
+        class   
+ 2seater   : 5  
+ compact   :47  
+ midsize   :41  
+ minivan   :11  
+ pickup    :33  
+ subcompact:35  
+ suv       :62  </code></pre>
+</div>
+</div>
+<p>This is actually much more informative.</p>
+</section>
+<section id="some-advanced-features-of-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="some-advanced-features-of-tidyverse">Some advanced features of tidyverse</h2>
+<p>Before we can start learning all the beautiful and so helpful functions in the tidyverse, it becomes absolutely vital to talk about the philosophy of the tidyverse. The functions in tidyverse are generally defined with a <em>verb</em> (e.g.&nbsp;select, filter, mutate, rename, arrange, etc) and we generally take a data set, stored as a data frame or a tibble, and we apply one of these verb, then another and then another and so on, until we get what we need. The coding equivalent of the adverb “then” is called a <em>pipe</em>. The pipe command is the coding equivalent of the composition of functions in maths.</p>
+<p>In maths, if <span class="math inline">f(x)</span> and <span class="math inline">g(x)</span> are two functions, instead of writing <span class="math inline">g(f(x))</span>, i.e.&nbsp;to take <span class="math inline">x</span> apply <span class="math inline">f</span> and then apply <span class="math inline">g</span>. In symbols,</p>
+<p><span class="math display">
+x \mapsto f(x) \mapsto g\big(f(x)\big),
+</span></p>
+<p>In R, we do something similar: instead of taking <code>g(f(x))</code>, we do <code>x |&gt; f |&gt; g</code> using the <code>|&gt;</code> (pipe) command. So, for example, to say</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> <span class="fu">mutate</span>(mpg, <span class="at">cyl =</span> <span class="fu">factor</span>(cyl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>we can write</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

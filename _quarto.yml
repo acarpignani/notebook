@@ -13,6 +13,7 @@ website:
           file: index.qmd
         - r-basics.qmd
         - vectors.qmd
+        - data-frames.qmd
 
 format:
   html:

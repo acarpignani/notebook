@@ -1,0 +1,195 @@
+# Data Frames
+
+Data frames are used to store tabular data in R. They are an important type of object and are used in a variety of statistical modelling applications. The **tidyverse** meta-package has an enhanced version of data frame, called a **tibble** and an optimised set of functions designed to work effectively with data frames and tibbles.
+
+Before we continue, it is therefore necessary to install, and load, the **tidyverse**.
+
+## Installing and loading packages in R
+
+Anyone can create new R packages, but only when packages satisfy certain strict rules are stored on CRAN. This ensures that packages stores on CRAN are reliable, have documentation and there is a support in place for the users. To install a package that lives on CRAN it suffices to type on the console `install.packages("package_name")`. R will then install the package and all the dependencies needed to run the package.
+
+So, to install the whole **tidyverse** we just have to type `install.packages("tidyverse")`.
+
+To load a package (regardless of where it comes from), we need to use the command `library()`. So, to load the **tidyverse** we can just type in out script and run the code
+
+```{r}
+library(tidyverse)
+```
+
+The outcome is pretty overwhelming! First we are informed that all the core tidyverse packages are correctly loaded: **dplyr**, **forecats**, **ggplot2**, **lubridate**, **purrr**, **readr**, **stringr**, **tibble** and **tidyr**. Then we are also informed that there are two functions that were already loaded from the package `stats` (a core package automatically loaded by R), and they are now substituted by the homonym functions from **dplyr**. This might seem like a loss, but the `stats` functions are not lost, we only need to call them via their "long name".
+
+### Long names versus short names
+
+The **long name** of a function is composed by the name of the package where the function is stored, two colons (`::`) and the name of the function. So, to use the function `filter()` in `stats` we can type `stats::filter()`. Similarly, if we wanted to use the function `read_csv()` which lies in the package `readr`, we could just type `readr::read_csv()` without the needs to load the package `readr` in advance.
+
+::: callout-tip
+It is good practice to always load at the beginning of the script code the packages that are going to be used, even though, sometimes, we may end up using the long name for the sake of clarity, or to avoid conflicts between packages.
+:::
+
+## The tidyverse
+
+Quoting from the [tidyverse](https://www.tidyverse.org/) home page:
+
+***The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.***
+
+As we have seen by loading the tidyverse, this meta-package is composed of 9 packages, each with a specific function, to make the code more readable, effective and data analysis more enjoyable.
+
+The first feature of the tidyverse that we want to get acquainted with is a **tibble**. Again, quoting from the tidyverse home page: "A tibble is a modern re-imagining of the data frame, keeping what time has proven to be effective, and throwing out what it has not. Tibbles are data.frames that are lazy and surly: they do less and complain more forcing you to confront problems earlier, typically leading to cleaner, more expressive code."
+
+## Tibbles
+
+Tibbles are represented as a special type of bivariate data sets, where every column may store different type of objects, but the overall length of each column must be the same. Tibbles may be thought of as two-by-two matrices, where the rows represent different items, and each column represents the variables that are recorded, or measured, for each item. Thus tibbles are the object that correctly represents a data set.
+
+Tibbles are generally created by reading in a data set using the `readr` functions such as `read_csv()` or `read_delim()`. However, tibbles can also be created explicitly using the `tibble()` function. For example,
+
+```{r}
+tibble(
+    name = c("Alice", "Bob", "Charlie"),
+    age = c(25, 31, 36),
+    salary = c(14000, 18000, 25000)
+)
+```
+
+This is easy however, only when the variables (`name`, `age` and `salary` are already stored in some vectors, and we wish to collate them together into a data frame). When we try to store them one by one, it is often more logical to give the data row by row. This can be done with a variant of tibble called `tribble()`, like so:
+
+```{r}
+tribble(
+    ~ name, ~ age, ~ salary,
+    "Alice", 25, 14000,
+    "Bob", 21, 18000,
+    "Charlie", 56, 25000
+)
+```
+
+Note the presence of the symbol `~` before the names of the columns (i.e. the names of the variables) when defined using the `tribble()` function.
+
+Generally speaking, the `tribble()` function works well when one wishes to write down the data directly, while the `tibble()` function works well to collect into a tibble different variables already stored into single vectors. For example, assume we have recorded the height (in cm) and the weight (in kg) of a sample of students and we have stored this information into the variables `height` and `weight`, like so:
+
+```{r}
+height <- c(163, 171, 159, 162, 161, 174, 177, 158, 164, 177)
+weight <- c(65, 78, 73, 81, 83, 79, 80, 76, 82, 88)
+```
+
+Then we can collect these variables into a tibble, like so:
+
+```{r}
+students <- tibble(height, weight)
+students
+```
+
+Nevertheless, it should be quite evident that when the data set is big, this is not the best way to create a data set. Before exploring how to import data sets into R, however, it may be worth exploring a few data sets.
+
+## Examples of data sets
+
+R contains several examples of data sets, some of which particularly interesting because they are data sets of historical value, like the **iris** data set. To see which data sets are included in R, we can use the command `data()`. This opens a new tab in RStudio showing the list of data sets included in base R.
+
+Any of these data sets can be called simply typing their name on the console (or running the corresponding code in the R script). However, data sets stored in R cannot be changed, and in order to have the flexibility to make changes, we may wish to save a copy in the memory. However, since the base R saves data sets as `data.frame` type, we may wish to transform them into a tibble, with the command `as_tibble()`, like so:
+
+```{r}
+iris <- as_tibble(iris)
+iris
+```
+
+Note that the data sets contains 150 rows, but one of the features of a tibble is that it shows only the first 10 rows. If we wish to see more (or less) rows, we can pass the tibble to the function `print()` and state the numbers of rows to print. For instance, to see the first three rows, we can use
+
+```{r}
+print(iris, n = 3)
+```
+
+If we wish to see the structure of the variables of this data set, we can use the `glimpse()` function, which shows the list of the variables together with their type and the first few values of each of them. For example,
+
+```{r}
+glimpse(iris)
+```
+
+We have also already established that the function `summary()` is adaptable and its outcome depends on the type of object that we pass to it. Let's see what happens when we pass a tibble to this function.
+
+```{r}
+summary(iris)
+```
+
+Nicely, `summary()` returns a summary of each variable in the tibble, and each summary depends on the type of the variable.
+
+Another nice data set stored in R is `airquality`, which shows the *Daily air quality measurements in New York, May to September 1973.* To store it as a tibble, let's run the following
+
+```{r}
+airquality <- as_tibble(airquality)
+airquality
+```
+
+Here we can notice a feature that we have not seen before: the presence of `NA`'s into the data set. `NA` is a special type of logical value which stands for "Not Available". This represents a **missing value**. It is often the case that a data set is incomplete, i.e. that some of the data is not recorded, or it is lost. If these situations are saved as `NA`, R can keep track of the missing value and handle it accordingly. There are several functions in R that help dealing with missing values.
+
+Another example of data set comes from the package `ggplot2` (one of the tidyverse core packages) and it is called `mpg`; it contains the *Fuel economy data from 1999 to 2008 for 38 popular models of cars*. This is a data set stored into the tidyverse so it is already a tibble. To see it we can just call it, like so:
+
+```{r}
+mpg
+```
+
+An interesting fact about this data set is the variety of variables stored in it. Let's have a proper look with `glimpse()`:
+
+```{r}
+glimpse(mpg)
+```
+
+Let's also use `summary()` to have a look at a summary of these values.
+
+```{r}
+summary(mpg)
+```
+
+A quick look shows that most of these summaries is little informative. For example, the number of cylinders, `cyl`, really not helpful to understand what is going on. Same for the model, which only tells us that there are 234 data, bat what is the distribution of the models?
+
+To answer that, we need to explain R that some of these data are not just characters (or numbers), but they are "categorical data", which R calls **factors**.
+
+## Factors
+
+Factors are categorical data, i.e. qualitative or non-numerical data. For instance, social class, primary diagnosis, tumor stage, Tanner stage of puberty, etc are all examples of categorical data. They are typically input using a numeric code, but they can also be stored as characters.
+
+Such variables should always be specified as **factor** in R. This is the data structure that (among other things) makes it possible to assign meaningful names to the categories, instead of reading them as mere strings of characters (such as IDs).
+
+The terminology is that a factor has a set of **levels** — say four levels for concreteness. Internally, a four-level factor consists of two items: (a) a vector of integers between 1 and 4, and (b) a character vector of length 4 containing strings describing what the four levels are. Let's look at an example, before going back to the `mpg` data set.
+
+```{r}
+pain <- c(0, 3, 2, 2, 1)
+fpain <- factor(pain, levels = 0:3)
+levels(fpain) <- c("none", "mild", "medium", "severe")
+
+pain
+fpain
+```
+
+The first command creates a numeric vector `pain`, encoding the pain levels of five patients. We wish to treat this as categorical variable, so we create a factor `fpain` from it using the function `factor()`. This is called with one argument in addition to `pain`, namely `levels = 0:3`, which indicates that the *input* coding uses the values 0 to 3. The latter can in principle be left out since R by default uses the values in `pain`, suitably sorted, but it is a good habit to retain it. The effect of the final line is that the level names are changed to the four specified character strings.
+
+Now let's return to the `mpg` data set. We wish to convert the variable `cyl` to factor. To do so, let's use some powerful features of the tidyverse, and in particular of the package **dplyr**. Precisely, we can "mutate" the variable `cyl` transforming it into a factor, using the function `mutate()`, like so:
+
+```{r}
+mpg <- mutate(mpg, cyl = factor(cyl))
+```
+
+We can now see what happens calling the `summary()` again.
+
+```{r}
+summary(mpg)
+```
+
+Now, correctly, R recognises that the number of cylinders are not just numbers, but they are actually factors, so instead of working out the median and the five-number summary, it counts how many times each of these level occurs.
+
+If we wish to do the same to `model`, `trans`, `drv`, `fl` and `class`, we can use a lovely convenience function called `across()`, which will apply the same function to all variables that we are stating, like so:
+
+```{r}
+mpg <- mutate(mpg, across(c(model, trans, drv, fl, class), factor))
+```
+
+Let's see the result with `glimpse()` first and `summary()` as well.
+
+```{r}
+glimpse(mpg)
+```
+
+We can see here that the variables we have mutated across now are all labelled as "factors" (`fct`). Let's see the summary as well now:
+
+```{r}
+summary(mpg)
+```
+
+This is actually much more informative.
