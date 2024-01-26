@@ -193,3 +193,20 @@ summary(mpg)
 ```
 
 This is actually much more informative.
+
+## Getting data in R
+
+There are useful base R functions to read data from external files or internet addresses, but we shall learn how to use their enhanced counterparts stored in the package `readr` which is one of the core packages of the tidyverse.
+
+Usually data are stored either in excel files or in CSV files (comma separated variable). Let's start with the latter and suppose we want to store in R the content of the **sheep** data set on the course repository. This contains the height (in cm) and the weight (in kg) of a sample of sheep. To do so, providing the tidyverse is loaded, it suffices to run the command
+
+```{r}
+sheep <- read_csv("https://raw.githubusercontent.com/acarpignani/R4DS/main/datasets/sheep.csv")
+sheep
+```
+
+Let's see what the mean values for these variables are with the `summary()` function:
+
+```{r}
+summary(sheep)
+```

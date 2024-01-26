@@ -101,49 +101,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -206,7 +163,7 @@ window.Quarto = {
   <li><a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles">Tibbles</a></li>
   <li><a href="#examples-of-data-sets" id="toc-examples-of-data-sets" class="nav-link" data-scroll-target="#examples-of-data-sets">Examples of data sets</a></li>
   <li><a href="#factors" id="toc-factors" class="nav-link" data-scroll-target="#factors">Factors</a></li>
-  <li><a href="#some-advanced-features-of-tidyverse" id="toc-some-advanced-features-of-tidyverse" class="nav-link" data-scroll-target="#some-advanced-features-of-tidyverse">Some advanced features of tidyverse</a></li>
+  <li><a href="#getting-data-in-r" id="toc-getting-data-in-r" class="nav-link" data-scroll-target="#getting-data-in-r">Getting data in R</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -601,20 +558,51 @@ $ class        &lt;fct&gt; compact, compact, compact, compact, compact, compact,
 </div>
 <p>This is actually much more informative.</p>
 </section>
-<section id="some-advanced-features-of-tidyverse" class="level2">
-<h2 class="anchored" data-anchor-id="some-advanced-features-of-tidyverse">Some advanced features of tidyverse</h2>
-<p>Before we can start learning all the beautiful and so helpful functions in the tidyverse, it becomes absolutely vital to talk about the philosophy of the tidyverse. The functions in tidyverse are generally defined with a <em>verb</em> (e.g.&nbsp;select, filter, mutate, rename, arrange, etc) and we generally take a data set, stored as a data frame or a tibble, and we apply one of these verb, then another and then another and so on, until we get what we need. The coding equivalent of the adverb “then” is called a <em>pipe</em>. The pipe command is the coding equivalent of the composition of functions in maths.</p>
-<p>In maths, if <span class="math inline">f(x)</span> and <span class="math inline">g(x)</span> are two functions, instead of writing <span class="math inline">g(f(x))</span>, i.e.&nbsp;to take <span class="math inline">x</span> apply <span class="math inline">f</span> and then apply <span class="math inline">g</span>. In symbols,</p>
-<p><span class="math display">
-x \mapsto f(x) \mapsto g\big(f(x)\big),
-</span></p>
-<p>In R, we do something similar: instead of taking <code>g(f(x))</code>, we do <code>x |&gt; f |&gt; g</code> using the <code>|&gt;</code> (pipe) command. So, for example, to say</p>
+<section id="getting-data-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="getting-data-in-r">Getting data in R</h2>
+<p>There are useful base R functions to read data from external files or internet addresses, but we shall learn how to use their enhanced counterparts stored in the package <code>readr</code> which is one of the core packages of the tidyverse.</p>
+<p>Usually data are stored either in excel files or in CSV files (comma separated variable). Let’s start with the latter and suppose we want to store in R the content of the <strong>sheep</strong> data set on the course repository. This contains the height (in cm) and the weight (in kg) of a sample of sheep. To do so, providing the tidyverse is loaded, it suffices to run the command</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> <span class="fu">mutate</span>(mpg, <span class="at">cyl =</span> <span class="fu">factor</span>(cyl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>sheep <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/acarpignani/R4DS/main/datasets/sheep.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 100 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (2): weight, height
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<p>we can write</p>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>sheep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 2
+   weight height
+    &lt;dbl&gt;  &lt;dbl&gt;
+ 1   75.2   56.3
+ 2  102.    83.6
+ 3   74.5   56.6
+ 4   81.4   55.6
+ 5   83.2   73.6
+ 6   80.8   56.2
+ 7   81.7   65.9
+ 8   90.8   70.4
+ 9  103.    66.3
+10  105.    74.0
+# ℹ 90 more rows</code></pre>
+</div>
+</div>
+<p>Let’s see what the mean values for these variables are with the <code>summary()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sheep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     weight           height     
+ Min.   : 55.90   Min.   :40.57  
+ 1st Qu.: 73.02   1st Qu.:57.53  
+ Median : 81.78   Median :65.31  
+ Mean   : 82.75   Mean   :65.02  
+ 3rd Qu.: 91.02   3rd Qu.:72.19  
+ Max.   :119.50   Max.   :90.05  </code></pre>
+</div>
 </div>
 
 
