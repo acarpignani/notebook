@@ -1,1 +1,1 @@
-# Reshaping data sets with *tidyr*
+# Data tidying

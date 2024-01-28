@@ -35,7 +35,7 @@ website:
       collapse-level: 1
 
       contents:
-        - section: "Basics"
+        - section: "Introduction to R programming"
           contents:
             - text: "Introduction"
               file: r-programming.qmd
@@ -46,26 +46,27 @@ website:
             - data-frames.qmd
             - in-and-out.qmd
         
-        - section: "Programming basics"
+        - section: "Basic R Programming"
           contents:
             - conditionals.qmd
             - loops.qmd
-            
-        - section: "Advanced R programming"
+
+        - section: "Advanced R Programming"
           contents:
             - functions.qmd
             - purrr-functions.qmd
-            
-        - section: "Data manipulation"
+
+        - section: "Data Manipulation"
           contents:
             - dplyr.qmd
             - tidyr.qmd
             
-        - section: "Data visualisation"
+        - section: "Data Visualisation"
           contents:
             - intro-gg.qmd
             - ggplot-basics.qmd
             - themes.qmd
+
 
     - title: "Practice"
       contents:
