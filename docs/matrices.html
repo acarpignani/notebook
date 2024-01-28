@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -189,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./in-and-out.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting data in and out R</span></a>
+ <span class="menu-text">Getting data in and out of R</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +336,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#matrices" id="toc-matrices" class="nav-link active" data-scroll-target="#matrices">Matrices</a></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link active" data-scroll-target="#matrices">Matrices</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-matrix" id="toc-creating-a-matrix" class="nav-link" data-scroll-target="#creating-a-matrix">Creating a matrix</a>
+  <ul class="collapse">
+  <li><a href="#creating-matrices-from-vectors" id="toc-creating-matrices-from-vectors" class="nav-link" data-scroll-target="#creating-matrices-from-vectors">Creating matrices from vectors</a></li>
+  <li><a href="#naming-matrices" id="toc-naming-matrices" class="nav-link" data-scroll-target="#naming-matrices">Naming matrices</a></li>
+  </ul></li>
+  <li><a href="#matrix-indexing" id="toc-matrix-indexing" class="nav-link" data-scroll-target="#matrix-indexing">Matrix indexing</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -314,8 +356,153 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="matrices" class="level1">
 <h1>Matrices</h1>
+<p>We’ve learned about vectors which allow us to store indexed elements. A matrix will allow us to have a 2-dimensional data structure which contains elements consisting of the same data type.</p>
+<p>Before introducing about matrices, however, we should recall a shortcut for quickly creating sequential numeric vectors. this can be quickly achieved using the colon notation <code>:</code> introduced in the section <strong>Vector indexing and slicing</strong>.</p>
+<p>For example, to create the sequence of the numbers from 1 to 10, we can type</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<section id="creating-a-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-matrix">Creating a matrix</h2>
+<p>To create an empty <code>m</code> by <code>n</code> matrix we can type <code>matrix(nrow = m, ncol = n)</code>. This will generate a matrix of <code>NA</code>, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]   NA   NA   NA   NA   NA
+[2,]   NA   NA   NA   NA   NA
+[3,]   NA   NA   NA   NA   NA</code></pre>
+</div>
+</div>
+<p>If we wish to create and populate a matrix at the same time, we can pass a vector with all the entries of the matrix. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    4    7   10   13
+[2,]    2    5    8   11   14
+[3,]    3    6    9   12   15</code></pre>
+</div>
+</div>
+<p>In this case, we don’t need to state both <code>nrow</code> and <code>ncol</code> because the total number of elements in the vector <code>1:15</code> gives this information. Notice that, by default, R populates the matrix “by column”, i.e.&nbsp;it fills in the first column, then it passes to the second, and so on. Sometimes, however, it is convenient to populate the matrix “by row” instead. To this end, it suffices to pass a further argument <code>byrow = TRUE</code>, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    6    7    8    9   10
+[3,]   11   12   13   14   15</code></pre>
+</div>
+</div>
+<section id="creating-matrices-from-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="creating-matrices-from-vectors">Creating matrices from vectors</h3>
+<p>We can also store the rows (or the columns) of a matrix in different vectors and later combine them into a single matrix. For example, consider the following vectors below of stock prices for Google and Microsoft:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>goog <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">450</span>, <span class="dv">451</span>, <span class="dv">452</span>, <span class="dv">445</span>, <span class="dv">468</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>msft <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">230</span>, <span class="dv">231</span>, <span class="dv">232</span>, <span class="dv">236</span>, <span class="dv">228</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>stocks <span class="ot">&lt;-</span> <span class="fu">c</span>(goog, msft)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>stock_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(stocks, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>stock_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]  450  451  452  445  468
+[2,]  230  231  232  236  228</code></pre>
+</div>
+</div>
+</section>
+<section id="naming-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="naming-matrices">Naming matrices</h3>
+<p>Now that we have our matrix, it would be nice to name the rows and columns for reference. We can do this similarly to the <code>names()</code> function for vectors, but in this case we define <code>colnames()</code> and <code>rownames()</code>. Let’s apply these commands to the stock matrix we have defined before:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>days <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Mon"</span>, <span class="st">"Tue"</span>, <span class="st">"Wed"</span>, <span class="st">"Thu"</span>, <span class="st">"Fri"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>stock_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"GOOG"</span>, <span class="st">"MSFT"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(stock_matrix) <span class="ot">&lt;-</span> days</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(stock_matrix) <span class="ot">&lt;-</span> stock_names</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>stock_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Mon Tue Wed Thu Fri
+GOOG 450 451 452 445 468
+MSFT 230 231 232 236 228</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One of the main features (and limitations) of matrices is that all values in a matrix must be of the same type. So, for example, one can create a matrix of <strong>double</strong> numbers, or a matrix of <strong>logical</strong> values, but we cannot take a matrix where one column has numbers and another has logical values. To do this, we need to use a <strong>data frame</strong> which is more general type of matrix, where the columns (but not the row) can have different types.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="matrix-indexing" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-indexing">Matrix indexing</h2>
+<p>Just like with vectors, we use the square bracket notation to select elements from a matrix. Since we have two dimensions to work with, we will use a comma to separate our indexing for each dimension.</p>
+<p>So the syntax is then:</p>
+<pre><code>example_matrix[rows, columns]</code></pre>
+<p>where the index notation (e.g.&nbsp;1:5) is put in place of the <em>rows</em> or <em>columns</em> . If either <em>rows</em> or <em>columns</em> is left blank, then we are selecting all the rows and columns.</p>
+<p>Let’s work through some examples:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let us select the first row:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">1</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<p>Let us now select the first column:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mat[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1 11 21 31 41</code></pre>
+</div>
+</div>
+<p>Let us now select the first 3 rows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+[1,]    1    2    3    4    5    6    7    8    9    10
+[2,]   11   12   13   14   15   16   17   18   19    20
+[3,]   21   22   23   24   25   26   27   28   29    30</code></pre>
+</div>
+</div>
+<p>Let us also take the top left 2 by 3 rectangle:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]   11   12   13</code></pre>
+</div>
+</div>
+<p>Finally, let’s take the last two columns:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mat[,<span class="dv">9</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    9   10
+[2,]   19   20
+[3,]   29   30
+[4,]   39   40
+[5,]   49   50</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

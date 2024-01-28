@@ -1,1 +1,92 @@
-# Lists
+# A brief introduction to lists
+
+Lists are a special type of vectors that can contain elements of different classes. Lists are a very important data type in R and you should get to know them well. On the other hand, lists are also a very complex topic, and before really understanding their usage, you must see a multitude of examples. Lists pair with a class of R functions called the "apply functions" and together they become an impressively powerful tool. We shall not discuss the base R apply functions but an enhanced version available in the **tidyverse** through the package **purrr**. Until then, let's only briefly see how a list is defined and how to access its elements.
+
+### Creating a list
+
+Suppose we have the following vectors:
+
+```{r}
+num <- c(4, 8, 15, 16, 23, 42)
+lgl <- c(TRUE, FALSE, TRUE)
+char <- c("Jack", "Kate", "Charlie", "John")
+```
+
+To put them into a list, we can just write:
+
+```{r}
+lst <- list(num, lgl, char)
+lst
+```
+
+You will notice that the `list()` assigned numbers to each of the objects in the list, but we can also assign names in the following manner:
+
+```{r}
+lst <- list(numbers = num, logicals = lgl, characters = char)
+lst
+```
+
+### Accessing the list
+
+We can use the brackets `[ ]` to access the elements of a list. For example,
+
+```{r}
+lst[1]
+```
+
+Notice however that by doing so, R returns another list, with only one element (namely the vector called "numbers" with entries 4, 8, 15, 16, 23, 42). In order to grab this vector, we need to use the double brackets `[[ ]]`, like so:
+
+```{r}
+lst[[1]]
+```
+
+Alternatively, but only when the elements of the list are named, we can use the `$` operator, and call the name of the list directly, like so:
+
+```{r}
+lst$numbers
+```
+
+Alternatively, we can use the double brackets `[[ ]]` with the name of the element, like so:
+
+```{r}
+lst[["numbers"]]
+```
+
+We can also compose the brackets, to access the elements of a specific object in a list. For example,
+
+```{r}
+lst[["numbers"]][3]
+```
+
+### Combining lists
+
+We can also combine two lists together in one. This can be done with the concatenation function `c()`. For example, take
+
+```{r}
+lst_1 <- list(nums = 0:9, alpha = letters)
+lst_2 <- list(bool = c(TRUE, FALSE), 
+              week = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))
+# List 1
+lst_1
+
+# List 2
+lst_2
+
+# Combined list
+lst <- c(lst_1, lst_2)
+lst
+```
+
+::: callout-note
+Notice that we have used the variable `letters` to generate the letters of the alphabet, even though we have never defined this variable before. This is because `letters` is a **build-in** variable in R and it is loaded with base R.
+:::
+
+### Structure of a list
+
+In order to see the structure of a list, we can use the command `str()`. For example, with reference with the last list, `lst`, created:
+
+```{r}
+str(lst)
+```
+
+This command shows the names of the elements that compose the list, the dimensions of these elements, and the first few elements.

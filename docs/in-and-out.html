@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -129,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r-programming.html">Basics</a></li><li class="breadcrumb-item"><a href="./in-and-out.html">Getting data in and out R</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r-programming.html">Basics</a></li><li class="breadcrumb-item"><a href="./in-and-out.html">Getting data in and out of R</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -177,7 +211,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lists.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lists</span></a>
+ <span class="menu-text">A brief introduction to lists</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -189,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./in-and-out.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Getting data in and out R</span></a>
+ <span class="menu-text">Getting data in and out of R</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +336,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-data-in-and-out-r" id="toc-getting-data-in-and-out-r" class="nav-link active" data-scroll-target="#getting-data-in-and-out-r">Getting data in and out R</a></li>
+  <li><a href="#getting-data-in-and-out-of-r" id="toc-getting-data-in-and-out-of-r" class="nav-link active" data-scroll-target="#getting-data-in-and-out-of-r">Getting data in and out of R</a>
+  <ul class="collapse">
+  <li><a href="#working-directory-and-r-projects" id="toc-working-directory-and-r-projects" class="nav-link" data-scroll-target="#working-directory-and-r-projects">Working directory and R projects</a></li>
+  <li><a href="#getting-data-in-r" id="toc-getting-data-in-r" class="nav-link" data-scroll-target="#getting-data-in-r">Getting data in R</a></li>
+  <li><a href="#getting-data-out-of-r" id="toc-getting-data-out-of-r" class="nav-link" data-scroll-target="#getting-data-out-of-r">Getting data out of R</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -312,10 +351,167 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="getting-data-in-and-out-r" class="level1">
-<h1>Getting data in and out R</h1>
+<section id="getting-data-in-and-out-of-r" class="level1">
+<h1>Getting data in and out of R</h1>
+<section id="working-directory-and-r-projects" class="level2">
+<h2 class="anchored" data-anchor-id="working-directory-and-r-projects">Working directory and R projects</h2>
+<p>Before we can describe how to import and export data in R, it becomes necessary to discuss a bit more in detail about R workflow. Let’s just start by describing good practice. When working at a project in R, using RStudio, it is convenient to always start a new Project, by clicking File &gt; New Project.</p>
+<p>Once the project is created we can create scripts to store in the directory where the Project is located, and this is set by RStudio as the <strong>working directory</strong> where R is going to start from when it reads or writes files.</p>
+<p>To see the working directory we can type</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If we wish to change the working directory manually (operation that we <strong>do not</strong> recommend) we can now type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"relative_path"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Quoting H wickham, once we are inside a project, we should only ever use relative paths, not absolute paths. A relative path, in fact, is relative to the working directory, i.e.&nbsp;the project home. This guarantees that, if two people share a project (e.g.&nbsp;by cloning a github repository), they both can run the code regardless of the actual location where that repository is cloned.</p>
+</section>
+<section id="getting-data-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="getting-data-in-r">Getting data in R</h2>
+<p>There are useful base R functions to read data from external files or internet addresses, but we shall learn how to use their enhanced counterparts stored in the package <code>readr</code> which is one of the core packages of the tidyverse. In fact, these functions are much faster than their base R analogues and provide a few nice extra features. For example, if there is a non-fatal problem that occurs while reading the data, these functions return a warning and the data frame will have some information about which row/observations triggered the warning.</p>
+<p>Usually data are stored either in excel files or in CSV files (comma separated variable). Let’s start with the latter and suppose we want to store in R the content of the <a href="https://github.com/acarpignani/R4DS/blob/main/datasets/sheep.csv">sheep data set</a> on the course’s repository. This contains the height (in cm) and the weight (in kg) of a sample of sheep. To do so, providing the tidyverse is loaded, it suffices to run the command</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sheep <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/acarpignani/R4DS/main/datasets/sheep.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 100 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (2): weight, height
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sheep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 2
+   weight height
+    &lt;dbl&gt;  &lt;dbl&gt;
+ 1   75.2   56.3
+ 2  102.    83.6
+ 3   74.5   56.6
+ 4   81.4   55.6
+ 5   83.2   73.6
+ 6   80.8   56.2
+ 7   81.7   65.9
+ 8   90.8   70.4
+ 9  103.    66.3
+10  105.    74.0
+# ℹ 90 more rows</code></pre>
+</div>
+</div>
+<p>What is the average weight and height of these sheep? We have now all the elements to respond. For example, we can call the function <code>summary()</code>. As we have seen this is an adaptable function and when we pass a tibble to it, it returns a summary of every variable in the tibble, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sheep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     weight           height     
+ Min.   : 55.90   Min.   :40.57  
+ 1st Qu.: 73.02   1st Qu.:57.53  
+ Median : 81.78   Median :65.31  
+ Mean   : 82.75   Mean   :65.02  
+ 3rd Qu.: 91.02   3rd Qu.:72.19  
+ Max.   :119.50   Max.   :90.05  </code></pre>
+</div>
+</div>
+<p>Let’s load another data set, from our repository. This time we are interested in the data set containing information about the <a href="https://github.com/acarpignani/R4DS/blob/main/datasets/worms.csv">density of worms</a> in some fields, also available in the course’s repository. Let’s call this data frame <code>worms</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>worms <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/acarpignani/R4DS/main/datasets/worms.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 20 Columns: 7
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Field.Name, Vegetation
+dbl (4): Area, Slope, Soil.pH, Worm.density
+lgl (1): Damp
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>worms</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 7
+   Field.Name         Area Slope Vegetation Soil.pH Damp  Worm.density
+   &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;        &lt;dbl&gt;
+ 1 Nashs.Field         3.6    11 Grassland      4.1 FALSE            4
+ 2 Silwood.Bottom      5.1     2 Arable         5.2 FALSE            7
+ 3 Nursery.Field       2.8     3 Grassland      4.3 FALSE            2
+ 4 Rush.Meadow         2.4     5 Meadow         4.9 TRUE             5
+ 5 Gunness.Thicket     3.8     0 Scrub          4.2 FALSE            6
+ 6 Oak.Mead            3.1     2 Grassland      3.9 FALSE            2
+ 7 Church.Field        3.5     3 Grassland      4.2 FALSE            3
+ 8 Ashurst             2.1     0 Arable         4.8 FALSE            4
+ 9 The.Orchard         1.9     0 Orchard        5.7 FALSE            9
+10 Rookery.Slope       1.5     4 Grassland      5   TRUE             7
+11 Garden.Wood         2.9    10 Scrub          5.2 FALSE            8
+12 North.Gravel        3.3     1 Grassland      4.1 FALSE            1
+13 South.Gravel        3.7     2 Grassland      4   FALSE            2
+14 Observatory.Ridge   1.8     6 Grassland      3.8 FALSE            0
+15 Pond.Field          4.1     0 Meadow         5   TRUE             6
+16 Water.Meadow        3.9     0 Meadow         4.9 TRUE             8
+17 Cheapside           2.2     8 Scrub          4.7 TRUE             4
+18 Pound.Hill          4.4     2 Arable         4.5 FALSE            5
+19 Gravel.Pit          2.9     1 Grassland      3.5 FALSE            1
+20 Farm.Wood           0.8    10 Scrub          5.1 TRUE             3</code></pre>
+</div>
+</div>
+<p>Let’s try now to apply the <code>summary()</code> to this data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(worms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Field.Name             Area           Slope        Vegetation       
+ Length:20          Min.   :0.800   Min.   : 0.00   Length:20         
+ Class :character   1st Qu.:2.175   1st Qu.: 0.75   Class :character  
+ Mode  :character   Median :3.000   Median : 2.00   Mode  :character  
+                    Mean   :2.990   Mean   : 3.50                     
+                    3rd Qu.:3.725   3rd Qu.: 5.25                     
+                    Max.   :5.100   Max.   :11.00                     
+    Soil.pH         Damp          Worm.density 
+ Min.   :3.500   Mode :logical   Min.   :0.00  
+ 1st Qu.:4.100   FALSE:14        1st Qu.:2.00  
+ Median :4.600   TRUE :6         Median :4.00  
+ Mean   :4.555                   Mean   :4.35  
+ 3rd Qu.:5.000                   3rd Qu.:6.25  
+ Max.   :5.700                   Max.   :9.00  </code></pre>
+</div>
+</div>
+<p>The variable <code>Vegetation</code> is another factor, so let’s transform it into a factor using again the <code>mutate()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>worms <span class="ot">&lt;-</span> <span class="fu">mutate</span>(worms, <span class="at">Vegetation =</span> <span class="fu">factor</span>(Vegetation))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(worms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Field.Name             Area           Slope           Vegetation
+ Length:20          Min.   :0.800   Min.   : 0.00   Arable   :3   
+ Class :character   1st Qu.:2.175   1st Qu.: 0.75   Grassland:9   
+ Mode  :character   Median :3.000   Median : 2.00   Meadow   :3   
+                    Mean   :2.990   Mean   : 3.50   Orchard  :1   
+                    3rd Qu.:3.725   3rd Qu.: 5.25   Scrub    :4   
+                    Max.   :5.100   Max.   :11.00                 
+    Soil.pH         Damp          Worm.density 
+ Min.   :3.500   Mode :logical   Min.   :0.00  
+ 1st Qu.:4.100   FALSE:14        1st Qu.:2.00  
+ Median :4.600   TRUE :6         Median :4.00  
+ Mean   :4.555                   Mean   :4.35  
+ 3rd Qu.:5.000                   3rd Qu.:6.25  
+ Max.   :5.700                   Max.   :9.00  </code></pre>
+</div>
+</div>
+<p>Once <code>read_csv()</code> is clear, using <code>readr</code>’s other functions is straightforward. The syntax is the same, and it is only a matter of understanding which function is good for what.</p>
+<ul>
+<li><p><code>read_csv2()</code> reads semicolon-separated files. These use <code>;</code> instead of <code>,</code> to separate fields and are common in countries that use <code>,</code> as the decimal marker (e.g.&nbsp;Italy).</p></li>
+<li><p><code>read_tsv()</code> reads tab-delimited files.</p></li>
+<li><p><code>read_delim()</code> reads a file with any delimiter, attempting to automatically guess the delimiter, unless it is specified using the parameter <code>delim =</code>.</p></li>
+<li><p><code>read_table()</code> read a common variation fixed-with files where columns are separated by white space.</p></li>
+</ul>
+</section>
+<section id="getting-data-out-of-r" class="level2">
+<h2 class="anchored" data-anchor-id="getting-data-out-of-r">Getting data out of R</h2>
+<p>If a data set is loaded in R in the format of a data frame, or a tibble, we might want to save it into the hard drive, in order to access it later, or to share it with others. R provides built-in functions to do so, but again <code>readr</code> gives an enhanced version of the same functions, which is highly recommended. Imagine we want to save the <strong>iris</strong> data set as a CSV file with the name <code>iris.csv</code>. To do so, we can type the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(iris, <span class="at">file =</span> <span class="st">"./data/iris.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

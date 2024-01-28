@@ -1,1 +1,109 @@
 # Matrices
+
+We've learned about vectors which allow us to store indexed elements. A matrix will allow us to have a 2-dimensional data structure which contains elements consisting of the same data type.
+
+Before introducing about matrices, however, we should recall a shortcut for quickly creating sequential numeric vectors. this can be quickly achieved using the colon notation `:` introduced in the section **Vector indexing and slicing**.
+
+For example, to create the sequence of the numbers from 1 to 10, we can type
+
+```{r}
+1:10
+```
+
+## Creating a matrix
+
+To create an empty `m` by `n` matrix we can type `matrix(nrow = m, ncol = n)`. This will generate a matrix of `NA`, like so:
+
+```{r}
+matrix(nrow = 3, ncol = 5)
+```
+
+If we wish to create and populate a matrix at the same time, we can pass a vector with all the entries of the matrix. For example,
+
+```{r}
+matrix(1:15, nrow = 3)
+```
+
+In this case, we don't need to state both `nrow` and `ncol` because the total number of elements in the vector `1:15` gives this information. Notice that, by default, R populates the matrix "by column", i.e. it fills in the first column, then it passes to the second, and so on. Sometimes, however, it is convenient to populate the matrix "by row" instead. To this end, it suffices to pass a further argument `byrow = TRUE`, like so:
+
+```{r}
+matrix(1:15, nrow = 3, byrow = TRUE)
+```
+
+### Creating matrices from vectors
+
+We can also store the rows (or the columns) of a matrix in different vectors and later combine them into a single matrix. For example, consider the following vectors below of stock prices for Google and Microsoft:
+
+```{r}
+goog <- c(450, 451, 452, 445, 468)
+msft <- c(230, 231, 232, 236, 228)
+
+stocks <- c(goog, msft)
+stock_matrix <- matrix(stocks, nrow = 2, byrow = TRUE)
+stock_matrix
+```
+
+### Naming matrices
+
+Now that we have our matrix, it would be nice to name the rows and columns for reference. We can do this similarly to the `names()` function for vectors, but in this case we define `colnames()` and `rownames()`. Let's apply these commands to the stock matrix we have defined before:
+
+```{r}
+days <- c("Mon", "Tue", "Wed", "Thu", "Fri")
+stock_names <- c("GOOG", "MSFT")
+colnames(stock_matrix) <- days
+rownames(stock_matrix) <- stock_names
+
+stock_matrix
+```
+
+::: callout-important
+One of the main features (and limitations) of matrices is that all values in a matrix must be of the same type. So, for example, one can create a matrix of **double** numbers, or a matrix of **logical** values, but we cannot take a matrix where one column has numbers and another has logical values. To do this, we need to use a **data frame** which is more general type of matrix, where the columns (but not the row) can have different types.
+:::
+
+## Matrix indexing
+
+Just like with vectors, we use the square bracket notation to select elements from a matrix. Since we have two dimensions to work with, we will use a comma to separate our indexing for each dimension.
+
+So the syntax is then:
+
+```         
+example_matrix[rows, columns]
+```
+
+where the index notation (e.g. 1:5) is put in place of the *rows* or *columns* . If either *rows* or *columns* is left blank, then we are selecting all the rows and columns.
+
+Let's work through some examples:
+
+```{r}
+mat <- matrix(1:50, nrow = 5, byrow = TRUE)
+```
+
+Let us select the first row:
+
+```{r}
+mat[1,]
+```
+
+Let us now select the first column:
+
+```{r}
+mat[,1]
+```
+
+Let us now select the first 3 rows:
+
+```{r}
+mat[1:3,]
+```
+
+Let us also take the top left 2 by 3 rectangle:
+
+```{r}
+mat[1:2, 1:3]
+```
+
+Finally, let's take the last two columns:
+
+```{r}
+mat[,9:10]
+```

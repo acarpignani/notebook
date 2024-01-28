@@ -1,1 +1,85 @@
-# Getting data in and out R
+# Getting data in and out of R
+
+## Working directory and R projects
+
+Before we can describe how to import and export data in R, it becomes necessary to discuss a bit more in detail about R workflow. Let's just start by describing good practice. When working at a project in R, using RStudio, it is convenient to always start a new Project, by clicking File \> New Project.
+
+Once the project is created we can create scripts to store in the directory where the Project is located, and this is set by RStudio as the **working directory** where R is going to start from when it reads or writes files.
+
+To see the working directory we can type
+
+```{r}
+#| eval: false
+getwd()
+```
+
+If we wish to change the working directory manually (operation that we **do not** recommend) we can now type:
+
+```{r}
+#| eval: false
+setwd("relative_path")
+```
+
+Quoting H wickham, once we are inside a project, we should only ever use relative paths, not absolute paths. A relative path, in fact, is relative to the working directory, i.e. the project home. This guarantees that, if two people share a project (e.g. by cloning a github repository), they both can run the code regardless of the actual location where that repository is cloned.
+
+## Getting data in R
+
+There are useful base R functions to read data from external files or internet addresses, but we shall learn how to use their enhanced counterparts stored in the package `readr` which is one of the core packages of the tidyverse. In fact, these functions are much faster than their base R analogues and provide a few nice extra features. For example, if there is a non-fatal problem that occurs while reading the data, these functions return a warning and the data frame will have some information about which row/observations triggered the warning.
+
+```{r}
+#| echo: false
+#| warning: false
+library(tidyverse)
+```
+
+Usually data are stored either in excel files or in CSV files (comma separated variable). Let's start with the latter and suppose we want to store in R the content of the [sheep data set](https://github.com/acarpignani/R4DS/blob/main/datasets/sheep.csv) on the course's repository. This contains the height (in cm) and the weight (in kg) of a sample of sheep. To do so, providing the tidyverse is loaded, it suffices to run the command
+
+```{r}
+sheep <- read_csv("https://raw.githubusercontent.com/acarpignani/R4DS/main/datasets/sheep.csv")
+sheep
+```
+
+What is the average weight and height of these sheep? We have now all the elements to respond. For example, we can call the function `summary()`. As we have seen this is an adaptable function and when we pass a tibble to it, it returns a summary of every variable in the tibble, like so:
+
+```{r}
+summary(sheep)
+```
+
+Let's load another data set, from our repository. This time we are interested in the data set containing information about the [density of worms](https://github.com/acarpignani/R4DS/blob/main/datasets/worms.csv) in some fields, also available in the course's repository. Let's call this data frame `worms`.
+
+```{r}
+worms <- read_csv("https://raw.githubusercontent.com/acarpignani/R4DS/main/datasets/worms.csv")
+worms
+```
+
+Let's try now to apply the `summary()` to this data set.
+
+```{r}
+summary(worms)
+```
+
+The variable `Vegetation` is another factor, so let's transform it into a factor using again the `mutate()` function.
+
+```{r}
+worms <- mutate(worms, Vegetation = factor(Vegetation))
+summary(worms)
+```
+
+Once `read_csv()` is clear, using `readr`'s other functions is straightforward. The syntax is the same, and it is only a matter of understanding which function is good for what.
+
+-   `read_csv2()` reads semicolon-separated files. These use `;` instead of `,` to separate fields and are common in countries that use `,` as the decimal marker (e.g. Italy).
+
+-   `read_tsv()` reads tab-delimited files.
+
+-   `read_delim()` reads a file with any delimiter, attempting to automatically guess the delimiter, unless it is specified using the parameter `delim =`.
+
+-   `read_table()` read a common variation fixed-with files where columns are separated by white space.
+
+## Getting data out of R
+
+If a data set is loaded in R in the format of a data frame, or a tibble, we might want to save it into the hard drive, in order to access it later, or to share it with others. R provides built-in functions to do so, but again `readr` gives an enhanced version of the same functions, which is highly recommended. Imagine we want to save the **iris** data set as a CSV file with the name `iris.csv`. To do so, we can type the following:
+
+```{r}
+#| eval: false
+write_csv(iris, file = "./data/iris.csv")
+```

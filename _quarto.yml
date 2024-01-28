@@ -67,6 +67,11 @@ website:
             - ggplot-basics.qmd
             - themes.qmd
 
+    - title: "Practice"
+      contents:
+        - practice.qmd
+        - practice-matrices.qmd
+
 format:
   html:
     theme: [cosmo, custom.scss]

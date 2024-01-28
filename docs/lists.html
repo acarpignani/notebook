@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -129,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r-programming.html">Basics</a></li><li class="breadcrumb-item"><a href="./lists.html">Lists</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r-programming.html">Basics</a></li><li class="breadcrumb-item"><a href="./lists.html">A brief introduction to lists</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -177,7 +211,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lists.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Lists</span></a>
+ <span class="menu-text">A brief introduction to lists</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -189,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./in-and-out.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting data in and out R</span></a>
+ <span class="menu-text">Getting data in and out of R</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +336,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lists" id="toc-lists" class="nav-link active" data-scroll-target="#lists">Lists</a></li>
+  <li><a href="#a-brief-introduction-to-lists" id="toc-a-brief-introduction-to-lists" class="nav-link active" data-scroll-target="#a-brief-introduction-to-lists">A brief introduction to lists</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-list" id="toc-creating-a-list" class="nav-link" data-scroll-target="#creating-a-list">Creating a list</a></li>
+  <li><a href="#accessing-the-list" id="toc-accessing-the-list" class="nav-link" data-scroll-target="#accessing-the-list">Accessing the list</a></li>
+  <li><a href="#combining-lists" id="toc-combining-lists" class="nav-link" data-scroll-target="#combining-lists">Combining lists</a></li>
+  <li><a href="#structure-of-a-list" id="toc-structure-of-a-list" class="nav-link" data-scroll-target="#structure-of-a-list">Structure of a list</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -312,10 +352,162 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="lists" class="level1">
-<h1>Lists</h1>
+<section id="a-brief-introduction-to-lists" class="level1">
+<h1>A brief introduction to lists</h1>
+<p>Lists are a special type of vectors that can contain elements of different classes. Lists are a very important data type in R and you should get to know them well. On the other hand, lists are also a very complex topic, and before really understanding their usage, you must see a multitude of examples. Lists pair with a class of R functions called the “apply functions” and together they become an impressively powerful tool. We shall not discuss the base R apply functions but an enhanced version available in the <strong>tidyverse</strong> through the package <strong>purrr</strong>. Until then, let’s only briefly see how a list is defined and how to access its elements.</p>
+<section id="creating-a-list" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-list">Creating a list</h3>
+<p>Suppose we have the following vectors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">23</span>, <span class="dv">42</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>lgl <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jack"</span>, <span class="st">"Kate"</span>, <span class="st">"Charlie"</span>, <span class="st">"John"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To put them into a list, we can just write:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lst <span class="ot">&lt;-</span> <span class="fu">list</span>(num, lgl, char)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1]  4  8 15 16 23 42
+
+[[2]]
+[1]  TRUE FALSE  TRUE
+
+[[3]]
+[1] "Jack"    "Kate"    "Charlie" "John"   </code></pre>
+</div>
+</div>
+<p>You will notice that the <code>list()</code> assigned numbers to each of the objects in the list, but we can also assign names in the following manner:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lst <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">numbers =</span> num, <span class="at">logicals =</span> lgl, <span class="at">characters =</span> char)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$numbers
+[1]  4  8 15 16 23 42
+
+$logicals
+[1]  TRUE FALSE  TRUE
+
+$characters
+[1] "Jack"    "Kate"    "Charlie" "John"   </code></pre>
+</div>
+</div>
+</section>
+<section id="accessing-the-list" class="level3">
+<h3 class="anchored" data-anchor-id="accessing-the-list">Accessing the list</h3>
+<p>We can use the brackets <code>[ ]</code> to access the elements of a list. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lst[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$numbers
+[1]  4  8 15 16 23 42</code></pre>
+</div>
+</div>
+<p>Notice however that by doing so, R returns another list, with only one element (namely the vector called “numbers” with entries 4, 8, 15, 16, 23, 42). In order to grab this vector, we need to use the double brackets <code>[[ ]]</code>, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lst[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4  8 15 16 23 42</code></pre>
+</div>
+</div>
+<p>Alternatively, but only when the elements of the list are named, we can use the <code>$</code> operator, and call the name of the list directly, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lst<span class="sc">$</span>numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4  8 15 16 23 42</code></pre>
+</div>
+</div>
+<p>Alternatively, we can use the double brackets <code>[[ ]]</code> with the name of the element, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lst[[<span class="st">"numbers"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4  8 15 16 23 42</code></pre>
+</div>
+</div>
+<p>We can also compose the brackets, to access the elements of a specific object in a list. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lst[[<span class="st">"numbers"</span>]][<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+</section>
+<section id="combining-lists" class="level3">
+<h3 class="anchored" data-anchor-id="combining-lists">Combining lists</h3>
+<p>We can also combine two lists together in one. This can be done with the concatenation function <code>c()</code>. For example, take</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lst_1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">nums =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">alpha =</span> letters)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>lst_2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">bool =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">week =</span> <span class="fu">c</span>(<span class="st">"Mon"</span>, <span class="st">"Tue"</span>, <span class="st">"Wed"</span>, <span class="st">"Thu"</span>, <span class="st">"Fri"</span>, <span class="st">"Sat"</span>, <span class="st">"Sun"</span>))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List 1</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>lst_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$nums
+ [1] 0 1 2 3 4 5 6 7 8 9
+
+$alpha
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List 2</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>lst_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$bool
+[1]  TRUE FALSE
+
+$week
+[1] "Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combined list</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>lst <span class="ot">&lt;-</span> <span class="fu">c</span>(lst_1, lst_2)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>lst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$nums
+ [1] 0 1 2 3 4 5 6 7 8 9
+
+$alpha
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z"
+
+$bool
+[1]  TRUE FALSE
+
+$week
+[1] "Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that we have used the variable <code>letters</code> to generate the letters of the alphabet, even though we have never defined this variable before. This is because <code>letters</code> is a <strong>build-in</strong> variable in R and it is loaded with base R.</p>
+</div>
+</div>
+</section>
+<section id="structure-of-a-list" class="level3">
+<h3 class="anchored" data-anchor-id="structure-of-a-list">Structure of a list</h3>
+<p>In order to see the structure of a list, we can use the command <code>str()</code>. For example, with reference with the last list, <code>lst</code>, created:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(lst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 4
+ $ nums : int [1:10] 0 1 2 3 4 5 6 7 8 9
+ $ alpha: chr [1:26] "a" "b" "c" "d" ...
+ $ bool : logi [1:2] TRUE FALSE
+ $ week : chr [1:7] "Mon" "Tue" "Wed" "Thu" ...</code></pre>
+</div>
+</div>
+<p>This command shows the names of the elements that compose the list, the dimensions of these elements, and the first few elements.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
