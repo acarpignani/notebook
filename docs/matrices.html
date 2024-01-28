@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -163,7 +129,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r-programming.html">Basics</a></li><li class="breadcrumb-item"><a href="./r-basics.html">Introduction to R</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r-programming.html">Basics</a></li><li class="breadcrumb-item"><a href="./matrices.html">Matrices</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -192,7 +158,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-basics.html" class="sidebar-item-text sidebar-link active">
+  <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to R</span></a>
   </div>
 </li>
@@ -204,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./matrices.html" class="sidebar-item-text sidebar-link">
+  <a href="./matrices.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Matrices</span></a>
   </div>
 </li>
@@ -336,26 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-r" id="toc-introduction-to-r" class="nav-link active" data-scroll-target="#introduction-to-r">Introduction to R</a>
-  <ul class="collapse">
-  <li><a href="#rs-command-line" id="toc-rs-command-line" class="nav-link" data-scroll-target="#rs-command-line">R’s command line</a></li>
-  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts">R scripts</a></li>
-  <li><a href="#arithmetic-with-r" id="toc-arithmetic-with-r" class="nav-link" data-scroll-target="#arithmetic-with-r">Arithmetic with R</a>
-  <ul class="collapse">
-  <li><a href="#logical-values-in-r-and-logical-operations" id="toc-logical-values-in-r-and-logical-operations" class="nav-link" data-scroll-target="#logical-values-in-r-and-logical-operations">Logical values in R and logical operations</a></li>
-  </ul></li>
-  <li><a href="#variables-and-assignment" id="toc-variables-and-assignment" class="nav-link" data-scroll-target="#variables-and-assignment">Variables and assignment</a></li>
-  <li><a href="#r-data-types" id="toc-r-data-types" class="nav-link" data-scroll-target="#r-data-types">R Data Types</a>
-  <ul class="collapse">
-  <li><a href="#double" id="toc-double" class="nav-link" data-scroll-target="#double">Double</a></li>
-  <li><a href="#integer" id="toc-integer" class="nav-link" data-scroll-target="#integer">Integer</a></li>
-  <li><a href="#complex" id="toc-complex" class="nav-link" data-scroll-target="#complex">Complex</a></li>
-  <li><a href="#logical" id="toc-logical" class="nav-link" data-scroll-target="#logical">Logical</a></li>
-  <li><a href="#character" id="toc-character" class="nav-link" data-scroll-target="#character">Character</a></li>
-  </ul></li>
-  <li><a href="#comparison-operators" id="toc-comparison-operators" class="nav-link" data-scroll-target="#comparison-operators">Comparison operators</a></li>
-  <li><a href="#getting-help-with-r" id="toc-getting-help-with-r" class="nav-link" data-scroll-target="#getting-help-with-r">Getting help with R</a></li>
-  </ul></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link active" data-scroll-target="#matrices">Matrices</a></li>
   </ul>
 </nav>
     </div>
@@ -365,286 +312,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="introduction-to-r" class="level1">
-<h1>Introduction to R</h1>
-<section id="rs-command-line" class="level3">
-<h3 class="anchored" data-anchor-id="rs-command-line">R’s command line</h3>
-<p>There are several ways to interact with R. The primary one will be through the <em>command line</em>, also known as <em>console</em>. The command line in RStudio is in the console panel. The name comes from it being the place where one types in <em>commands</em>.</p>
-</section>
-<section id="r-scripts" class="level3">
-<h3 class="anchored" data-anchor-id="r-scripts">R scripts</h3>
-<p>An alternative way to interact with R is by typing all the code in an R script. In RStudio, click File &gt; New File &gt; R Script to open a new script. Changing line in the script won’t run the code, however. In order to run the line of code you need to press Ctrl + ENTER in Windows and cmd + ENTER in Mac. There are also commands to run the whole script, but let’s just keep it simple for the time being.</p>
-</section>
-<section id="arithmetic-with-r" class="level2">
-<h2 class="anchored" data-anchor-id="arithmetic-with-r">Arithmetic with R</h2>
-<p>In first instance, R is a very powerful and fancy calculator. Typing in the command line numerical expressions with the usual mathematical operations, we get the results we expect:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
-</div>
-</div>
-<p>The four operations in R are <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code> and R follows the usual mathematical rules for the priority of the operations (the one that some people call BIDMAS).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">-</span> <span class="dv">12</span> <span class="sc">/</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7</code></pre>
-</div>
-</div>
-<p>The order of the operations can be altered using brackets, like so:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">4</span> <span class="sc">+</span> <span class="dv">5</span> <span class="sc">*</span> <span class="dv">2</span>) <span class="sc">/</span> (<span class="dv">8</span> <span class="sc">/</span> <span class="dv">2</span> <span class="sc">-</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 14</code></pre>
-</div>
-</div>
-<p>Besides the four operations, R has some very useful other operations, such as the integer division <code>%/%</code> and the modulo <code>%%</code> of two numbers. The integer division gives the quotient of the division and the modulo gives the remainder of the division, like so:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="sc">%/%</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span> <span class="sc">%%</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
-</div>
-</div>
-<p>In fact, we have 25 = 6 x 4 + 1.</p>
-<p>We can also perform powers with R. The syntax is <code>a ^ n</code> to produce a to the power of n.&nbsp;For example,</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">^</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 81</code></pre>
-</div>
-</div>
-<section id="logical-values-in-r-and-logical-operations" class="level3">
-<h3 class="anchored" data-anchor-id="logical-values-in-r-and-logical-operations">Logical values in R and logical operations</h3>
-<p>R is also equipped with two special “values” that represent “true” and “false”. These are called the <strong>Boolean values</strong> and denoted in R by <code>TRUE</code> or <code>T</code>, and <code>FALSE</code> or <code>F</code>. These two special values can be joined together through the <strong>logical operations</strong> which are: <strong>and</strong>, <strong>or</strong>, and <strong>not</strong>. In R, and is represented by <code>&amp;</code>, or by <code>|</code> and not by <code>!</code>. So, for example, we have:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">&amp;</span> <span class="cn">FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="cn">FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-</div>
-<p>Again, logical values can be linked together with brackets.</p>
-</section>
-</section>
-<section id="variables-and-assignment" class="level2">
-<h2 class="anchored" data-anchor-id="variables-and-assignment">Variables and assignment</h2>
-<p>Once started understanding how R works with operations and numbers, we wish to start assigning values to variables and working with variables instead. R provides a special command to assign a value to a variable: <code>&lt;-</code>. This is called the <strong>assignment</strong> operator. For example</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 25</code></pre>
-</div>
-</div>
-<p>You don’t have to use a single letter to name a variable. Conversely, it is advisable not to do so, but to use meaningful words that recall the meaning of that variable. For example, to record the height and weight of an individual, we could use</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="dv">150</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span> <span class="dv">65</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="On the names of variables">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-On the names of variables
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>A variable name must start with a letter, but it can contain also numbers, full stop, and underscore after the first letter. There are several different schools of thought about which is the best way to denote variables. In the past, I would have probably chosen a notation such as <code>my.variable</code> to indicate a variable, but after having coded for a long time alongside the magnificent data scientists and software engineers at Posit (former RStudio), I am now more used to a notation like <code>my_variable</code> which I do recommend.</p>
-</div>
-</div>
-<p>We can work with variables joining them together with the usual operations. For example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bank_account <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>deposit <span class="ot">&lt;-</span>  <span class="dv">30</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>bank_account <span class="ot">&lt;-</span> bank_account <span class="sc">+</span> deposit</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>bank_account</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 130</code></pre>
-</div>
-</div>
-</section>
-<section id="r-data-types" class="level2">
-<h2 class="anchored" data-anchor-id="r-data-types">R Data Types</h2>
-<p>Unlike programming languages such as C, Pascal, etc, R doesn’t require to state in advance the type of the variables but it assigns the data type automatically. In most simple cases, the user doesn’t really need bother about the data types, but in some cases, and especially when one starts working with data frames and working in machine learning, awareness of the variable type is very important, and the ability to change data type is paramount.</p>
-<p>R has many different data types. In what follows we shall go through the most important of them.</p>
-<section id="double" class="level3">
-<h3 class="anchored" data-anchor-id="double">Double</h3>
-<p>The most common data type is <strong>double</strong>, i.e.&nbsp;decimal numbers described using floating point values. Any number is stored in R as a double, unless otherwise specified. So, for example, the following are double.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fl">2.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>To see the type of these variable, we can use the command <code>typeof</code>. So</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "double"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "double"</code></pre>
-</div>
-</div>
-</section>
-<section id="integer" class="level3">
-<h3 class="anchored" data-anchor-id="integer">Integer</h3>
-<p>To tell R that we want the number to be an <strong>integer</strong> we need to add an <code>L</code> after the number during the assignment. For example</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>is an integer. To see this, let’s use again the <code>typeof</code> command:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "integer"</code></pre>
-</div>
-</div>
-<p>Double and integer are referred to as <strong>numeric</strong> variables.</p>
-</section>
-<section id="complex" class="level3">
-<h3 class="anchored" data-anchor-id="complex">Complex</h3>
-<p>R has also the possibility to store complex numbers. This is done using the key <code>i</code> for the imaginary unit. For example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>i</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">2</span>i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If variables are complex, R knows how to adapt the arithmetic operations to complex numbers. For example,</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>z <span class="sc">+</span> w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7+5i</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4+6i</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">-</span> <span class="dv">2</span>i) <span class="sc">*</span> w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 9-8i</code></pre>
-</div>
-</div>
-</section>
-<section id="logical" class="level3">
-<h3 class="anchored" data-anchor-id="logical">Logical</h3>
-<p>As we have mentioned before, R has two Boolean values (true and false). Their type is <strong>logical</strong>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "logical"</code></pre>
-</div>
-</div>
-</section>
-<section id="character" class="level3">
-<h3 class="anchored" data-anchor-id="character">Character</h3>
-<p>Another common type is <strong>character</strong>, which is the data type of characters and strings. To assign a character type to a variable, we use the quotation marks: both the single <code>'</code> and the double <code>"</code> quotation marks work.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>char <span class="ot">&lt;-</span> <span class="st">"Hello, world!"</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(char)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "character"</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Beside <code>typeof</code>, there is another command that shows the type of a variable: <code>class</code>.</p>
-</div>
-</div>
-</section>
-</section>
-<section id="comparison-operators" class="level2">
-<h2 class="anchored" data-anchor-id="comparison-operators">Comparison operators</h2>
-<p>In R we can use comparison operators to compare variables and return a logical value. The comparison operators are</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Operator</th>
-<th>Name</th>
-<th>Syntax</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>==</code></td>
-<td>equal</td>
-<td><code>a == b</code></td>
-</tr>
-<tr class="even">
-<td><code>!=</code></td>
-<td>different</td>
-<td><code>a != b</code></td>
-</tr>
-<tr class="odd">
-<td><code>&lt;=</code></td>
-<td>smaller than, or equal to</td>
-<td><code>a &lt;= b</code></td>
-</tr>
-<tr class="even">
-<td><code>&lt;</code></td>
-<td>smaller than</td>
-<td><code>a &lt; b</code></td>
-</tr>
-<tr class="odd">
-<td><code>&gt;=</code></td>
-<td>greater than, or equal to</td>
-<td><code>a &gt;= b</code></td>
-</tr>
-<tr class="even">
-<td><code>&gt;</code></td>
-<td>greater than</td>
-<td><code>a &gt; b</code></td>
-</tr>
-</tbody>
-</table>
-<p>For example,</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="sc">&lt;</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
-</div>
-</section>
-<section id="getting-help-with-r" class="level2">
-<h2 class="anchored" data-anchor-id="getting-help-with-r">Getting help with R</h2>
-<p>Besides google searching and visiting <a href="https://stackoverflow.com/">Stack Overflow</a>, there are some build-in functions to get help from R. In fact, most of the R functions have documentation and examples. To access the documentation of a function <code>foo</code> we can either use <code>?foo</code> or <code>help(foo)</code>. For example,</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(vector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>opens the documentation with title <strong>Vectors - Creation, Coercion, etc</strong>.</p>
+<section id="matrices" class="level1">
+<h1>Matrices</h1>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

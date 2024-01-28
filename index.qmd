@@ -1,41 +1,47 @@
----
-title: "R for Data Science"
-subtitle: "The Bedford Sixth Form"
-author: "Andrea Carpignani"
-date: today
-site: acarpignani.github.io/notebook/
-github-repo: acarpignani/notebook/
----
+# R for Data Science
 
-# Introduction
+Andrea Carpignani
 
-Welcome to the public repository of the enhancement class on R for Data Science offered at The Bedford Sixth Form. In this page you will find the list of all data set that are going to be used in the course, as well as useful information, and a brief note of all the topics covered in each lesson.
+## Welcome
 
-### Aim of this course
+This is the notebook associated with the enhancement class **R for Data Science** at **The Bedford Sixth Form**.
 
-The aim of this course is to give a thorough and opinionated introduction to R using the magnificent IDE RStudio, to show how the program excellently performs data analysis on different data sets, to introduce to the use of the meta-package **tidyverse** to perform exploratory data analysis, clean and reshape the data, and to give an introduction to machine learning algorithms using the meta-package **tidymodels**.
+In this web page you can find all the topics that we have done (or that we are going to do) in the enhancement class, and more. Sometimes, in fact, we might run out of time or focus more on certain aspects, depending on the interests of the students. However here I shall try to keep things simple and as complete as I can. The idea is that whoever misses a lesson, or wants to delve into a specific aspect can either find the answer in this website or find a link pointing to someone much more expert and skilled than me that can answer the question.
 
-In the second part of the course, when the students have acquired the basic syntax of R, the course will move onto an individual project in which every participant can collect suitable data and analyse the data to answer a statistical question on a topic of their choice, and write a full reproducible report to show their findings. The project may be published on RPubs and can be included in the student's portfolio, to show potential employers or to university their ability to use the software and to analyse data.
+## Basic bibliography
 
-### Prerequisites to follow this course
+I have used a myriad of resources to create this enhancement class, and I am sure that I cannot quote them all in a single shot, because they are really too many. However, I will try to keep the bibliography up-to-date by adding the references to the books, videos, screen-casts etc that I take inspiration from. If you notice that I have forgotten any, please do open an issue on github and/or submit a pull request. If you are comfortable with neither, just drop me a line, and I'll fix it.
 
-This course has basically no prerequisites, except the notions of mathematics and statistics from any GCSE Mathematics course. In particular, the learner is assumed to know the following statistical tools: *mean*, *mode*, *median*, *range*, *interquartile range*, *box-and-whiskers plot*, *histogram*, *bar chart*. Any other statistical instrument that might be useful will be briefly recalled during the course.
+### R programming
 
-### Install R and RStudio
+-   H Wickham, M Çetinkaya-Rundel, G Grolemund. *R for Data Science*. O'Reilly (2nd Ed)
 
--   To install R, it suffices to follow the link to the [Comprehensive R Archive Network](https://cran.r-project.org/) (CRAN) repository and to install R clicking on the **Download R for \<your-base-system\>.**
+-   H Wickham. *ggplot2 - Elegant Graphics for Data Analysis*. Springer (2nd Ed)
 
-In this course we will also assume that you have installed the **RStudio** IDE. This open-source, integrated desktop environment makes it possible for all R users to have a common R interface, which is greatly enhanced over the R's basic command line interface.
+-   J Verzani. *Using R for Introductory Statistics*. CRC Press (2nd Ed)
 
--   Installation of RStudio is straightforward in most cases. The [RStudio web site](https://posit.co/products/open-source/rstudio/) has links to the necessary files to download.
+-   M Kuhn, J Silge. *Tidy Modeling with R*. O'Reilly
 
-### Bibliography
+-   J Silge, D Robinson. *Text Mining with R*. O.Reilly
 
-I am adding below some websites that you might find useful to look for data.
+-   M Crawley. *Statistics - An introduction using R*. Wiley
 
-1.  The [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/) (UCI Repository) contains lots of data sets that can be used to do machine learning.
-2.  [TidyTuesday](https://github.com/rfordatascience/tidytuesday) is a project of the R community that aims to provide weekly real world data sets to tidy and analyse.
-3.  [Kaggle](https://www.kaggle.com/) is a great place to find little useful challenges to do. We shall see some of these challenges in our course, but you may always want to attempt one of them of your own. If there is a general consensus on a particular challenge, that could also be done as a team.
-4.  [The World Bank](https://data.worldbank.org/) contains a wealth of data that can be analysed.
+-   P Delgaard. *Introductory Statistics with R*. Springer (2nd Ed)
 
-Also you may wish to check the little publications that I have made on [RPubs](https://rpubs.com/acarpignani).
+### Machine Learning
+
+-   G James, D Witten, T Hastie, R Tibshirani. *An Introduction to Statistical Learning*. Springer (2nd Ed)
+
+-   T Hastie, R Tibshirani, J Friedman. *The Elements of Statistical Learning*. Springer (2nd Ed)
+
+### Data sets sources
+
+-   [TidyTuesday, a weekly data project in R from the R4DS online learning community](https://github.com/rfordatascience/tidytuesday)
+-   [UC Irving Machine Learning Repository](https://archive.ics.uci.edu/)
+-   [Kaggle](https://www.kaggle.com/)
+
+## Acknowledgments
+
+I have always been interested in data science, and working with R has massively enhanced this interest, by offering a magnificent tool, easy to learn, robust and beautifully open source. However, if my interest for data science with R has exploded, it is mostly thanks to the admirable work of **Hadley Wickham**, who has created the beautiful **ggplot** package and then the magnificent **tidyverse**. His work, his passion and his knowledge are absolutely inspiring.
+
+The other person to whom I owe a wealth of knowledge is **Julia Silge** whose weekly screen casts has taught me not only how to use the superb **tidymodels** meta-package, but also what it looks like to be excellent at reshaping data sets, and at performing exploratory data analysis. Julia is constant source of inspiration for me, and if I have decided to start this project to teach "R for Data Science" at The Bedford Sixth Form, and if I have started writing the notebook for the course is thank to the wealth of knowledge that I have learnt from Julia.

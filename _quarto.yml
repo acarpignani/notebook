@@ -2,18 +2,70 @@ project:
   type: website
   output-dir: docs
 
-page-navigation: true
+page-navigation: false
 
 website:
   title: "R for Data Science"
+  
   navbar:
-    search: true
-    left:
-        - text: "Introduction"
-          file: index.qmd
-        - r-basics.qmd
-        - vectors.qmd
-        - data-frames.qmd
+    search: false
+    tools:
+      - icon: github
+        menu:
+          - text: "Source code"
+            url: "https://github.com/acarpignani/notebook"
+          - text: "Report a bug"
+            url: "https://github.com/acarpignani/notebook/issues"
+    
+    left: 
+      - text: "Intro"
+        file: index.qmd
+      - text: "R programming"
+        file: r-programming.qmd
+      - text: "Intro to ML"
+        file: intro-ml.qmd
+      - text: "Practice"
+        file: practice.qmd
+  
+  sidebar:
+    
+    - title: "R programming"
+      style: "floating"
+      search: false
+      collapse-level: 1
+
+      contents:
+        - section: "Basics"
+          contents:
+            - text: "Introduction"
+              file: r-programming.qmd
+            - r-basics.qmd
+            - vectors.qmd
+            - matrices.qmd
+            - lists.qmd
+            - data-frames.qmd
+            - in-and-out.qmd
+        
+        - section: "Programming basics"
+          contents:
+            - conditionals.qmd
+            - loops.qmd
+            
+        - section: "Advanced R programming"
+          contents:
+            - functions.qmd
+            - purrr-functions.qmd
+            
+        - section: "Data manipulation"
+          contents:
+            - dplyr.qmd
+            - tidyr.qmd
+            
+        - section: "Data visualisation"
+          contents:
+            - intro-gg.qmd
+            - ggplot-basics.qmd
+            - themes.qmd
 
 format:
   html:
