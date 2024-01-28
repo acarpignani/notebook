@@ -224,14 +224,23 @@ window.Quarto = {
 <section id="answer-the-following-questions-using-r" class="level2">
 <h2 class="anchored" data-anchor-id="answer-the-following-questions-using-r">Answer the following questions using R</h2>
 <ol type="1">
-<li>Create 2 vectors A and B, where A is <span class="math inline">(1, 2, 3)</span> and B is <span class="math inline">(4, 5, 6)</span>. With these vectors, use the <code>cbind()</code> or <code>rbind()</code> function to create a 2 by 3 matrix from the vectors. You’ll need to figure out which of these binding functions is the correct choice.</li>
+<li>Create 2 vectors A and B, where A is <span class="math inline">(1, 2, 3)</span> and B is <span class="math inline">(4, 5, 6)</span>. With these vectors, use the <code>cbind()</code> or <code>rbind()</code> function to create a 2 by 3 matrix from the vectors.<br>
+<strong>Tip.</strong> You will need to figure out which of these binding functions is the correct choice.</li>
 <li>Create a 3 by 3 matrix consisting of the numbers 1 to 9. Create this matrix using the shortcut <code>1:9</code> and by specifying the <code>nrow</code> argument in the <code>matrix()</code> function call. Assign this matrix to the variable <code>mat</code>.</li>
 <li>Confirm that <code>mat</code> is a matrix using <code>is.matrix()</code>.</li>
 <li>Create a 5 by 5 matrix consisting of the numbers 1 to 25 and assign it to the variable <code>mat2</code>. The top row should be the numbers 1 to 5.</li>
 <li>Using indexing notation, grab a sub-matrix of <code>mat2</code> from question 4 that looks like this: <span class="math display"> \begin{pmatrix}  7 &amp; 8 \cr 12 &amp; 13 \end{pmatrix} </span></li>
 <li>Using indexing notation, grab a sub-section of <code>mat2</code> from question 4 that looks like this: <span class="math display"> \begin{pmatrix}  19 &amp; 20 \cr 24 &amp; 25 \end{pmatrix} </span></li>
 <li>What is the sum of all the elements in <code>mat2</code>?</li>
-<li>Use <code>runif()</code> to create a 4 by 5 matrix consisting of 20 random numbers.</li>
+<li>Create a <span class="math inline">4 \times 5</span> matrix consisting of 20 random numbers extracted from a uniform distribution. Set the seed to <code>101</code> to ensure reproducibility. Take the square of this matrix, and give the final matrix rounded to two decimal places.</li>
+<li>Set the seed <code>101</code> to create a <span class="math inline">5 \times 5</span> matrix which contains random numbers, and calculate its determinant. Repeat the same experiment 10 times, storing the determinant of each matrix in a vector <code>determinants</code> with length 10 and find the mean and the standard deviation of this vector.<br>
+<strong>Tip.</strong> You may wish to use the function <code>det()</code> to calculate the determinant.</li>
+<li>Set the seed to <code>111</code> and generate a matrix <span class="math inline">\mathbf{A}</span> with dimension <span class="math inline">4 \times 6</span> and a vector <span class="math inline">\mathbf{b}</span> with length 4. Obtain a new matrix <span class="math inline">4 \times 7</span> whose first 6 columns are the columns of <span class="math inline">\mathbf{A}</span> and the seventh column contains the values of <span class="math inline">\mathbf{b}</span>.</li>
+<li>Set the seed to <code>111</code> and generate a matrix <span class="math inline">\mathbf{A}</span> with dimension <span class="math inline">4 \times 6</span> and a vector <span class="math inline">\mathbf{b}</span> with length 6. Obtain a new matrix <span class="math inline">5 \times 6</span> whose first 4 rows are the rows of <span class="math inline">\mathbf{A}</span> and the fifth row contains the values of <span class="math inline">\mathbf{b}</span>.</li>
+<li>Create a vector <code>vec</code> containing the integers from 1 to 5. Using the function <code>diag()</code> create a <span class="math inline">5 \times 5</span> diagonal matrix which has the elements of <code>vec</code> on the diagonal. Find the determinant of this matrix and check that this is the same as the product of the elements in <code>vec</code>.<br>
+<strong>Tip.</strong> You may wish to explore the function <code>prod()</code>.</li>
+<li>Set the seed to <code>123</code> and create a <span class="math inline">5 \times 5</span> matrix <code>Q</code> containing random numbers taken from the uniform distribution. Use the function <code>solve()</code> to find the inverse matrix. Show that this is, in fact, the inverse of the matrix <code>Q</code> using the matrix product <code>%*%</code>.<br>
+<strong>Tip.</strong> You may wish to compare a suitable matrix to <code>I &lt;- diag(rep(1, times = 5))</code>.</li>
 </ol>
 
 

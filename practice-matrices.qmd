@@ -2,11 +2,20 @@
 
 ## Answer the following questions using R
 
-1.  Create 2 vectors A and B, where A is $(1, 2, 3)$ and B is $(4, 5, 6)$. With these vectors, use the `cbind()` or `rbind()` function to create a 2 by 3 matrix from the vectors. You'll need to figure out which of these binding functions is the correct choice.
+1.  Create 2 vectors A and B, where A is $(1, 2, 3)$ and B is $(4, 5, 6)$. With these vectors, use the `cbind()` or `rbind()` function to create a 2 by 3 matrix from the vectors. \
+    **Tip.** You will need to figure out which of these binding functions is the correct choice.
 2.  Create a 3 by 3 matrix consisting of the numbers 1 to 9. Create this matrix using the shortcut `1:9` and by specifying the `nrow` argument in the `matrix()` function call. Assign this matrix to the variable `mat`.
 3.  Confirm that `mat` is a matrix using `is.matrix()`.
 4.  Create a 5 by 5 matrix consisting of the numbers 1 to 25 and assign it to the variable `mat2`. The top row should be the numbers 1 to 5.
 5.  Using indexing notation, grab a sub-matrix of `mat2` from question 4 that looks like this: $$ \begin{pmatrix}  7 & 8 \cr 12 & 13 \end{pmatrix} $$
 6.  Using indexing notation, grab a sub-section of `mat2` from question 4 that looks like this: $$ \begin{pmatrix}  19 & 20 \cr 24 & 25 \end{pmatrix} $$
 7.  What is the sum of all the elements in `mat2`?
-8.  Use `runif()` to create a 4 by 5 matrix consisting of 20 random numbers.
+8.  Create a $4 \times 5$ matrix consisting of 20 random numbers extracted from a uniform distribution. Set the seed to `101` to ensure reproducibility. Take the square of this matrix, and give the final matrix rounded to two decimal places.
+9.  Set the seed `101` to create a $5 \times 5$ matrix which contains random numbers, and calculate its determinant. Repeat the same experiment 10 times, storing the determinant of each matrix in a vector `determinants` with length 10 and find the mean and the standard deviation of this vector. \
+    **Tip.** You may wish to use the function `det()` to calculate the determinant.
+10. Set the seed to `111` and generate a matrix $\mathbf{A}$ with dimension $4 \times 6$ and a vector $\mathbf{b}$ with length 4. Obtain a new matrix $4 \times 7$ whose first 6 columns are the columns of $\mathbf{A}$ and the seventh column contains the values of $\mathbf{b}$.
+11. Set the seed to `111` and generate a matrix $\mathbf{A}$ with dimension $4 \times 6$ and a vector $\mathbf{b}$ with length 6. Obtain a new matrix $5 \times 6$ whose first 4 rows are the rows of $\mathbf{A}$ and the fifth row contains the values of $\mathbf{b}$.
+12. Create a vector `vec` containing the integers from 1 to 5. Using the function `diag()` create a $5 \times 5$ diagonal matrix which has the elements of `vec` on the diagonal. Find the determinant of this matrix and check that this is the same as the product of the elements in `vec`. \
+    **Tip.** You may wish to explore the function `prod()`.
+13. Set the seed to `123` and create a $5 \times 5$ matrix `Q` containing random numbers taken from the uniform distribution. Use the function `solve()` to find the inverse matrix. Show that this is, in fact, the inverse of the matrix `Q` using the matrix product `%*%`. \
+    **Tip.** You may wish to compare a suitable matrix to `I <- diag(rep(1, times = 5))`.
