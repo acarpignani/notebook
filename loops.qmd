@@ -1,1 +1,128 @@
-# Loops with R
+# Loops
+
+There are several control structures that represent loops. The most common are `for` and `while`.
+
+## *for* loops
+
+A `for` loop enables to iterate over an object (such as a vector) and then execute a block of code *for every* loop. The syntax for a `for` loop is the following:
+
+```{r}
+#| eval: false
+
+for (temporary_variable in object) {
+    # Execute some code at every loop
+}
+```
+
+Let us see some examples to see how to use a `for` loop.
+
+### *for* loop over a vector
+
+We can think of looping through a vector in two different ways. The first way would be to create a temporary variable with the use of the `in` keyword:
+
+```{r}
+vec <- 1:5
+
+for (temp_var in vec) {
+    print(temp_var)
+}
+```
+
+The other way would be to loop a numbered amount of times and then use the indexing to continually grab from the vector:
+
+```{r}
+for (i in seq_along(vec)) {
+    print(vec[i])
+}
+```
+
+The first method is more elegant, but sometimes it is more intuitive to use the second one.
+
+### *for* loop over a list
+
+We can do the same thing over a list.
+
+```{r}
+li <- list(1:5, 10:20)
+
+for (temp_var in li) {
+    print(temp_var)
+}
+```
+
+To use the second method, however, we must remember to use the double brackets `[[ ]]` to extract the object from the list.
+
+```{r}
+for (i in seq_along(li)) {
+    print(li[[i]])
+}
+```
+
+### Nested *for* loops
+
+`for` loops can be nested one inside the other, especially with structures like matrices, which have more than one dimensions. For example,
+
+```{r}
+mat <- matrix(1:25, nrow = 5)
+mat
+
+for (row in 1:nrow(mat)) {
+    for (col in 1:ncol(mat)) {
+        print(paste("The element at row:", row, "and col:", col, "is", mat[row, col]))
+    }
+}
+```
+
+## *while* loops
+
+In a `while` loop, the condition in the `while` statement is evaluated and if it is true, the statement is executed and the condition is re-evaluated. The loop continues until the condition becomes false, at which point the execution resumes after the clause.
+
+The syntax of the `while` statement is the following:
+
+```{r}
+#| eval: false
+
+while (condition) {
+    # Code to execute
+    # as long as the condition
+    # in the statement is true
+}
+
+```
+
+The major concern when working with a `while` loop is to make sure that at some point the condition becomes false, otherwise the loop will go on forever.
+
+Let's see an example:
+
+```{r}
+set.seed(12)
+x <- 0
+
+while (x != 6) {
+    x <- sample(1:6, size = 1)
+    print(paste("We rolled a ", x))
+}
+
+```
+
+## Final example: the Law of Large Numbers
+
+In this final example, we wish to study the Law of Large Numbers for a normal distribution. The Law of Large Numbers (LNN) states that if the number of samples grows, the sample mean approaches the mean of the population. So, if we extract a sample from a population with normal distribution with mean $0$ and standard deviation $1$, and we work out the mean of the sample, we would find a number that is close to $0$. Furthermore, if we increase the size of the sample, this number gets closer and closer to $0$.
+
+Let's see what happens when we run the simulation 10, 100, 1000 and 100000 times.
+
+```{r}
+total <- c(10L, 100L, 1000L, 100000L)
+mean_value <- NULL
+
+for (tot in total) {
+    set.seed(123)
+    count <- 0
+    normal_sample <- rnorm(tot)
+    for (x in normal_sample) {
+        count <- count + x
+    }
+    mean_value <- append(mean_value, count / tot)
+}
+print(mean_value)
+```

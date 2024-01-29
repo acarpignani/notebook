@@ -1,6 +1,10 @@
-# R for Data Science
-
-Andrea Carpignani
+---
+title: "R for Data Science"
+subtitle: "The Bedford Sixth Form"
+author: "Andrea Carpignani"
+date: today
+date-format: "DD MMMM YYYY"
+---
 
 ## Welcome
 
@@ -10,7 +14,7 @@ In this web page you can find all the topics that we have done (or that we are g
 
 ## Basic bibliography
 
-I have used a myriad of resources to create this enhancement class, and I am sure that I cannot quote them all in a single shot, because they are really too many. However, I will try to keep the bibliography up-to-date by adding the references to the books, videos, screen-casts etc that I take inspiration from. If you notice that I have forgotten any, please do open an issue on github and/or submit a pull request. If you are comfortable with neither, just drop me a line, and I'll fix it.
+I have used a myriad of resources to create this enhancement class, and I am sure that I cannot quote them all in a single shot, because they are really too many. However, I will try to keep the bibliography up-to-date by adding the references to the books, videos, screen-casts etc, that I take inspiration from. If you notice that I have forgotten any, please do open an issue on github and/or submit a pull request. If you are comfortable with neither, just drop me a line, and I'll fix it.
 
 ### R programming
 

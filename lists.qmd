@@ -1,4 +1,4 @@
-# A brief introduction to lists
+# Lists
 
 Lists are a special type of vectors that can contain elements of different classes. Lists are a very important data type in R and you should get to know them well. On the other hand, lists are also a very complex topic, and before really understanding their usage, you must see a multitude of examples. Lists pair with a class of R functions called the "apply functions" and together they become an impressively powerful tool. We shall not discuss the base R apply functions but an enhanced version available in the **tidyverse** through the package **purrr**. Until then, let's only briefly see how a list is defined and how to access its elements.
 
