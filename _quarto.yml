@@ -67,8 +67,12 @@ website:
 
     - title: "Practice"
       contents:
-        - practice.qmd
+        - practice-basics.qmd
         - practice-matrices.qmd
+        - practice-data-frames.qmd
+        - practice-control-flow.qmd
+        - practice-functions.qmd
+        
 
 format:
   html:
