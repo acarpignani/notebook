@@ -50,9 +50,6 @@ website:
           contents:
             - conditionals.qmd
             - loops.qmd
-
-        - section: "Advanced R Programming"
-          contents:
             - functions.qmd
             - purrr-functions.qmd
 

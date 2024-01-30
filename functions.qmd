@@ -1,1 +1,200 @@
 # Functions with R
+
+Quoting Professor Roger Peng, "writing functions is a core activity of an R programmer. It represents the key step of the transition from the mere "user" to a developer who creates new functionality for R". Functions are often used to encapsulate a chunk of code that needs to be executed numerous times, perhaps under slightly different conditions, or depending on certain parameters that serve as input to the function.
+
+Functions in R are "first class objects", which means that they can be treated pretty much like any other R object (e.g. a vector or a list). Most importantly, functions can be passed as arguments to other functions, and can be nested, so that we can define a function inside another function.
+
+The syntax for a function is the following:
+
+```{r}
+#| eval: false
+
+function_name <- function(arg1, arg2, ...) {
+    ## Code that is executed when
+    ## the function is called
+}
+```
+
+There are many functions already built-in in R, and loading packages we can get even more functions. If we wish to recall the structure of the function that we are about to use we can either call the `help()` function, or we can just call the function `str()` which shows the parameters and the default values of a function. For example, for the function `sum()`, we have
+
+```{r}
+str(matrix)
+```
+
+## Simple examples of functions
+
+Let's immediately see an example of function:
+
+```{r}
+hello_world <- function() {
+    print("Hello, world!")
+}
+
+hello_world
+```
+
+Let's make this function a bit more interesting, by adding a parameter.
+
+```{r}
+hello <- function(name) {
+    print(paste("Hello,", name))
+}
+
+hello("Jack")
+```
+
+This function is better, but if we call `hello()` it would throw an error, because R doesn't know what to do with the parameter that has not been used. If we wish, we can set up a default value for the parameter, to be used unless a different value is passed to the function. For example,
+
+```{r}
+hello <- function(name = "world!") {
+    print(paste("Hello,", name))
+}
+
+hello()
+hello("Mr President!")
+```
+
+## Returning a value
+
+The function that we have created thus far only print the result. Sometimes, however, we may want to *return* the value, so that we can store it into a variable. This is done using the function `return()`. For example, assume we want to create a function that takes a name and a title and returns the name with the title in front of it. So, if we pass the name `"John Smith"` and the title `"sir"`, the functions should return `"sir John Smith"`. This can be done with the following code:
+
+```{r}
+formal <- function(name = "John Doe", title = "Mr") {
+    return(paste(title, name))
+}
+
+formal()
+formal("Isaac Newton", "sir")
+```
+
+So far, the function works in the exact same way as before, but now we can also assign the result of the value to a variable. For example,
+
+```{r}
+var <- formal("Byron", "Lord")
+var
+```
+
+As a simple rule of thumb on when you should use a function, I once heard the following:
+
+::: callout-tip
+If you need to use cut-and-paste more than three times, use a function.
+:::
+
+I am not sure I always follow this rule of thumbs, but I should!
+
+## Argument matching
+
+Calling an R function with arguments can be done in a variety of ways. This may be confusing at first, but it is really handy when doing interactive work at the command line. R functions argument can be matched both *positionally* or *by name*. Positional matching just means that R assigns the first value to the first argument, the second value to the second argument, etc. So, in the following call to `rnorm()`,
+
+```{r}
+str(rnorm)
+
+set.seed(123)
+rnorm(10, 2, 1)
+```
+
+the number 10 is assigned to the `n` argument, 2 is assigned to the `mean` argument, and 1 is assigned to the `sd` argument, all by position matching. We could however achieve the same result with any of the following codes:
+
+```{r}
+# Matching by name with the same order
+set.seed(123)
+rnorm(n = 10, mean = 2, sd = 1)
+
+# Matching by name with a different order
+set.seed(123)
+rnorm(sd = 1, mean = 2, n = 10)
+```
+
+Notice that by setting always the same seed before any call of the random number generators, we always get the same results.
+
+To sum up, when specifying the function arguments by name, it doesn't matter in what order the arguments are passed to the function: we will always obtain the same result. Very often we can also mix positional matching with matching by name. When an argument is matched by name, it is "taken out" of the argument list and the remaining unnamed arguments are matched in the order that they are listed in the function definition, as shown for example passing the function to `str()`. So, in the previous example, we would most likely use
+
+```{r}
+set.seed(123)
+rnorm(10, mean = 2, sd = 1)
+```
+
+::: callout-caution
+Quoting again Professor Peng, "even though it's legal, I don't recommend messing around with the order of the arguments too much, since it can lead to do some confusion.
+
+Most of the time, named arguments are useful on the command line when you have a long argument list and you want to use the defaults for everything except for an argument near the end of the list. Named arguments are also help if you can remember the name of the argument and not its position on the argument list."
+:::
+
+## Lazy evaluation
+
+Arguments to functions are evaluated *lazily*, which means that they are evaluated only as needed in the body of the function. For example,
+
+```{r}
+foo <- function(a, b){
+    a^2
+}
+
+foo(3)
+```
+
+This function never uses the argument `b`, so calling `foo(3)` will not throw an error because the 3 gets positionally matched to `a`. This behaviour may be considered good or bad. It is common to write a function that doesn't actually use an argument and not notice it simply because R never throws an error.
+
+This example shows lazy evaluation at work, but does eventually result in an error.
+
+```{r}
+#| error: true
+
+foo <- function(a, b){
+    print(a)
+    print(b)
+}
+
+foo(10)
+```
+
+Notice that "10" is printed before the error is triggered. This is because `b` did not have to be evaluated until after `print(a)`. Once the function tried to evaluate `print(b)` the function had to throw an error, because R cannot find a value for `b`.
+
+## The `...` argument
+
+There is a special argument in R known as the `...` argument, which indicates a variable number of arguments that are usually passed to other functions. The `...` argument is often used when extending another function but one doesn't want to copy the entire argument list of the original function.
+
+For example, we wish to create a function that simulates rolling a die a given number of times. This can be achieved by calling the function `sample()` on the vector `1:6`, like so:
+
+```{r}
+die_rolling <- function(n = 1, ...) {
+    sample(1:6, size = n, replace = TRUE, ...)
+}
+```
+
+Let's have a look at the arguments of `sample()`.
+
+```{r}
+str(sample)
+```
+
+There is a special parameter `prob` that we can use to assign the probabilities of each element of the vector to be given, and we can pass it to sample, through the `...` argument, to pass from a fair die to a biased one. Look at the difference between rolling a fair die and a biased one:
+
+```{r}
+# Fair die
+set.seed(111)
+die_rolling(10)
+
+# Biased die
+set.seed(111)
+die_rolling(10, prob = c(0.5, 0.2 , 0.1, 0.1, 0.05, 0.05))
+```
+
+## Arguments coming after the `...` argument
+
+One catch with `...` is that any argument that appear **after** `...` on the argument list **must** be named explicitly and cannot be partially matched or matched positionally. Take a look at the structure of the `paste()` function.
+
+```{r}
+str(paste)
+```
+
+With the `paste()` function, the arguments `sep` and `collapse` must be named explicitly and in full if the default values are not going to be used. For example,
+
+```{r}
+paste("a", "b", sep = ":")
+```
+
+If we don't specify the `sep` argument, R would interpret the last argument as another of the `...` arguments and only paste it after `b`, using the default value of `sep`. For example,
+
+```{r}
+paste("a", "b", ":")
+```
