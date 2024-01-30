@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lists.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A brief introduction to lists</span></a>
+ <span class="menu-text">Lists</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -240,13 +240,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conditionals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Conditionals with R</span></a>
+ <span class="menu-text">Conditionals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./loops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Loops with R</span></a>
+ <span class="menu-text">Loops</span></a>
   </div>
 </li>
       </ul>
@@ -358,19 +358,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="data-frames" class="level1">
 <h1>Data Frames</h1>
-<p>Data frames are used to store tabular data in R. They are an important type of object and are used in a variety of statistical modelling applications. The <strong>tidyverse</strong> meta-package has an enhanced version of data frame, called a <strong>tibble</strong> and an optimised set of functions designed to work effectively with data frames and tibbles.</p>
+<p>Data frames are used to store tabular data in R. They are an important type of object and are used in a variety of statistical modelling applications.</p>
+<p>The <strong>tidyverse</strong> meta-package has an enhanced version of data frame, called a <strong>tibble</strong> and an optimised set of functions designed to work effectively with data frames and tibbles.</p>
 <p>Before we continue, it is therefore necessary to install, and load, the <strong>tidyverse</strong>.</p>
 <section id="installing-and-loading-packages-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="installing-and-loading-packages-in-r">Installing and loading packages in R</h2>
-<p>Anyone can create new R packages, but only when packages satisfy certain strict rules are stored on CRAN. This ensures that packages stores on CRAN are reliable, have documentation and there is a support in place for the users. To install a package that lives on CRAN it suffices to type on the console <code>install.packages("package_name")</code>. R will then install the package and all the dependencies needed to run the package.</p>
+<p>Anyone can create new R packages, but only when packages satisfy certain strict rules are they stored on CRAN. This ensures that packages stored on CRAN are reliable, have documentation and there is a support in place for the users. To install a package that lives on CRAN it suffices to type on the console <code>install.packages("package_name")</code>. R will then install the package and all the dependencies needed to run the package.</p>
 <p>So, to install the whole <strong>tidyverse</strong> we just have to type <code>install.packages("tidyverse")</code>.</p>
 <p>To load a package (regardless of where it comes from), we need to use the command <code>library()</code>. So, to load the <strong>tidyverse</strong> we can just type in out script and run the code</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
 ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
 ✔ purrr     1.0.2     
@@ -380,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
-<p>The outcome is pretty overwhelming! First we are informed that all the core tidyverse packages are correctly loaded: <strong>dplyr</strong>, <strong>forecats</strong>, <strong>ggplot2</strong>, <strong>lubridate</strong>, <strong>purrr</strong>, <strong>readr</strong>, <strong>stringr</strong>, <strong>tibble</strong> and <strong>tidyr</strong>. Then we are also informed that there are two functions that were already loaded from the package <code>stats</code> (a core package automatically loaded by R), and they are now substituted by the homonym functions from <strong>dplyr</strong>. This might seem like a loss, but the <code>stats</code> functions are not lost, we only need to call them via their “long name”.</p>
+<p>The outcome is pretty overwhelming! First we are informed that all the core tidyverse packages are correctly loaded: <strong>dplyr</strong>, <strong>forecats</strong>, <strong>ggplot2</strong>, <strong>lubridate</strong>, <strong>purrr</strong>, <strong>readr</strong>, <strong>stringr</strong>, <strong>tibble</strong> and <strong>tidyr</strong>. Then we are also informed that there are two functions that were already loaded from the package <code>stats</code> (a base R package automatically loaded by R), and they are now substituted by the homonym functions from <strong>dplyr</strong>. This might seem like a loss, but the <code>stats</code> functions are not lost, we only need to call them via their “long name”.</p>
 <section id="long-names-versus-short-names" class="level3">
 <h3 class="anchored" data-anchor-id="long-names-versus-short-names">Long names versus short names</h3>
 <p>The <strong>long name</strong> of a function is composed by the name of the package where the function is stored, two colons (<code>::</code>) and the name of the function. So, to use the function <code>filter()</code> in <code>stats</code> we can type <code>stats::filter()</code>. Similarly, if we wanted to use the function <code>read_csv()</code> which lies in the package <code>readr</code>, we could just type <code>readr::read_csv()</code> without the needs to load the package <code>readr</code> in advance.</p>
@@ -425,7 +426,7 @@ Tip
 3 Charlie    36  25000</code></pre>
 </div>
 </div>
-<p>This is easy however, only when the variables (<code>name</code>, <code>age</code> and <code>salary</code> are already stored in some vectors, and we wish to collate them together into a data frame). When we try to store them one by one, it is often more logical to give the data row by row. This can be done with a variant of tibble called <code>tribble()</code>, like so:</p>
+<p>This is easy however, only when the variables (<code>name</code>, <code>age</code> and <code>salary</code> are already stored in some vectors, and we wish to collate them together into a data frame). When we try to store them one by one, it is often more logical to assign the data row by row. This can be done with a variant of tibble called <code>tribble()</code>, which stands for “transpose tibble”. For example,</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> name, <span class="sc">~</span> age, <span class="sc">~</span> salary,</span>
@@ -685,11 +686,11 @@ Levels: none mild medium severe</code></pre>
 </div>
 </div>
 <p>Now, correctly, R recognises that the number of cylinders are not just numbers, but they are actually factors, so instead of working out the median and the five-number summary, it counts how many times each of these level occurs.</p>
-<p>If we wish to do the same to <code>model</code>, <code>trans</code>, <code>drv</code>, <code>fl</code> and <code>class</code>, we can use a lovely convenience function called <code>across()</code>, which will apply the same function to all variables that we are stating, like so:</p>
+<p>If we wish to do the same to <code>model</code>, <code>trans</code>, <code>drv</code>, <code>fl</code> and <code>class</code>, we can use a lovely convenience function called <code>across()</code>, which will apply a given function across all variables that are passed through as a vector of variables, like so:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> <span class="fu">mutate</span>(mpg, <span class="fu">across</span>(<span class="fu">c</span>(model, trans, drv, fl, class), factor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Let’s see the result with <code>glimpse()</code> first and <code>summary()</code> as well.</p>
+<p>Let’s see the result with <code>glimpse()</code> first and <code>summary()</code> afterwards.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

@@ -1,12 +1,14 @@
 # Data Frames
 
-Data frames are used to store tabular data in R. They are an important type of object and are used in a variety of statistical modelling applications. The **tidyverse** meta-package has an enhanced version of data frame, called a **tibble** and an optimised set of functions designed to work effectively with data frames and tibbles.
+Data frames are used to store tabular data in R. They are an important type of object and are used in a variety of statistical modelling applications.
+
+The **tidyverse** meta-package has an enhanced version of data frame, called a **tibble** and an optimised set of functions designed to work effectively with data frames and tibbles.
 
 Before we continue, it is therefore necessary to install, and load, the **tidyverse**.
 
 ## Installing and loading packages in R
 
-Anyone can create new R packages, but only when packages satisfy certain strict rules are stored on CRAN. This ensures that packages stores on CRAN are reliable, have documentation and there is a support in place for the users. To install a package that lives on CRAN it suffices to type on the console `install.packages("package_name")`. R will then install the package and all the dependencies needed to run the package.
+Anyone can create new R packages, but only when packages satisfy certain strict rules are they stored on CRAN. This ensures that packages stored on CRAN are reliable, have documentation and there is a support in place for the users. To install a package that lives on CRAN it suffices to type on the console `install.packages("package_name")`. R will then install the package and all the dependencies needed to run the package.
 
 So, to install the whole **tidyverse** we just have to type `install.packages("tidyverse")`.
 
@@ -16,7 +18,7 @@ To load a package (regardless of where it comes from), we need to use the comman
 library(tidyverse)
 ```
 
-The outcome is pretty overwhelming! First we are informed that all the core tidyverse packages are correctly loaded: **dplyr**, **forecats**, **ggplot2**, **lubridate**, **purrr**, **readr**, **stringr**, **tibble** and **tidyr**. Then we are also informed that there are two functions that were already loaded from the package `stats` (a core package automatically loaded by R), and they are now substituted by the homonym functions from **dplyr**. This might seem like a loss, but the `stats` functions are not lost, we only need to call them via their "long name".
+The outcome is pretty overwhelming! First we are informed that all the core tidyverse packages are correctly loaded: **dplyr**, **forecats**, **ggplot2**, **lubridate**, **purrr**, **readr**, **stringr**, **tibble** and **tidyr**. Then we are also informed that there are two functions that were already loaded from the package `stats` (a base R package automatically loaded by R), and they are now substituted by the homonym functions from **dplyr**. This might seem like a loss, but the `stats` functions are not lost, we only need to call them via their "long name".
 
 ### Long names versus short names
 
@@ -50,7 +52,7 @@ tibble(
 )
 ```
 
-This is easy however, only when the variables (`name`, `age` and `salary` are already stored in some vectors, and we wish to collate them together into a data frame). When we try to store them one by one, it is often more logical to give the data row by row. This can be done with a variant of tibble called `tribble()`, like so:
+This is easy however, only when the variables (`name`, `age` and `salary` are already stored in some vectors, and we wish to collate them together into a data frame). When we try to store them one by one, it is often more logical to assign the data row by row. This can be done with a variant of tibble called `tribble()`, which stands for "transpose tibble". For example,
 
 ```{r}
 tribble(
@@ -174,13 +176,13 @@ summary(mpg)
 
 Now, correctly, R recognises that the number of cylinders are not just numbers, but they are actually factors, so instead of working out the median and the five-number summary, it counts how many times each of these level occurs.
 
-If we wish to do the same to `model`, `trans`, `drv`, `fl` and `class`, we can use a lovely convenience function called `across()`, which will apply the same function to all variables that we are stating, like so:
+If we wish to do the same to `model`, `trans`, `drv`, `fl` and `class`, we can use a lovely convenience function called `across()`, which will apply a given function across all variables that are passed through as a vector of variables, like so:
 
 ```{r}
 mpg <- mutate(mpg, across(c(model, trans, drv, fl, class), factor))
 ```
 
-Let's see the result with `glimpse()` first and `summary()` as well.
+Let's see the result with `glimpse()` first and `summary()` afterwards.
 
 ```{r}
 glimpse(mpg)

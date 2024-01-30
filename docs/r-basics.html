@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lists.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A brief introduction to lists</span></a>
+ <span class="menu-text">Lists</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -240,13 +240,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conditionals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Conditionals with R</span></a>
+ <span class="menu-text">Conditionals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./loops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Loops with R</span></a>
+ <span class="menu-text">Loops</span></a>
   </div>
 </li>
       </ul>
@@ -355,6 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#comparison-operators" id="toc-comparison-operators" class="nav-link" data-scroll-target="#comparison-operators">Comparison operators</a></li>
   <li><a href="#getting-help-with-r" id="toc-getting-help-with-r" class="nav-link" data-scroll-target="#getting-help-with-r">Getting help with R</a></li>
+  <li><a href="#comments-in-r" id="toc-comments-in-r" class="nav-link" data-scroll-target="#comments-in-r">Comments in R</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -642,6 +643,11 @@ Warning
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(vector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>opens the documentation with title <strong>Vectors - Creation, Coercion, etc</strong>.</p>
+</section>
+<section id="comments-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="comments-in-r">Comments in R</h2>
+<p>R ignores anything after a <code>#</code> sign in a line, whether it is at the beginning of a line or in the middle. Unless the sign <code>#</code> is escaped, this symbol tells R that whatever comes next is a comment, and therefore R ignores it.</p>
+<p>Running code in the console generally doesn’t require comments, so comments are hardly ever used in this context. However, when a code is saved into an R script, it easily becomes messy and confusing, and that is when comments are become really helpful. Using code we can separate chunks of codes, write little notes on the work that we have done, recall results, and even sometimes copy some results into the script for future reference. It is good practice to always write comments in the code, and I would encourage everyone to always use them in their scripts.</p>
 
 
 </section>

@@ -197,3 +197,9 @@ help(vector)
 ```
 
 opens the documentation with title **Vectors - Creation, Coercion, etc**.
+
+## Comments in R
+
+R ignores anything after a `#` sign in a line, whether it is at the beginning of a line or in the middle. Unless the sign `#` is escaped, this symbol tells R that whatever comes next is a comment, and therefore R ignores it.
+
+Running code in the console generally doesn't require comments, so comments are hardly ever used in this context. However, when a code is saved into an R script, it easily becomes messy and confusing, and that is when comments are become really helpful. Using code we can separate chunks of codes, write little notes on the work that we have done, recall results, and even sometimes copy some results into the script for future reference. It is good practice to always write comments in the code, and I would encourage everyone to always use them in their scripts.
