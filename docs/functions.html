@@ -134,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Intro to ML</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./practice.html"> 
+    <a class="nav-link" href="./practice.qmd"> 
 <span class="menu-text">Practice</span></a>
   </li>  
 </ul>
@@ -527,7 +527,7 @@ Caution
 <pre><code>[1] 10</code></pre>
 </div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in foo(10): argument "b" is missing, with no default</code></pre>
+<pre><code>Error in print(b): argument "b" is missing, with no default</code></pre>
 </div>
 </div>
 <p>Notice that “10” is printed before the error is triggered. This is because <code>b</code> did not have to be evaluated until after <code>print(a)</code>. Once the function tried to evaluate <code>print(b)</code> the function had to throw an error, because R cannot find a value for <code>b</code>.</p>
