@@ -30,7 +30,9 @@ It is good practice to always load at the beginning of the script code the packa
 
 ## The tidyverse
 
-Quoting from the [tidyverse](https://www.tidyverse.org/) home page:
+[![](images/tidyverse.svg){fig-alt="tidyverse" width="140" height="165"}](https://www.tidyverse.org/)
+
+Quoting from the tidyverse home page:
 
 ***The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.***
 

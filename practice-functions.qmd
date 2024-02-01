@@ -1,1 +1,1 @@
-# Practice 5: Functions in R
+# Practice 5: Functions
