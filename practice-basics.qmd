@@ -2,6 +2,8 @@
 
 The questions below should be straightforward if you have reviewed the lectures: do not expect here anything particularly challenging yet. This should only be a review to make sure you have understood everything so far. In further practice sessions and projects we will encounter more challenging (and fun) activities.
 
+## Simple questions
+
 ### Answer the following questions using R
 
 1.  Generate a vector that contains the numbers from 1 to 10, and concatenate its reversed vector (i.e. the vector with the same numbers in descending order), obtaining a vector with 20 elements.\

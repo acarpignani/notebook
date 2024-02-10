@@ -26,7 +26,7 @@ I have used a myriad of resources to create this enhancement class, and I am sur
 
 -   M Kuhn, J Silge. *Tidy Modeling with R*. O'Reilly
 
--   J Silge, D Robinson. *Text Mining with R*. O.Reilly
+-   J Silge, D Robinson. *Text Mining with R*. O'Reilly
 
 -   M Crawley. *Statistics - An introduction using R*. Wiley
 
