@@ -1,1 +1,111 @@
 # Data transformation
+
+## Introduction
+
+This section introduces to some of the main tools in the **tidyverse**. We shall focus on the package **dplyr** here and in particular on some *verbs* that are particularly useful when it comes to transforming data frames (or tibbles in our case). The verbs we are looking at are:
+
+-   `filter` - to filter the rows of the data set depending on specific conditions
+
+-   `arrange` - to sort the rows on a specific variable (or set of variables)
+
+-   `distinct` - to return all unique values in a tables
+
+-   `mutate` (and `transmute`) - to create new variables
+
+-   `select` - to select specific variables (i.e. columns) of the data set
+
+-   `summarise` (or `summarize`) - to calculate a summary of a specific variable
+
+These are the most common and important verbs in **dplyr** but we will also see a few more, less important, but often rather useful when the occasion arises.
+
+### **dplyr** basics
+
+```{r}
+#| echo: false
+#| warning: false
+library(tidyverse)
+```
+
+Before starting describing how the **dplyr** verbs work, it is worth to start by describing what these verbs have in common.
+
+1.  The first argument is always the data frame (or tibble)
+2.  The subsequent arguments typically describe which columns to operate on, using the variable names (without quotes)
+3.  The output is always a new data frame
+
+Since each verb does one thing, solving complex problems will usually require to combine multiple verbs. We can do so using the *pipe*, `|>`. In brief, the pipe takes the thing on its left and passes it along to the function on its right so that `x |> f(y)` is equivalent to `f(x,y)` and, inductively, `x |> f(y) |> g(z)` is equivalent to `g(f(x, y), z)`. The easiest way to pronounce the pipe is 'then'.
+
+### The "flights" data set
+
+To explore the basic **dplyr** verbs, we are going to use the `flights` data set in the package `nycflights13`. This data set contains all 336,776 flights departed from New York city in 2013. The data comes from the US Bureau of Transportation Statistics and is documented in `help(flights)`.
+
+To install the package `nyflights13` it suffices to run the command `install.packages("nycflights13")` from the console. Once the package is loaded, we can just run `flights` to see its content, like so:
+
+```{r}
+library(nycflights13)
+flights
+```
+
+Let's also see the variables in this data set:
+
+```{r}
+glimpse(flights)
+```
+
+In both views, the variables names are followed by abbreviations that tell you the type of each variable. For example `<int>` is short for *integer*, `<dbl>` is short for *double* (aka the floating point real numbers), `<chr>` is short for *character* (aka strings), and `<dttm>` is short for data-time.
+
+## The main **dplyr** functions
+
+### Filter
+
+The simplest verb of all is `filter()` which allows you to keep rows based on the values of columns. The first argument of the function (as per general rule) is the data frame, which we can pass using the pipe. The second and all subsequent arguments of the functions are the conditions that must be true in order to keep the row. For example, if we wish to find all flights in the `flights` data set that departed from New York in December, we could use the following:
+
+```{r}
+flights |> 
+    filter(month == 12)
+```
+
+We can add more than one condition at once. For example, suppose we wish to find all flights that departed from New York in December with more than 120 minutes of delay. We could then use the following
+
+```{r}
+flights |> 
+    filter(month == 12, dep_delay > 120)
+```
+
+From a logical point of view, `,` acts like an "and". However, we can also combine conditions using the logical operations `&` (and), `|` (or) and `!` (not) in a single argument. Suppose now we wish to find all flights that departed from New York on the 16 December. We can then use the following:
+
+```{r}
+flights |> 
+    filter(month == 12 & day == 16)
+```
+
+This is clearly the same as
+
+```{r}
+flights |> 
+    filter(month == 12, day == 16)
+```
+
+Another useful one is `%in%` which allows us to request that the variable lies in a specific vector. For example, if we wish to know the flights that departed from New York on the 25 December, 26 December or the 31 December, we could use the following:
+
+```{r}
+flights |> 
+    filter(month == 12, day %in% c(25, 26, 31))
+```
+
+### Arrange
+
+`arrange()` changes the order of the rows based on the value of a column. Its first argument (as per general rule) is a data frame, and its second argument is a set of column names (or more complicated expressions) to order by. If more than one column is provided, the subsequent columns will be used to break ties in the value of the preceding columns.
+
+For example, let's rearrange the data set to show the flights sorted by departure time, which is spread over four columns: `year`, `month`, `day` and `dep_time`.
+
+```{r}
+flights |> 
+    arrange(year, month, day, dep_time)
+```
+
+We can also use the function `desc()` on a column inside `arrange()` to reorder the data frame based on that column in descending order. For example, this code orders flights from most to least delayed:
+
+```{r}
+flights |> 
+    arrange(desc(dep_delay))
+```
