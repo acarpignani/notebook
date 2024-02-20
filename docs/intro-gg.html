@@ -291,7 +291,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-the-grammar-of-graphics" id="toc-introduction-to-the-grammar-of-graphics" class="nav-link active" data-scroll-target="#introduction-to-the-grammar-of-graphics">Introduction to the “Grammar of Graphics”</a></li>
+  <li><a href="#introduction-to-the-grammar-of-graphics" id="toc-introduction-to-the-grammar-of-graphics" class="nav-link active" data-scroll-target="#introduction-to-the-grammar-of-graphics">Introduction to the “Grammar of Graphics”</a>
+  <ul class="collapse">
+  <li><a href="#grammar-of-graphics" id="toc-grammar-of-graphics" class="nav-link" data-scroll-target="#grammar-of-graphics">Grammar of Graphics</a>
+  <ul class="collapse">
+  <li><a href="#layers-for-building-visualizations" id="toc-layers-for-building-visualizations" class="nav-link" data-scroll-target="#layers-for-building-visualizations">Layers for building Visualizations</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -303,8 +309,24 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction-to-the-grammar-of-graphics" class="level1">
 <h1>Introduction to the “Grammar of Graphics”</h1>
+<p><strong>ggplot2</strong> is an R package for producing statistical, or data, graphics, but it is unlike most other graphics packages because it has a deep underlying grammar. This grammar, based on the Grammar of Graphics (Wilkinson, 2005), is made up of a set of independent components that can be composed in many different ways. This makes ggplot2 very powerful because you are not limited to a set of pre-specified graphics, but you can create new graphics that are specifically tailored for your problem.</p>
+<section id="grammar-of-graphics" class="level2">
+<h2 class="anchored" data-anchor-id="grammar-of-graphics">Grammar of Graphics</h2>
+<p>ggplot2 is based on the grammar of graphics, the idea that you can build every graph from the same few components: a data set, a set of geometries —visual marks that represent data points, and a coordinate system. At the very core, the grammar of graphics works like so: to display data values, variables in the data set are mapped to aesthetic properties of the geometries like size, colour, and x and y locations.</p>
+<section id="layers-for-building-visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="layers-for-building-visualizations">Layers for building Visualizations</h3>
+<p>ggplot2 is based off the grammar of graphics, which sets a paradigm for data visualization in layers:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/gg.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="565"></p>
+</figure>
+</div>
+<p>We will not delve too much in depth to the overall philosophy of the grammar of graphics because the best source for this is from the creator of ggplot2, Hadley Wickham, who published a magnificent article on the topic which can be found <a href="http://vita.had.co.nz/papers/layered-grammar.pdf">here</a>.</p>
+<p>Hadley Wickham has also written beautiful book on ggplot called <em>ggplot2, Elegant Graphics for Data Analysis</em>, Springer, and a very good introduction to ggplot can also be found in the bible of the Tidyverse, <em>Data Science with R</em>, O’Railly second edition. Both these are excellent references to learn the secrets of ggplot2.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
