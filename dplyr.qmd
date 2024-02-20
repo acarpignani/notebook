@@ -53,7 +53,9 @@ glimpse(flights)
 
 In both views, the variables names are followed by abbreviations that tell you the type of each variable. For example `<int>` is short for *integer*, `<dbl>` is short for *double* (aka the floating point real numbers), `<chr>` is short for *character* (aka strings), and `<dttm>` is short for data-time.
 
-## The main **dplyr** functions
+## Row functions
+
+The most important verbs that operate on rows are `filter()`, which selects rows based on values of columns, and `arrange()` which changes the order of the rows. Both these functions only affect the rows, and the columns are left unchanged. We shall also introduce `distinct()` which finds the rows with unique values, but that, unlike `filter()` and `arrange()` also modifies the columns.
 
 ### Filter
 
@@ -108,4 +110,234 @@ We can also use the function `desc()` on a column inside `arrange()` to reorder 
 ```{r}
 flights |> 
     arrange(desc(dep_delay))
+```
+
+### Distinct
+
+`distinct()` finds all the unique rows in a data set. So, if we wish to distinct the variable `dest` we can use the code
+
+```{r}
+flights |> 
+    distinct(dest)
+```
+
+Sometimes, however, we might be interested in combination of variable, e.g. origin and destination of the flights, so we can pass more than one variable, like so:
+
+```{r}
+flights |> 
+    distinct(origin, dest)
+```
+
+## Columns functions
+
+There are four important verbs that affect the columns without changing the rows: `mutate()` creates new columns that are derived from the existing columns, `select()` changes which columns to present, `rename()` changes the name of the columns, and `relocate()` changes the position of the columns.
+
+### Mutate
+
+The job of `mutate()` is to create new column that are calculated from the existing columns. For example, in the `flights` data set, if we wish to compute the `gain`, how much time a delayed flight made up in the air, and the average speed in miles per hour, we can use the following code:
+
+```{r}
+flights |> 
+    mutate(
+        gain = dep_delay - arr_delay,
+        speed = distance / air_time * 60
+    )
+```
+
+By default, `mutate()` adds the new columns on the right-hand side of the data set, which makes it difficult, sometimes, to see what is happening. There is however the optional argument `.before` to move the new column to the left-hand side of a given column. For example, to add the two columns before `dep_time` we can use the code:
+
+```{r}
+flights |> 
+    mutate(
+        gain = dep_delay - arr_delay,
+        speed = distance / air_time * 60,
+        .before = dep_time
+    )
+```
+
+Alternatively, we can also use the argument `.after` to move the new columns to the right-hand side of a given column. Another option might be to use a slight variation of `mutate()` which is called `transmute()`. This verb only returns the new columns. By extension, if we pass a column without modifying it, it would also return that column. So, for example, if we wish show only the year, month, day, scheduled departure time, arrival time and the new columns, we could use the code:
+
+```{r}
+flights |> 
+    transmute(
+        year, month, day, 
+        sched_dep_time, arr_time,
+        gain = dep_delay - arr_delay,
+        speed = distance / air_time * 60
+    )
+```
+
+### Select
+
+It is not uncommon to get data sets with hundreds or even thousands of variables. In situations such as these, the first challenge is often just focusing on the variables of interest. The `select()` function allows to quickly zoom in on the subset using operations based on the names of the variables. There are a few ways to use select.
+
+-   The simplest way is to select a column by passing their name:
+
+    ```{r}
+    #| eval: false
+    flights |> 
+        select(year, month, day)
+    ```
+
+-   Select all columns between two given ones, e.g. the following code shows the columns `year`, `month` and `day`.
+
+    ```{r}
+    #| eval: false
+    flights |> 
+        select(year:day)
+    ```
+
+-   Select all columns except from the one passed, e.g. the following code shows all columns except `year`, `month` and `day`.
+
+    ```{r}
+    #| eval: false
+    flights |> 
+        select(!year:day)
+    ```
+
+-   Select all columns that satisfy a certain condition, e.g. the following code shows all columns that are characters:
+
+    ```{r}
+    #| eval: false
+    flights |> 
+        select(where(is.character))
+    ```
+
+There are also a number of helper functions that can be used within a `select()` statement:
+
+-   `starts_with("abc")` - matches names that begin with "abc"
+
+-   `ends_with("xyz")` - matches names that end with "xyz"
+
+-   `contains("pqr")` - matches names that contain "pqr"
+
+We can also rename a variable as we select using the `=` sign. For example
+
+```{r}
+flights |> 
+    select(tail_num = tailnum)
+```
+
+### Rename
+
+If we wish to keep all the existing variables, but change the name of a variable, e.g. `tailnum` to `tail_num`, we can use the `rename()` function instead, like so:
+
+```{r}
+flights |> 
+    rename(tail_num = tailnum)
+```
+
+The syntax is self-explanatory: you can just pass the argument `new_name = old_name` to the function and the result will be that the column `old_name` will be labelled with the `new_name`.
+
+::: callout-tip
+If there are a bunch of inconsistently named columns and it would be painful to fix them all by hand, a very neat and easy-to-use function that you might want to use is `janitor::clean_names()` which provides some useful automated cleaning. It suffices to pipe the data frame (or tibble) into this function to get consistent names. Check out the help page for further details.
+:::
+
+### Relocate
+
+The function `relocate()` can be used to move around variables in the data set. This is useful when one wants, for example, to collect related variables together or to move important variables at the front. By default, `relocate()` moves the columns at the front, like so:
+
+```{r}
+flights |> 
+    relocate(origin, dest)
+```
+
+We can also use the arguments `.before` and `.after`, just like `mutate()`. For example,
+
+```{r}
+#| eval: false
+flights |> 
+    relocate(year:day, .after = air_time)
+flights |> 
+    relocate(starts_with("arr_"), .before = dep_time)
+```
+
+## More about the "pipe"
+
+Thus far we have shown only simple applications of the pipe, but its real power arises when we start combining multiple verbs together. For example, assume we want to find all fast flights to Huston's IAH airport: we will need to combine `filter()`, `mutate()`, `select()` and `arrange()`. The *piped* version of this is
+
+```{r}
+flights |> 
+    filter(dest == "IAH") |> 
+    mutate(speed = distance / air_time * 60) |> 
+    select(year:day, dep_time, carrier, flight, speed) |> 
+    arrange(desc(speed))
+```
+
+Even though this pipeline has four steps, it is easy to skim, because the verb come at the start of each line, informing what we are doing: start from flights, then filter for the rows where `dest` is IAH, then calculate the average speed of the aircraft, then select the variables of interest, then arrange them in descending order by speed.
+
+Let's see how this code would be without the pipe:
+
+```{r}
+#| eval: false
+arrange(
+    select(
+        mutate(
+            filter(
+              flights,
+              dest == "IAH"
+            ),
+            speed = distance / air_time * 60
+        ),
+        year:day, dep_time, carrier, flight, speed
+    ),
+    desc(speed)
+)
+```
+
+Alternatively, we could also use a bunch of intermediate steps, like so:
+
+```{r}
+#| eval: false
+flights1 <- filter(flights, dest == "IAH")
+flights2 <- mutate(flights1, speed = distance / air_time * 60)
+flights3 <- select(flights2, year:day, dep_time, carrier, flight, speed)
+arrange(flights3, desc(speed))
+```
+
+While both these alternative forms are correct, the first is almost impossible to understand (and to type in one shot without mistakes), and the second introduces a full range of useless variables in the memory - something that you don't really wish to do with a heavy data set.
+
+To add the pipe to the code it comes really handy the built-in keyboard shortcut Ctrl/Cmd + Shift + M. In RStudio, however, the default pipe operator is indicated with `%>%` rather than `|>`. This is because the `%>%` pipe operator, provided by the `magrittr` package, and included in the core tidyverse, is older than the native `|>` pipe operator. For simple cases, `|>` and `%>%` are identical. However, H Wickham recommends to use `|>` instead of `%>%` for two reasons:
+
+1.  The native pipe `|>` is part of the base R, so it's always available even when tidyverse is not loaded.
+2.  `|>` is quite simpler than `%>%`: in the time between the invention of `%>%` in 2014 and the inclusion of `|>` in R 4.1.0 in 2021, says Wickham, the programmers gained a better understanding of the pipe. This allows the base implementation to jettison infrequently used and less important features.
+
+## Grouping and summarising
+
+Thus far, we have learned about functions that work with rows and columns. However, **dplyr** gets even more powerful when we add the ability to work with groups. Herewith we shall focus on to important functions: `group_by()` and `summarise()` (or `summarize()` if someone prefers the American spelling - not myself).
+
+### Group by
+
+We can use the `group_by()` function to divide the data set into groups meaningful for data analysis. For example,
+
+```{r}
+flights |> 
+    group_by(month)
+```
+
+`group_by()` doesn't change the data, but looking closely at the output we can notice that the output indicates that it is "grouped by" month (`Groups: month [12]`). This means that any subsequent operation will now be performed "by month". `group_by()` is a complicated function because it doesn't alter the output *per se*, but adds this "group feature" (technically referred to as *class*) to the data frame, which changes the behaviour of the subsequent functions applied to the data set.
+
+### Summarise
+
+The most important grouped operation is `summarise()` which reduces the data set to a single row for each group. For example, to calculate the average delay every month, we can use the following code:
+
+```{r}
+flights |> 
+    group_by(month) |> 
+    summarise(
+        avg_delay = mean(dep_delay, na.rm = TRUE)
+    )
+```
+
+Notice that we need to pass to the `mean()` function the argument `na.rm = TRUE` because if we do not remove the NAs from the data set, all mean values where an NA is present would cast an NA.
+
+Notice that we can also calculate a number of summaries at the same time. For instance, we can find the median delay, and the number of flights at the same time, like so:
+
+```{r}
+flights |> 
+    group_by(month) |> 
+    summarise(
+        avg_delay = median(dep_delay, na.rm = TRUE),
+        n = n()
+    )
 ```
