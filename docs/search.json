@@ -1150,5 +1150,17 @@
       "Basic R Programming",
       "The *map* family"
     ]
+  },
+  {
+    "objectID": "advanced-ggplot.html",
+    "href": "advanced-ggplot.html",
+    "title": "Advanced topics",
+    "section": "",
+    "text": "Advanced topics",
+    "crumbs": [
+      "R programming",
+      "Data Visualisation",
+      "Advanced topics"
+    ]
   }
 ]

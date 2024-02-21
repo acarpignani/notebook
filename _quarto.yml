@@ -63,7 +63,7 @@ website:
             - intro-gg.qmd
             - ggplot-basics.qmd
             - core-ggplot.qmd
-
+            - advanced-ggplot.qmd
 
     - title: "Practice"
       contents:
