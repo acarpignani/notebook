@@ -129,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro-gg.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./intro-gg.html">Introduction to the “Grammar of Graphics”</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro-gg.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./intro-gg.html">The “Grammar of Graphics”</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -247,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tidyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data tidying</span></a>
+ <span class="menu-text">Reshaping data sets</span></a>
   </div>
 </li>
       </ul>
@@ -264,19 +264,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro-gg.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Introduction to the “Grammar of Graphics”</span></a>
+ <span class="menu-text">The “Grammar of Graphics”</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to <em>ggplot</em></span></a>
+ <span class="menu-text">Introduction to ggplot</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./themes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced <em>ggplot</em> features: themes</span></a>
+  <a href="./core-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plotting elegant graphs</span></a>
   </div>
 </li>
       </ul>
@@ -291,12 +291,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-the-grammar-of-graphics" id="toc-introduction-to-the-grammar-of-graphics" class="nav-link active" data-scroll-target="#introduction-to-the-grammar-of-graphics">Introduction to the “Grammar of Graphics”</a>
+  <li><a href="#the-grammar-of-graphics" id="toc-the-grammar-of-graphics" class="nav-link active" data-scroll-target="#the-grammar-of-graphics">The “Grammar of Graphics”</a>
   <ul class="collapse">
   <li><a href="#grammar-of-graphics" id="toc-grammar-of-graphics" class="nav-link" data-scroll-target="#grammar-of-graphics">Grammar of Graphics</a>
   <ul class="collapse">
   <li><a href="#layers-for-building-visualizations" id="toc-layers-for-building-visualizations" class="nav-link" data-scroll-target="#layers-for-building-visualizations">Layers for building Visualizations</a></li>
   </ul></li>
+  <li><a href="#why-are-graphs-so-important-in-data-analysis" id="toc-why-are-graphs-so-important-in-data-analysis" class="nav-link" data-scroll-target="#why-are-graphs-so-important-in-data-analysis">Why are graphs so important in Data Analysis?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -307,8 +308,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="introduction-to-the-grammar-of-graphics" class="level1">
-<h1>Introduction to the “Grammar of Graphics”</h1>
+<section id="the-grammar-of-graphics" class="level1">
+<h1>The “Grammar of Graphics”</h1>
 <p><strong>ggplot2</strong> is an R package for producing statistical, or data, graphics, but it is unlike most other graphics packages because it has a deep underlying grammar. This grammar, based on the Grammar of Graphics (Wilkinson, 2005), is made up of a set of independent components that can be composed in many different ways. This makes ggplot2 very powerful because you are not limited to a set of pre-specified graphics, but you can create new graphics that are specifically tailored for your problem.</p>
 <section id="grammar-of-graphics" class="level2">
 <h2 class="anchored" data-anchor-id="grammar-of-graphics">Grammar of Graphics</h2>
@@ -323,9 +324,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>We will not delve too much in depth to the overall philosophy of the grammar of graphics because the best source for this is from the creator of ggplot2, Hadley Wickham, who published a magnificent article on the topic which can be found <a href="http://vita.had.co.nz/papers/layered-grammar.pdf">here</a>.</p>
 <p>Hadley Wickham has also written beautiful book on ggplot called <em>ggplot2, Elegant Graphics for Data Analysis</em>, Springer, and a very good introduction to ggplot can also be found in the bible of the Tidyverse, <em>Data Science with R</em>, O’Railly second edition. Both these are excellent references to learn the secrets of ggplot2.</p>
-
-
 </section>
+</section>
+<section id="why-are-graphs-so-important-in-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="why-are-graphs-so-important-in-data-analysis">Why are graphs so important in Data Analysis?</h2>
+<p>Before moving on with this, however, it is important to understand that sketching graphs is not a purely artistic/aesthetic task, but a vital scientific activity, which is paramount in data science. A wide part of a data scientist’s job is to create graphs who help them understand the structure of their data, or that help spotting relationship between variables, or understanding bias in the population, etc. The list of questions that a well presented graph can answer is infinite. Furthermore, in the cycle of a data scientist, plotting graphs is the core of the so called <strong>Exploratory Data Analysis</strong>, which is the initial part of the data scientist’s exploration that then leads to choose the right mathematical models to describe the data, the right Machine Learning algorithms to perform predictions, the right hypothesis testings to answer questions about the data. All starts from graphs. So making outstanding graphs, is the first, concrete, real step into the work of a data scientist.</p>
+
+
 </section>
 </section>
 

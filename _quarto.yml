@@ -62,7 +62,7 @@ website:
           contents:
             - intro-gg.qmd
             - ggplot-basics.qmd
-            - themes.qmd
+            - core-ggplot.qmd
 
 
     - title: "Practice"

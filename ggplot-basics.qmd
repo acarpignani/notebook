@@ -1,1 +1,87 @@
-# Introduction to *ggplot*
+# Introduction to ggplot
+
+In order to start working with ggplot, we need a data set that we wish to analyse. There are several interesting which enable a few interesting graphs. In the sequel we shall use a data set that is built-in ggplot2: the `mpg` data set which contains the fuel economy data from 1999 to 2008 for 38 popular models of cars.
+
+```{r}
+#| echo: false
+#| warning: false
+library(tidyverse)
+```
+
+Before starting drawing graphs, let's check the data set and see what variables it contains.
+
+```{r}
+mpg
+glimpse(mpg)
+```
+
+So there are 234 rows and 11 variables. The variables `cty` and `hwy` in particular represent the city and highway consumption in miles per gallon of the different cars, `displ` indicates the engine displacement, in litres, `cyl` the number of cylinders, etc.
+
+### Drawing a basic scatter diagram
+
+We might want to draw a scatter diagram showing the highway consumption against the engine displacement. With **ggplot2** this can be done as follows:
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+    geom_point()
+```
+
+The first line contains already some rather curious features: inside the `ggplot()` function the first argument, as per tradition in the tidyverse, is the data set, and the second argument is a function, `aes()` which maps the variables into the aesthetics of the graph (in this case the variable `cty` is mapped to the x-axis and the variable `hwy` is mapped to the y-axis).
+
+This graph already contains a few layers: data, aesthetics and geometry. We might however wish to make this graph even more interesting, by plotting different transmission (automatic or manual) in different colours. We would also like to make the y-axis a bit more accurate (adding breaks to the grid), and to change the labels in the axes. We shall do this in one single shot, showing the power of tidyverse. A note of warning, though: the following is a complex pipeline, but the rest of this section (and the next) will look into the details of all the aspects summarised in the code below, so don't panic if you find this hard to start with.
+
+```{r}
+mpg |> 
+    mutate(transmission = case_when(str_detect(trans, "auto") ~ "Automatic",
+                                    str_detect(trans, "manual") ~ "Manual",
+                                    TRUE ~ "Other")) |> 
+    ggplot(aes(x = displ, y = hwy)) +
+    geom_point(aes(colour = transmission),
+               size = 4, alpha = 0.5) +
+    scale_y_continuous(breaks = seq(0, 60, 5)) +
+    labs(x = "Engine displacement (in litres)", 
+         y = "Highway consumption (in mpg)",
+         colour = "Transmission:") 
+```
+
+In this code we can notice three things: first of all the data set is piped into the `mutate()` function to create the new variable `transmission` which takes only the values "Automatic" and "Manual" (since we are not sure whether there might be issues with the data, we have also introduced a third option called "Other" with the idea that we shouldn't really see any car with this transmission, but if it occurs, it tells us that we need to investigate those occurrences). The second important thing is that the new data set built with mutate is directly piped into the `ggplot()` function. This is something that we will do consistently. The third, very important thing, concerns **ggplot2**: notice that every layer is added through a `+` operator. This, like a normal mathematical operation, has the role to take the layer on the left-hand side and *add* the feature described on the right-hand side (the below line, in the usual code formatting).
+
+### Drawing a histogram
+
+We would like now to sketch two histograms, one for the city consumption and one for the highway consumption. Again, let's see the final code (which is quite complex this time) but again we shall delve into the details later on in the course. In retrospective, this is going to be a simple exercise.
+
+```{r}
+mpg |> 
+    pivot_longer(cols = cty:hwy) |> 
+    mutate(name = if_else(str_detect(name, "cty"), 
+                          "City", "Highway")) |> 
+    ggplot(aes(x = value, fill = name)) +
+    geom_histogram(bins = 30, alpha = 0.7) +
+    scale_x_continuous(breaks = seq(0, 100, 5)) +
+    facet_wrap(vars(name), nrow = 2) +
+    labs(x = "Consumption (in mpg)", y = "Frequency", fill = NULL)
+```
+
+This graph shows two important features: the first is that if we wish to create a single graph out of two different variables, we need to put the values of these variables in a single column, and use a second column to specify the type fo variable that the value refers to. This is done with `pivot_longer()`, one of the two core functions of **tidyr**. The second feature is our first encounter with faceting. Facets are graphs that are divided into sub-graphs, like the one just shown.
+
+### Drawing a bar chart
+
+Finally, let's draw a bar chart showing the number of car per manufacturer. Let's see the final code and again we shall delve into the details further on, so just be patient for the moment.
+
+```{r}
+mpg |> 
+    group_by(manufacturer) |> 
+    count() |> 
+    ungroup() |> 
+    mutate(manufacturer = str_to_title(manufacturer),
+           manufacturer = fct_reorder(manufacturer, -n)) |> 
+    ggplot(aes(x = manufacturer, y = n, fill = manufacturer)) +
+    geom_col(show.legend = FALSE, alpha = 0.7) +
+    geom_text(aes(label = n), vjust = 0, nudge_y = 0.25) +
+    labs(x = NULL, y = NULL) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+In this code a lot is going on: in the first part, we group the data by manufacturer and we count the number of cars per manufacturer. Then we use the `mutate()` function to change the variable `manufacturer` to capitalise every word, and we reorder the manufacturers in descending order by the number of cars found (the `n` variable is generated by `count()` which is a shortcut for `summarise()` when we want to only count). Then we finally pass the new data set to `ggplot()` and we map the manufacturer to the x-axis, the number of cars to the y-axis and the manufacturer also to colour of the bars (`fill`). This last thing is not strictly speaking "necessary" but makes the graph nicer. Then we use the `geom_col()` to make the bars, and `geom_text()` to write the number on top of the bars. Finally we get rid of the labels on the axes (the axes are now self-explanatory) and we use the very complex (and powerful) `theme()` function to access the theme of the text on the x-axis, rotate it by 45 degrees, and adjust it so that all words end at the mark on the axis.
+
+This is quite a lot to take in all in one shot, but every single step is simple after all. The whole strategy, here, is to break down the problem into simplest parts, and beautiful graphs are only one code line away.

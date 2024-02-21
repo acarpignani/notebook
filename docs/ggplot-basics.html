@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -129,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro-gg.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./ggplot-basics.html">Introduction to <em>ggplot</em></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro-gg.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./ggplot-basics.html">Introduction to ggplot</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -270,13 +304,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot-basics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Introduction to <em>ggplot</em></span></a>
+ <span class="menu-text">Introduction to ggplot</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./themes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced <em>ggplot</em> features: themes</span></a>
+  <a href="./core-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plotting elegant graphs</span></a>
   </div>
 </li>
       </ul>
@@ -291,7 +325,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-ggplot" id="toc-introduction-to-ggplot" class="nav-link active" data-scroll-target="#introduction-to-ggplot">Introduction to <em>ggplot</em></a></li>
+  <li><a href="#introduction-to-ggplot" id="toc-introduction-to-ggplot" class="nav-link active" data-scroll-target="#introduction-to-ggplot">Introduction to ggplot</a>
+  <ul class="collapse">
+  <li><a href="#drawing-a-basic-scatter-diagram" id="toc-drawing-a-basic-scatter-diagram" class="nav-link" data-scroll-target="#drawing-a-basic-scatter-diagram">Drawing a basic scatter diagram</a></li>
+  <li><a href="#drawing-a-histogram" id="toc-drawing-a-histogram" class="nav-link" data-scroll-target="#drawing-a-histogram">Drawing a histogram</a></li>
+  <li><a href="#drawing-a-bar-chart" id="toc-drawing-a-bar-chart" class="nav-link" data-scroll-target="#drawing-a-bar-chart">Drawing a bar chart</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -302,9 +341,134 @@ ul.task-list li input[type="checkbox"] {
 
 
 <section id="introduction-to-ggplot" class="level1">
-<h1>Introduction to <em>ggplot</em></h1>
+<h1>Introduction to ggplot</h1>
+<p>In order to start working with ggplot, we need a data set that we wish to analyse. There are several interesting which enable a few interesting graphs. In the sequel we shall use a data set that is built-in ggplot2: the <code>mpg</code> data set which contains the fuel economy data from 1999 to 2008 for 38 popular models of cars.</p>
+<p>Before starting drawing graphs, let’s check the data set and see what variables it contains.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 234 × 11
+   manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
+   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 audi         a4           1.8  1999     4 auto… f        18    29 p     comp…
+ 2 audi         a4           1.8  1999     4 manu… f        21    29 p     comp…
+ 3 audi         a4           2    2008     4 manu… f        20    31 p     comp…
+ 4 audi         a4           2    2008     4 auto… f        21    30 p     comp…
+ 5 audi         a4           2.8  1999     6 auto… f        16    26 p     comp…
+ 6 audi         a4           2.8  1999     6 manu… f        18    26 p     comp…
+ 7 audi         a4           3.1  2008     6 auto… f        18    27 p     comp…
+ 8 audi         a4 quattro   1.8  1999     4 manu… 4        18    26 p     comp…
+ 9 audi         a4 quattro   1.8  1999     4 auto… 4        16    25 p     comp…
+10 audi         a4 quattro   2    2008     4 manu… 4        20    28 p     comp…
+# ℹ 224 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 234
+Columns: 11
+$ manufacturer &lt;chr&gt; "audi", "audi", "audi", "audi", "audi", "audi", "audi", "…
+$ model        &lt;chr&gt; "a4", "a4", "a4", "a4", "a4", "a4", "a4", "a4 quattro", "…
+$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…
+$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…
+$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …
+$ trans        &lt;chr&gt; "auto(l5)", "manual(m5)", "manual(m6)", "auto(av)", "auto…
+$ drv          &lt;chr&gt; "f", "f", "f", "f", "f", "f", "f", "4", "4", "4", "4", "4…
+$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…
+$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…
+$ fl           &lt;chr&gt; "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p…
+$ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact", "c…</code></pre>
+</div>
+</div>
+<p>So there are 234 rows and 11 variables. The variables <code>cty</code> and <code>hwy</code> in particular represent the city and highway consumption in miles per gallon of the different cars, <code>displ</code> indicates the engine displacement, in litres, <code>cyl</code> the number of cylinders, etc.</p>
+<section id="drawing-a-basic-scatter-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="drawing-a-basic-scatter-diagram">Drawing a basic scatter diagram</h3>
+<p>We might want to draw a scatter diagram showing the highway consumption against the engine displacement. With <strong>ggplot2</strong> this can be done as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ggplot-basics_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The first line contains already some rather curious features: inside the <code>ggplot()</code> function the first argument, as per tradition in the tidyverse, is the data set, and the second argument is a function, <code>aes()</code> which maps the variables into the aesthetics of the graph (in this case the variable <code>cty</code> is mapped to the x-axis and the variable <code>hwy</code> is mapped to the y-axis).</p>
+<p>This graph already contains a few layers: data, aesthetics and geometry. We might however wish to make this graph even more interesting, by plotting different transmission (automatic or manual) in different colours. We would also like to make the y-axis a bit more accurate (adding breaks to the grid), and to change the labels in the axes. We shall do this in one single shot, showing the power of tidyverse. A note of warning, though: the following is a complex pipeline, but the rest of this section (and the next) will look into the details of all the aspects summarised in the code below, so don’t panic if you find this hard to start with.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">transmission =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(trans, <span class="st">"auto"</span>) <span class="sc">~</span> <span class="st">"Automatic"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(trans, <span class="st">"manual"</span>) <span class="sc">~</span> <span class="st">"Manual"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Other"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> transmission),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Engine displacement (in litres)"</span>, </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Highway consumption (in mpg)"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">colour =</span> <span class="st">"Transmission:"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ggplot-basics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this code we can notice three things: first of all the data set is piped into the <code>mutate()</code> function to create the new variable <code>transmission</code> which takes only the values “Automatic” and “Manual” (since we are not sure whether there might be issues with the data, we have also introduced a third option called “Other” with the idea that we shouldn’t really see any car with this transmission, but if it occurs, it tells us that we need to investigate those occurrences). The second important thing is that the new data set built with mutate is directly piped into the <code>ggplot()</code> function. This is something that we will do consistently. The third, very important thing, concerns <strong>ggplot2</strong>: notice that every layer is added through a <code>+</code> operator. This, like a normal mathematical operation, has the role to take the layer on the left-hand side and <em>add</em> the feature described on the right-hand side (the below line, in the usual code formatting).</p>
+</section>
+<section id="drawing-a-histogram" class="level3">
+<h3 class="anchored" data-anchor-id="drawing-a-histogram">Drawing a histogram</h3>
+<p>We would like now to sketch two histograms, one for the city consumption and one for the highway consumption. Again, let’s see the final code (which is quite complex this time) but again we shall delve into the details later on in the course. In retrospective, this is going to be a simple exercise.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> cty<span class="sc">:</span>hwy) <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(name, <span class="st">"cty"</span>), </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"City"</span>, <span class="st">"Highway"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">fill =</span> name)) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(name), <span class="at">nrow =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Consumption (in mpg)"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ggplot-basics_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This graph shows two important features: the first is that if we wish to create a single graph out of two different variables, we need to put the values of these variables in a single column, and use a second column to specify the type fo variable that the value refers to. This is done with <code>pivot_longer()</code>, one of the two core functions of <strong>tidyr</strong>. The second feature is our first encounter with faceting. Facets are graphs that are divided into sub-graphs, like the one just shown.</p>
+</section>
+<section id="drawing-a-bar-chart" class="level3">
+<h3 class="anchored" data-anchor-id="drawing-a-bar-chart">Drawing a bar chart</h3>
+<p>Finally, let’s draw a bar chart showing the number of car per manufacturer. Let’s see the final code and again we shall delve into the details further on, so just be patient for the moment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(manufacturer) <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">manufacturer =</span> <span class="fu">str_to_title</span>(manufacturer),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">manufacturer =</span> <span class="fu">fct_reorder</span>(manufacturer, <span class="sc">-</span>n)) <span class="sc">|&gt;</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> manufacturer, <span class="at">y =</span> n, <span class="at">fill =</span> manufacturer)) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> n), <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">nudge_y =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ggplot-basics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this code a lot is going on: in the first part, we group the data by manufacturer and we count the number of cars per manufacturer. Then we use the <code>mutate()</code> function to change the variable <code>manufacturer</code> to capitalise every word, and we reorder the manufacturers in descending order by the number of cars found (the <code>n</code> variable is generated by <code>count()</code> which is a shortcut for <code>summarise()</code> when we want to only count). Then we finally pass the new data set to <code>ggplot()</code> and we map the manufacturer to the x-axis, the number of cars to the y-axis and the manufacturer also to colour of the bars (<code>fill</code>). This last thing is not strictly speaking “necessary” but makes the graph nicer. Then we use the <code>geom_col()</code> to make the bars, and <code>geom_text()</code> to write the number on top of the bars. Finally we get rid of the labels on the axes (the axes are now self-explanatory) and we use the very complex (and powerful) <code>theme()</code> function to access the theme of the text on the x-axis, rotate it by 45 degrees, and adjust it so that all words end at the mark on the axis.</p>
+<p>This is quite a lot to take in all in one shot, but every single step is simple after all. The whole strategy, here, is to break down the problem into simplest parts, and beautiful graphs are only one code line away.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -1,4 +1,4 @@
-# Introduction to the "Grammar of Graphics"
+# The "Grammar of Graphics"
 
 **ggplot2** is an R package for producing statistical, or data, graphics, but it is unlike most other graphics packages because it has a deep underlying grammar. This grammar, based on the Grammar of Graphics (Wilkinson, 2005), is made up of a set of independent components that can be composed in many different ways. This makes ggplot2 very powerful because you are not limited to a set of pre-specified graphics, but you can create new graphics that are specifically tailored for your problem.
 
@@ -15,3 +15,7 @@ ggplot2 is based off the grammar of graphics, which sets a paradigm for data vis
 We will not delve too much in depth to the overall philosophy of the grammar of graphics because the best source for this is from the creator of ggplot2, Hadley Wickham, who published a magnificent article on the topic which can be found [here](http://vita.had.co.nz/papers/layered-grammar.pdf).
 
 Hadley Wickham has also written beautiful book on ggplot called *ggplot2, Elegant Graphics for Data Analysis*, Springer, and a very good introduction to ggplot can also be found in the bible of the Tidyverse, *Data Science with R*, O'Railly second edition. Both these are excellent references to learn the secrets of ggplot2.
+
+## Why are graphs so important in Data Analysis?
+
+Before moving on with this, however, it is important to understand that sketching graphs is not a purely artistic/aesthetic task, but a vital scientific activity, which is paramount in data science. A wide part of a data scientist's job is to create graphs who help them understand the structure of their data, or that help spotting relationship between variables, or understanding bias in the population, etc. The list of questions that a well presented graph can answer is infinite. Furthermore, in the cycle of a data scientist, plotting graphs is the core of the so called **Exploratory Data Analysis**, which is the initial part of the data scientist's exploration that then leads to choose the right mathematical models to describe the data, the right Machine Learning algorithms to perform predictions, the right hypothesis testings to answer questions about the data. All starts from graphs. So making outstanding graphs, is the first, concrete, real step into the work of a data scientist.
