@@ -1,3 +1,288 @@
-# The *map* family 
+# The *map* family
 
-![](images/purrr.svg){fig-alt="purrr" width="110"}
+One of the features of R is that there are a number of functions that allow to apply a function to the elements of a list or a vector. The base R version of this family is called the **apply family** and is composed by the functions `lapply()`, `sapply()`, `vapply(),` etc.
+
+An enhanced version of these functions comes from the package **purrr** from the **tidyverse** and is called the **map family**. Mastering the functions of the map family is not easy, but it is a particularly rewarding activity, hence why I strongly suggest to always attempt to solve problems avoiding loops and using a map function instead.
+
+## The map function
+
+We are now going to describe the functions in the map family, starting of course from the simplest of them: `map()`. In mathematical terms, the `map()` function associates to a vector $(x_1, \dots, x_n)$ and a function $f(x)$, the vector $(f(x_1),\dots, f(x_n))$.
+
+```{r}
+#| echo: false
+#| warning: false
+library(tidyverse)
+```
+
+So, for example, suppose to have a list of numbers and that we want to calculate the mean of all the elements in the list.
+
+```{r}
+my_list <- list(a = 0:10, b = 10:20, c = 30:40)
+map(my_list, mean)
+```
+
+The result, as we can see is a list with 1 element in each term. If we would like to return this as a simple vector, we can use the function `map_vec()` which returns a vector. Furthermore, if we already know that the result is going to be `double`, we can use the function `map_dbl()` that returns a `double` typed outcome.
+
+```{r}
+map_dbl(my_list, mean)
+```
+
+To understand the utility of this function, let's try to code again the simulation for the Law of Large Numbers that we have seen in the Loop section.
+
+The code used to look as follows:
+
+```{r}
+total <- c(10L, 100L, 1000L, 100000L)
+
+set.seed(123)
+
+mean_values <- NULL
+for (tot in total) {
+    count <- 0
+    normal_sample <- rnorm(tot)
+    for (x in normal_sample) {
+        count <- count + x
+    }
+    mean_values <- append(mean_values, count / tot)
+}
+
+mean_values
+```
+
+We can replicate the same code using the `map()` function, like so:
+
+```{r}
+total <- c(10L, 100L, 1000L, 100000L)
+
+set.seed(123)
+sim_data <- map(total, rnorm)
+mean_values <- map_dbl(sim_data, mean)
+mean_values
+```
+
+### Speed comparison
+
+Not only is this code much shorter, but it is also much faster. But instead of taking my word for that, let's check this out using the `rbenchmark` package. To install the package, as usual, run `install.packages("rbenchmark")` and then let's load the package:
+
+```{r}
+library(rbenchmark)
+```
+
+This package contains a function `benchmark` that measures the speed to run chunks of code. Let's use it with our two codes:
+
+```{r}
+#| cache: true
+total <- c(10L, 100L, 1000L, 100000L)
+
+benchmark(
+    "loop" = {
+        set.seed(123)
+        mean_values <- NULL
+        for (tot in total) {
+            count <- 0
+            normal_sample <- rnorm(tot)
+            for (x in normal_sample) {
+                count <- count + x
+            }
+            mean_values <- append(mean_values, count / tot)
+        }},
+    "map" = {
+        set.seed(123)
+        sim_data <- map(total, rnorm)
+        mean_values <- map_dbl(sim_data, mean)
+    },
+    replications = 1000,
+    columns = c("test", "replications", "elapsed",
+                "relative", "user.self", "sys.self")
+    
+)
+```
+
+Here `elapsed` measures the time taken to do 1000 replications of the same code. The elapsed time for the map function is 3.0 while the time for the loop is 5.4. The map function is almost twice as fast as the loop!
+
+## Other functions of the map family
+
+Now that we have made acquaintance with the `map()` function and we have ascertained that using this functions is convenient because not only the code in neater, but the algorithm is also faster, we may wish to delve into the full set of functions in the *map* family. The good people at Posit (former RStudio) have also created a useful cheat sheet for the purr package, which you can access [here](https://github.com/rstudio/cheatsheets/blob/main/purrr.pdf).
+
+The basic functions for the looping over an object and returning a value are:
+
+| Map variant | Description                |
+|-------------|----------------------------|
+| `map()`     | returns a list             |
+| `map_lgl()` | returns a logical vector   |
+| `map_int()` | returns an integer vector  |
+| `map_dbl()` | returns a double vector    |
+| `map_chr()` | returns a character vector |
+
+All these functions have two arguments: `.x` and `.f`. The first is a vector (list, or data frame) and the second is a function.
+
+Note that `map_*()` is a strict function: it forces the outcome to be the type specified.
+
+```{r}
+#| error: true
+x <- list(1L:5L, c(0.2, -0.2, 0), c(pi, 3*pi))
+
+map_dbl(x, mean)
+map_chr(x, mean)
+map_lgl(x, mean)
+map_int(x, mean)
+```
+
+Conversely, the function, `.f`, is quite flexible. It can take:
+
+-   a function,
+
+-   a formula (one sided) / anonymous function,
+
+-   a vector.
+
+For example,
+
+```{r}
+map_dbl(1:5, ~ . ^ .)
+map_dbl(1:5, ~ .x ^ .x)
+```
+
+## Map variants
+
+There are 23 primary variants of `map()`. So far we have mentioned 5 of them, so there are other 18 to learn. This sounds quite a lot, but fortunately, the design of **purrr** means that we only need to learn 5 new ideas.
+
+-   Iterate over two inputs with `map2()`
+
+-   Iterate over any number of inputs with `pmap()`
+
+-   Output same type as input with `modify()`
+
+-   Return nothing with `walk()`
+
+-   Iterate with an index using `imap()`
+
+The map family of functions has orthogonal input and outputs, meaning that we can organise all the family into a matrix, with inputs in the rows and outputs in the columns.
+
+Once we have mastered the idea in a row, we can combine it with any column; once we have mastered the idea in a column, we can combine it with any row.
+
+This relationship is summarised in the following table:
+
+|                      | List      | Atomic            | Same type   | Nothing   |
+|----------------------|-----------|-------------------|-------------|-----------|
+| One argument         | `map()`   | `map_lgl()`, ...  | `modify()`  | `walk()`  |
+| Two arguments        | `map2()`  | `map2_lgl()`, ... | `modify2()` | `walk2()` |
+| One argument + index | `imap()`  | `imap_lgl()`, ... | `imodify()` | `iwalk()` |
+| N arguments          | `pmap()`  | `pmap_lgl()`, ... | ---         | `pwalk()` |
+
+### Same type of output as input
+
+Imagine we want to duplicate all values in a data frame. To do this we can use `modify()` which always returns the same type as the input. So, if we have
+
+```{r}
+df <- tibble(x = 1:3, y = 6:4)
+modify(df, ~ 2 * .x)
+```
+
+In spite of the name, `modify()` does not modify in place, but it returns a modified copy. So, if we wanted to permanently modify `df`, we would need to assign it, like so:
+
+```{r}
+df <- modify(df, ~ 2 * .x)
+```
+
+### Two inputs: `map2()` and friends
+
+The function `map()` is vectorised over a single argument, `.x`. This means that it only varies `.x` when calling `.f` and all other arguments are passed along unchanged. This however may cause some issues in certain problems where we need to pass more than one vector to the function. For example, imagine we want to find the weighted mean when we have a list of observations, `obs`, and a list of weights, `wts`. In this case we need to use the `map2()` function, which would iterate over the two vectors `obs` and `wt` at the same time.
+
+For example, consider the code below:
+
+```{r}
+set.seed(123)
+obs <- map(1:8, ~ runif(10))
+
+set.seed(234)
+wts <- map(1:8, ~ rpois(10, 5) + 1)
+
+# Simple mean:
+map_dbl(obs, mean)
+
+# Weighted mean:
+map2_dbl(obs, wts, weighted.mean)
+```
+
+### Any number of inputs: `pmap()` and friends
+
+Since there are `map()` and `map2()`, we would expect to have also `map3()`, `map4()`, `map5()` and so on. But where would this stop? Instead of generalising `map2()` to an arbitrary number of indices, **purrr** takes a slightly different approach with `pmap()`. We supply a single list, which contains any number of arguments. In most cases, that would be a list of equal-length vectors, i.e. something very similar to a data frame (but conceptually not a data frame).
+
+There is a simple equivalence between `pmap()` and `map2()`. Precisely, `map2(x, y, f)` is the same as `pmap(list(x, y), f)`. The `pmap()` equivalent of the example before is the following:
+
+```{r}
+set.seed(123)
+obs <- map(1:8, ~ runif(10))
+
+set.seed(234)
+wts <- map(1:8, ~ rpois(10, 5) + 1)
+
+# Weighted mean:
+pmap_dbl(list(obs, wts), weighted.mean)
+```
+
+A big difference between `pmap()` and the other map functions is that `pmap()` gives you much finer control over argument matching because you can name the components of the list.
+
+It is often convenient to call `pmap()` with a data frame. A handy way to create that data frame is with `tribble()`, which allows you to describe a data frame row-by-row (rather than column-by-column, as usual): thinking about the parameters to a function as a data frame is a very powerful pattern.
+
+The following example shows how you might draw random uniform numbers with varying parameters:
+
+```{r}
+params <- tribble(
+  ~ n, ~ min, ~ max,
+   1L,     0,     1,
+   2L,    10,   100,
+   3L,   100,  1000
+)
+
+pmap(params, runif)
+```
+
+### No output: `walk()` and friends
+
+Most functions are called for the value that they return, so it makes sense to capture and store the result with a `map()` function. However, some functions are called primarily for their side effects, like `cat()`, `write_csv()`, or `ggsave()` and it doesn't make sense to capture their results. Let's consider a simple example using the function `cat()` to display a welcome message, like so:
+
+```{r}
+welcome <- function(name) {
+    cat("Welcome,", name, "\n", sep = " ")
+}
+
+names <- c("Alice", "Bob", "Charlie")
+```
+
+and let's try to apply the `map()` function.
+
+```{r}
+map(names, welcome)
+```
+
+As we can see, the `cat()` function writes the welcome message on the screen, and since the function `cat()` has worked fine, it returns a `NULL` value, which is then stored into the list, because `map()` needs to return a list. We could solve the problem of showing all these `NULL`s by assigning the results to a variable that we are never going to use again, but instead **purrr** offer the `walk()` function that takes care of this, like so:
+
+```{r}
+walk(names, welcome)
+```
+
+One of the most useful function in the `walk()` family is `walk2()` because a very common side-effect is saving something to disk, and when saving something to disk we always have two things: the object that we want to save, and the path where we want to save it.
+
+### Iterating over values and indices
+
+There are three basic ways to loop over a vector with a for loop:
+
+-   Loop over the element: `for (x in vec)`
+
+-   Loop over the numeric indices: `for (i in seq_along(vec))`
+
+-   Loop over the names: `for (name in names(vec))`
+
+The first form is the analogous of `map()`. The second and the third form are the analogous of `imap()` which allows us to iterate over the values and the indices of a vector in parallel.
+
+So, `imap()` is like `map2()` in the sense that the `.f` function gets two arguments, but here both are derived from the same vector. In short, `imap(x, f)` is equivalent to `map2(x, names(x), f)`, if `x` has names, or `map2(x, seq_along(x), f)`, if `x` does not have names.
+
+The `imap()` functions are generally useful for constructing labels.
+
+```{r}
+set.seed(123)
+x <- map(1:6, ~ sample(1000, 10))
+imap_chr(x, ~ paste("The highest value of", .y, "is", max(.x)))
+```
