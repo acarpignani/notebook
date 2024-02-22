@@ -10,7 +10,7 @@ library(tidyverse)
 
 ## The Palmer Penguin data set
 
-We are going to use the Palmer Penguin data set, which is a data set containing the size measurements for adult foraging penguins near Palmer Station, Antarctica. This data set is contained in an external package that can be installed, as usual, using the command `install.packages("palmerpenguins")`. To load the package, we can use now the command
+We are going to use the Palmer Penguin data set, which is a data set containing the size measurements for adult foraging penguins near Palmer Station, Antarctica. This data set is contained in an external package that can be installed, as usual, using the command `install.packages("palmerpenguins")`. To load the package, we can now use the command
 
 ```{r}
 library(palmerpenguins)
@@ -165,20 +165,20 @@ penguins |>
     geom_bar()
 ```
 
-Let's now make some changes. First of all we wish to change the colour of the bars. We don't want to map a variable to the colour, but we only wish to change all colours. To do so, it suffices to change the `fill` parameter. Let's do it locally inside `geom_bar()`, like so:
+Let's now make some changes. First of all, let's add some transparency. This is done using the parameter `alpha` which is a number that goes from 0 (total transparency) to 1 (no transparency). For example, let's set `alpha = 0.7`.
 
 ```{r}
 penguins |> 
     ggplot(aes(x = fct_infreq(species))) +
-    geom_bar(fill = "midnightblue")
+    geom_bar(alpha = 0.7)
 ```
 
-Let us also add some transparency. This is done using the parameter `alpha` which is a number that goes from 0 (total transparency) to 1 (no transparency). For example, let's set `alpha = 0.7`.
+We also wish to change the colour of the bars. We don't want to map a variable to the colour, but we only wish to change all colours. To do so, it suffices to change the `fill` parameter. R has a number of colours already defined for you to use. A full list can be be seen by typing the command `colors()` in the console. Let's go for "midnightblue" which is Julia Silge's favourite (and I don't dislike it either):
 
 ```{r}
 penguins |> 
     ggplot(aes(x = fct_infreq(species))) +
-    geom_bar(fill = "midnightblue", alpha = 0.7)
+    geom_bar(alpha = 0.7, fill = "midnightblue")
 ```
 
 Finally, we want to change the labels and add a title to the graph. The x-axis is kind of obvious, so we don't really need a label at all. We can pass `x = NULL` to tell ggplot to skip the label.
@@ -258,16 +258,19 @@ penguins |>
     geom_density(aes(colour = species, fill = species), alpha = 0.4)
 ```
 
-I find the numbers on the y-axis to be really ugly and would rather having normal numbers there. Since densities are always numbers between 0 and 1, they are very clear in percentage. Let's use the function `scales::percent` to do so. Let's also change the labels on the axes.
+I find the numbers on the y-axis to be really ugly and would rather having normal numbers there. There is an add-on packages in the **tidyverse** that allows us to deal with formats (such as percentages, currencies, etc). This is called `scales`. In this case, let's use the function `scales::number` to show the number in the ordinary way. Let's also change the labels on the axes.
 
 ```{r}
 penguins |>
     drop_na(body_mass_g) |> 
     ggplot(aes(x = body_mass_g)) +
     geom_density(aes(colour = species, fill = species), alpha = 0.4) +
-    scale_y_continuous(label = scales::percent) +
-    labs(x = "Body Mass (g)", y = "Density")
+    scale_y_continuous(label = scales::comma) +
+    labs(x = "Body Mass (g)", y = "Density", 
+         colour = "Species", fill = "Species")
 ```
+
+This is now a beautiful graph, ready to be exported and used. Notice how clearly the graph describes that Adelie and Chinstrap tend to have the same average body mass, whereas the Gentoo penguins tend in average to have a much higher body mass.
 
 ## Box plots
 
@@ -290,3 +293,5 @@ penguins |>
     geom_boxplot(alpha = 0.3, show.legend = FALSE) +
     labs(x = "Species", y = "Body Mass (g)")
 ```
+
+Again, look how this graph gives the same information we had seen before: Adelie and Chinstrap have virtually the same body mass, with more variation in the Adelie species, and Gentoo penguins have a much higher body mass. See how only one Chinstrap outlier actually falls in the Gentoo interquartile range.

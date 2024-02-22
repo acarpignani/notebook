@@ -1,1 +1,224 @@
 # Reshaping data sets
+
+## Introduction
+
+In this section we are delving into the core of the **tidyverse**, learning two of the most important functions in the package **tidyr**, which enable us to *reshape* the data set in order to make them *tidy*. Before introducing these new functions, however, it is now time to answer a big question: *what is a tidy data set?*
+
+Quoting Hadley Wickham, there are three interrelated rules that make a data set tidy:
+
+1.  Each variable is a column; each column is a variable.
+
+2.  Each observation is a row; each row is an observation.
+
+3.  Each value is a cell; each cell is a single value.
+
+Clearly, the majority of the data sets that can be found out there in the wild are not tidy, so the natural question would be why bothering? In other words, why ensure that the data is tidy? Hadley Wickham gives two main reasons for this:
+
+1.  There is a general advantage to picking one consistent way of storing data. If we have a consistent data structure, it is easier to learn the tools that work with it because they have an underlying uniformity.
+
+2.  There is a specific advantage to placing variables in columns because it allows R’s vectorised nature to shine. In fact, most built-in R functions work with vectors of values. That makes transforming tidy data feel particularly natural.
+
+So, how do we make our data tidy? Essentially there are two opposite things that we may wish to do: lengthening the data or widening the data. This is done with the functions:
+
+-   `pivot_longer()` — "lengthens" data, increasing the number of rows and decreasing the number of columns.
+
+-   `pivot_wider()` — "widens" data, increasing the number of columns and decreasing the number of rows.
+
+These are the most important functions in **tidyr** and our objective is to learn how to use them effectively to reshape our data sets to make them tidy and to prepare the data set into a format that allows us to make plots.
+
+```{r}
+#| echo: false
+#| warning: false
+library(tidyverse)
+```
+
+## Lengthening data
+
+Let's start with a very simple data set. Imagine to have three patients, Alice, Bob, and Charlie, and we take two blood pressure measurement for each patient. Suppose that the patients IDs are A, B, and C. We can create the simple data set with the `tribble()` function, like so:
+
+```{r}
+bp <- tribble(
+    ~ id, ~ bp1, ~ bp2,
+     "A",   100,   120,
+     "B",   140,   115,
+     "C",   120,   125
+)
+```
+
+We want our new data set to have three variables: `id`, representing the ID of the patient, `measurement` representing the number of measurement taken (1 or 2), and `value` representing the value of the measurement. To achieve this, we can use `pivot_longer()`, like so:
+
+```{r}
+bp |> 
+    pivot_longer(
+        cols = bp1:bp2,
+        names_to = "measurement",
+        values_to = "value"
+    )
+```
+
+There are three key arguments:
+
+-   `cols` specifies which columns need to be pivoted, i.e. which columns are not variables. This argument uses the same syntax as `select()` so here any function available for `select()` can be used as well.
+
+-   `names_to` names the variable stored in the column names, we named that variable `measurement`.
+
+-   `values_to` names the variable stored in the cell values, we named that variable `value`.
+
+To see a more complex examble, **tidyr** contains a few data sets to practice lengthening and widening. One of them is called `billboard` and contains the song rankings for Billboard top 100 in the year 2000. Let's have a look at it.
+
+```{r}
+billboard
+```
+
+In this data set, each observation is a song. The first three columns (`artist`, `track` and `date.entered`) are variables that describe the song. Then we have 76 columns (`wk1`-`wk76`) that describe the rank of the song in each week. Here, the column names are one variable (the `week`) and the cell values are another (the `rank`). The data set is therefore not in a tidy format. To make it tidy, we need to use `pivot_longer()` to move the week number in a column and the ranking for that week in a different column, like so:
+
+```{r}
+billboard |> 
+    pivot_longer(
+        cols = starts_with("wk"),
+        names_to = "week",
+        values_to = "rank"
+    )
+```
+
+Let's have a look at he result. This new data set contains now 24,092 rows, instead of the initial 217, and only 5 columns, instead of the initial 79. Let's also notice that when song is in the top 100 for less than 76 weeks, the initial output suggests that all the remaining weeks are filled in with `NA`s. These `NA`s don’t really represent unknown observations; they were forced to exist by the structure of the data set, so we can ask `pivot_longer()` to get rid of them by setting `values_drop_na = TRUE`, like so:
+
+```{r}
+billboard |> 
+    pivot_longer(
+        cols = starts_with("wk"),
+        names_to = "week",
+        values_to = "rank",
+        values_drop_na = TRUE
+    )
+```
+
+Now we can see how the data set is much reduced from the initial 24,092 rows to 5,307 rows. This data now looks much better, but still is not tidy, because the `week` is not in stored in the right manner. Instead of `wk` and a number, the values stored should be numbers and the type should be a number not a character. We can do this using `mutate()` from **dplyr** and the function `readr::parse_number()`. `parse_number()` is a convenience function that will extract the first number it finds in a string, ignoring all the other text. So, using this function we get:
+
+```{r}
+billboard |> 
+    pivot_longer(
+        cols = starts_with("wk"),
+        names_to = "week",
+        values_to = "rank",
+        values_drop_na = TRUE
+    ) |> 
+    mutate(week = parse_number(week))
+```
+
+And notice now how all the variables have the right type: `date.entered` is of type date, `week` and `rank` are double, `artist` and `track` are character.
+
+A more challenging situation occurs when multiple pieces of information are crammed into the column names, and we would like to store these in separate new variables. For example, take the `who2` data set — a subset of data from the World Health Organization Global Tubercolosis Report, which is another of the data sets included in **tidyr**:
+
+```{r}
+who2
+```
+
+This data set records information about tuberculosis diagnoses. There are two columns that are already variables and are easy to interpret: `country` and `year`. They are followed by 56 columns like `sp_m_014`, `ep_m_4554`, and `rel_m_3544` which at first glance may not make much sense. Staring at these columns for long enough, however, we can see a pattern. Each column name is made up of three pieces separated by `_`. The first piece, `sp`/`rel`/`ep`, describes the method used for the diagnosis, the second piece, `m`/`f` is the sex, and the third piece, `014`/`1524`/`2534`/`3544`/`4554`/`5564`/`65` is the age range (`014` represents 0-14, for example).
+
+So in this case we have six pieces of information recorded in `who2`: the country and the year (already columns); the method of diagnosis, the gender category, and the age range category (contained in the other column names); and the count of patients in that category (cell values). To organize these six pieces of information in six separate columns, we use `pivot_longer()` with a vector of column names for `names_to` and instructors for splitting the original variable names into pieces for `names_sep` as well as a column name for `values_to`:
+
+```{r}
+who2 |> 
+    pivot_longer(
+        cols = !(country:year),
+        names_to = c("diagnosis", "sex", "age"),
+        names_sep = "_",
+        values_to = "count"
+    )
+```
+
+Notice that this data set is not yet tidy: first of all we would need to remove all the `NA`s, using again the `values_drop_na = TRUE` argument, then we would have to transform the `sex` variable into a factor with two levels (`m` and `f`) and the `age` range needs to be written in a better way, e.g. splitting min and max age into two distinct columns.
+
+The next step up in complexity is when the column names include a mix of variable values and variable names. For example, take the `household` data set:
+
+```{r}
+household
+```
+
+This data set contains data about five families, with the names and dates of birth of up to two children. The new challenge in this data set is that the column names contain the names of two variables (`dob`, `name)` and the values of another (`child,` with values 1 or 2). To solve this problem we again need to supply a vector to `names_to` but this time we use the special `".value"` sentinel; this is not the name of a variable but a unique value that tells `pivot_longer()` to do something different. This overrides the usual `values_to` argument to use the first component of the pivoted column name as a variable name in the output, like so:
+
+```{r}
+household |> 
+    pivot_longer(
+        cols = !(family),
+        names_to = c(".value", "child"),
+        names_sep = "_",
+        values_drop_na = TRUE
+    )
+```
+
+We again use `values_drop_na = TRUE`, since the shape of the input forces the creation of explicit missing variables (e.g., for families with only one child). Also notice that we did not use the argument `values_to`. This is because this values has a default `"name"` and since we were happy with the default, we just ignored it.
+
+## Widening data
+
+The opposite problem as lengthening data is widening data, which involves the use of `pivot_wider()`. Like before, let's start with an artificial very simple data set to understand the structure of the command, and then we shall move onto a more complex and realistic example. This time we have two patients with `id`s A and B, we have three blood pressure measurements on patient A and two on patient B:
+
+```{r}
+bp <- tribble(
+  ~id, ~measurement, ~value,
+  "A",        "bp1",    100,
+  "B",        "bp1",    140,
+  "B",        "bp2",    115, 
+  "A",        "bp2",    120,
+  "A",        "bp3",    105
+)
+```
+
+And assume this time we want to revert it onto its original shape. This is the job of `pivot_wider()`, like so:
+
+```{r}
+bp |> 
+    pivot_wider(
+        names_from = measurement,
+        values_from = value
+    )
+```
+
+`pivot_wider()` has the opposite interface to `pivot_longer()`: instead of choosing new column names, we need to provide the existing columns that define the values (`values_from`) and the column name (`names_from)`.
+
+Let's move now onto a more complex example. Let's take the very messy data set `cms_patient_experience` which contains some lightly cleaned data from "Hospice - Provider Data", which provides a list of hospice agencies along with some data on quality of patient care. Let's have a look at it
+
+```{r}
+cms_patient_experience
+```
+
+Let's try to understand each column:
+
+-   `org_pac_id` is the organisation ID,
+
+-   `org_nm` is the organisation's name,
+
+-   `measure_cd` is the measure code,
+
+-   `measure_title` is the measure title,
+
+-   `prf_rate` is the rate given to the corresponding measure code and title.
+
+Let's first have a look at the variables `measure_cd` and `measure_title`
+
+```{r}
+cms_patient_experience |> 
+    distinct(measure_cd, measure_title)
+```
+
+There are overall 6 codes with corresponding titles. So we would like to have a new table with columns `org_pac_id`, `org_nm`, and six more rows, labelled with the codes `CHAPS_GRP_`, under which there is the value of `prf_rate`. So we wish to get the names of the new columns from `measure_cd` and the values from `prf_rate`. Let's try with this code:
+
+```{r}
+cms_patient_experience |> 
+    pivot_wider(
+        names_from = measure_cd,
+        values_from = prf_rate
+    )
+```
+
+This is not quite what we had expected: we still seem to have multiple rows for each organization. Why? This is because, we also need to tell `pivot_wider()` which column or columns have values that uniquely identify each row. Since the `measure_title` is not the same, `pivot_wider()` uses it to identify a different record. One way to get around this could be to simply remove, with `select()`, the column `measure_title`. Another, probably quicker, option is to specify that `org_pac_id` and `org_nm` are the two IDs, i.e. the two columns that need to be kept. This is done passing the argument `id_cols`, like so:
+
+```{r}
+cms_patient_experience |> 
+    pivot_wider(
+        id_cols = starts_with("org_"),
+        names_from = measure_cd,
+        values_from = prf_rate
+    )
+```

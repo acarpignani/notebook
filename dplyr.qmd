@@ -4,17 +4,17 @@
 
 This section introduces to some of the main tools in the **tidyverse**. We shall focus on the package **dplyr** here and in particular on some *verbs* that are particularly useful when it comes to transforming data frames (or tibbles in our case). The verbs we are looking at are:
 
--   `filter` - to filter the rows of the data set depending on specific conditions
+-   `filter` — to filter the rows of the data set depending on specific conditions.
 
--   `arrange` - to sort the rows on a specific variable (or set of variables)
+-   `arrange` — to sort the rows on a specific variable (or set of variables).
 
--   `distinct` - to return all unique values in a tables
+-   `distinct` — to return all unique values in a tables.
 
--   `mutate` (and `transmute`) - to create new variables
+-   `mutate` (and `transmute`) — to create new variables.
 
--   `select` - to select specific variables (i.e. columns) of the data set
+-   `select` — to select specific variables (i.e. columns) of the data set.
 
--   `summarise` (or `summarize`) - to calculate a summary of a specific variable
+-   `summarise` (or `summarize`) — to calculate a summary of a specific variable.
 
 These are the most common and important verbs in **dplyr** but we will also see a few more, less important, but often rather useful when the occasion arises.
 
