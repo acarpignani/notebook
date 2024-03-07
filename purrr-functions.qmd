@@ -163,12 +163,12 @@ Once we have mastered the idea in a row, we can combine it with any column; once
 
 This relationship is summarised in the following table:
 
-|                      | List      | Atomic            | Same type   | Nothing   |
-|----------------------|-----------|-------------------|-------------|-----------|
-| One argument         | `map()`   | `map_lgl()`, ...  | `modify()`  | `walk()`  |
-| Two arguments        | `map2()`  | `map2_lgl()`, ... | `modify2()` | `walk2()` |
-| One argument + index | `imap()`  | `imap_lgl()`, ... | `imodify()` | `iwalk()` |
-| N arguments          | `pmap()`  | `pmap_lgl()`, ... | ---         | `pwalk()` |
+|                      | List     | Atomic            | Same type   | Nothing   |
+|----------------------|----------|-------------------|-------------|-----------|
+| One argument         | `map()`  | `map_lgl()`, ...  | `modify()`  | `walk()`  |
+| Two arguments        | `map2()` | `map2_lgl()`, ... | `modify2()` | `walk2()` |
+| One argument + index | `imap()` | `imap_lgl()`, ... | `imodify()` | `iwalk()` |
+| N arguments          | `pmap()` | `pmap_lgl()`, ... | ---         | `pwalk()` |
 
 ### Same type of output as input
 
