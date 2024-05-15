@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R for Data Science</title>
+<title>R for Data Science - 9&nbsp; Functions with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,11 +74,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -104,126 +104,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">R for Data Science</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Intro</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./r-programming.html" aria-current="page"> 
-<span class="menu-text">R programming</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./intro-ml.html"> 
-<span class="menu-text">Intro to ML</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./practice-basics.html"> 
-<span class="menu-text">Practice</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
-    <div class="dropdown">
-      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/acarpignani/notebook">
-            Source code
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/acarpignani/notebook/issues">
-            Report a bug
-            </a>
-          </li>
-      </ul>
-    </div>
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./conditionals.html">Basic R Programming</a></li><li class="breadcrumb-item"><a href="./functions.html">Functions with R</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./conditionals.html">Advanced R programming</a></li><li class="breadcrumb-item"><a href="./functions.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Functions with R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R for Data Science</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/acarpignani/notebook/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
- <span class="menu-text">Introduction to R programming</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">R programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./r-programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to R</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./vectors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Vectors</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vectors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./matrices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Matrices</span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lists.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lists</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lists</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-frames.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Frames</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Frames</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./in-and-out.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting data in and out of R</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Getting data in and out of R</span></span></a>
   </div>
 </li>
       </ul>
@@ -231,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Basic R Programming</span></a>
+ <span class="menu-text">Advanced R programming</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -240,83 +206,124 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conditionals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Conditionals</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conditionals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./loops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Loops</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./functions.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Functions with R</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Functions with R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./purrr-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">The <em>map</em> family</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The <em>map</em> family</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
- <span class="menu-text">Data Manipulation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Data manipulation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data transformation</span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data transformation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tidyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reshaping data sets</span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Reshaping data sets</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
  <span class="menu-text">Data Visualisation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro-gg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">The “Grammar of Graphics”</span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The “Grammar of Graphics”</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to ggplot</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./core-ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Plotting elegant graphs</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Plotting elegant graphs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./advanced-ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced topics</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Advanced topics</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./practice-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice 1: Introduction to R programming</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./practice-matrices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice 2: Matrices and Lists</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./practice-data-frames.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice 3: Data Frames</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./practice-control-flow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice 4: Control structures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./practice-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice 5: Functions</span></a>
   </div>
 </li>
       </ul>
@@ -326,31 +333,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#functions-with-r" id="toc-functions-with-r" class="nav-link active" data-scroll-target="#functions-with-r">Functions with R</a>
-  <ul class="collapse">
-  <li><a href="#simple-examples-of-functions" id="toc-simple-examples-of-functions" class="nav-link" data-scroll-target="#simple-examples-of-functions">Simple examples of functions</a></li>
-  <li><a href="#returning-a-value" id="toc-returning-a-value" class="nav-link" data-scroll-target="#returning-a-value">Returning a value</a></li>
-  <li><a href="#argument-matching" id="toc-argument-matching" class="nav-link" data-scroll-target="#argument-matching">Argument matching</a></li>
-  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation">Lazy evaluation</a></li>
-  <li><a href="#the-...-argument" id="toc-the-...-argument" class="nav-link" data-scroll-target="#the-...-argument">The <code>...</code> argument</a></li>
-  <li><a href="#arguments-coming-after-the-...-argument" id="toc-arguments-coming-after-the-...-argument" class="nav-link" data-scroll-target="#arguments-coming-after-the-...-argument">Arguments coming after the <code>...</code> argument</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./conditionals.html">Advanced R programming</a></li><li class="breadcrumb-item"><a href="./functions.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Functions with R</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Functions with R</span></h1>
+</div>
 
 
 
-<section id="functions-with-r" class="level1">
-<h1>Functions with R</h1>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
 <p>Quoting Professor Roger Peng, “writing functions is a core activity of an R programmer. It represents the key step of the transition from the mere <em>user</em> to a developer who creates new functionality for R”. Functions are often used to encapsulate a chunk of code that needs to be executed numerous times, perhaps under slightly different conditions, or depending on certain parameters that serve as input to the function.</p>
 <p>Functions in R are “first class objects”, which means that they can be treated pretty much like any other R object (e.g.&nbsp;a vector or a list). Most importantly, functions can be passed as arguments to other functions, and can be nested, so that we can define a function inside another function.</p>
 <p>The syntax for a function is the following:</p>
@@ -367,8 +372,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>function (data = NA, nrow = 1, ncol = 1, byrow = FALSE, dimnames = NULL)  </code></pre>
 </div>
 </div>
-<section id="simple-examples-of-functions" class="level2">
-<h2 class="anchored" data-anchor-id="simple-examples-of-functions">Simple examples of functions</h2>
+<section id="simple-examples-of-functions" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="simple-examples-of-functions"><span class="header-section-number">9.1</span> Simple examples of functions</h2>
 <p>Let’s immediately see an example of function:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>hello_world <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
@@ -409,8 +414,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="returning-a-value" class="level2">
-<h2 class="anchored" data-anchor-id="returning-a-value">Returning a value</h2>
+<section id="returning-a-value" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="returning-a-value"><span class="header-section-number">9.2</span> Returning a value</h2>
 <p>The function that we have created thus far only print the result. Sometimes, however, we may want to <em>return</em> the value, so that we can store it into a variable. This is done using the function <code>return()</code>. For example, assume we want to create a function that takes a name and a title and returns the name with the title in front of it. So, if we pass the name <code>"John Smith"</code> and the title <code>"sir"</code>, the functions should return <code>"sir John Smith"</code>. This can be done with the following code:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>formal <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">name =</span> <span class="st">"John Doe"</span>, <span class="at">title =</span> <span class="st">"Mr"</span>) {</span>
@@ -450,8 +455,8 @@ Tip
 </div>
 <p>I am not sure I always follow this rule of thumbs, but I should!</p>
 </section>
-<section id="argument-matching" class="level2">
-<h2 class="anchored" data-anchor-id="argument-matching">Argument matching</h2>
+<section id="argument-matching" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="argument-matching"><span class="header-section-number">9.3</span> Argument matching</h2>
 <p>Calling an R function with arguments can be done in a variety of ways. This may be confusing at first, but it is really handy when doing interactive work at the command line. R functions argument can be matched both <em>positionally</em> or <em>by name</em>. Positional matching just means that R assigns the first value to the first argument, the second value to the second argument, etc. So, in the following call to <code>rnorm()</code>,</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(rnorm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -507,8 +512,8 @@ Caution
 </div>
 </div>
 </section>
-<section id="lazy-evaluation" class="level2">
-<h2 class="anchored" data-anchor-id="lazy-evaluation">Lazy evaluation</h2>
+<section id="lazy-evaluation" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="lazy-evaluation"><span class="header-section-number">9.4</span> Lazy evaluation</h2>
 <p>Arguments to functions are evaluated <em>lazily</em>, which means that they are evaluated only as needed in the body of the function. For example,</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b){</span>
@@ -533,13 +538,13 @@ Caution
 <pre><code>[1] 10</code></pre>
 </div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in print(b): argument "b" is missing, with no default</code></pre>
+<pre><code>Error in foo(10): argument "b" is missing, with no default</code></pre>
 </div>
 </div>
 <p>Notice that “10” is printed before the error is triggered. This is because <code>b</code> did not have to be evaluated until after <code>print(a)</code>. Once the function tried to evaluate <code>print(b)</code> the function had to throw an error, because R cannot find a value for <code>b</code>.</p>
 </section>
-<section id="the-...-argument" class="level2">
-<h2 class="anchored" data-anchor-id="the-...-argument">The <code>...</code> argument</h2>
+<section id="the-...-argument" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="the-...-argument"><span class="header-section-number">9.5</span> The <code>...</code> argument</h2>
 <p>There is a special argument in R known as the <code>...</code> argument, which indicates a variable number of arguments that are usually passed to other functions. The <code>...</code> argument is often used when extending another function but one doesn’t want to copy the entire argument list of the original function.</p>
 <p>For example, we wish to create a function that simulates rolling a die a given number of times. This can be achieved by calling the function <code>sample()</code> on the vector <code>1:6</code>, like so:</p>
 <div class="cell">
@@ -570,8 +575,8 @@ Caution
 </div>
 </div>
 </section>
-<section id="arguments-coming-after-the-...-argument" class="level2">
-<h2 class="anchored" data-anchor-id="arguments-coming-after-the-...-argument">Arguments coming after the <code>...</code> argument</h2>
+<section id="arguments-coming-after-the-...-argument" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="arguments-coming-after-the-...-argument"><span class="header-section-number">9.6</span> Arguments coming after the <code>...</code> argument</h2>
 <p>One catch with <code>...</code> is that any argument that appear <strong>after</strong> <code>...</code> on the argument list <strong>must</strong> be named explicitly and cannot be partially matched or matched positionally. Take a look at the structure of the <code>paste()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(paste)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -595,7 +600,6 @@ Caution
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -987,6 +991,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>A. Carpignani – R for Data Science</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was build with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
 
 
 

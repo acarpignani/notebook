@@ -2,11 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://acarpignani.github.io/notebook/index.html</loc>
-    <lastmod>2024-05-15T20:45:31.784Z</lastmod>
-  </url>
-  <url>
-    <loc>https://acarpignani.github.io/notebook/r-programming.html</loc>
-    <lastmod>2024-05-15T20:07:26.859Z</lastmod>
+    <lastmod>2024-05-15T21:09:06.437Z</lastmod>
   </url>
   <url>
     <loc>https://acarpignani.github.io/notebook/r-basics.html</loc>
@@ -21,16 +17,56 @@
     <lastmod>2024-02-17T16:24:32.519Z</lastmod>
   </url>
   <url>
+    <loc>https://acarpignani.github.io/notebook/lists.html</loc>
+    <lastmod>2024-02-17T16:24:32.519Z</lastmod>
+  </url>
+  <url>
+    <loc>https://acarpignani.github.io/notebook/data-frames.html</loc>
+    <lastmod>2024-02-17T16:24:32.476Z</lastmod>
+  </url>
+  <url>
     <loc>https://acarpignani.github.io/notebook/in-and-out.html</loc>
     <lastmod>2024-02-17T16:24:32.518Z</lastmod>
+  </url>
+  <url>
+    <loc>https://acarpignani.github.io/notebook/conditionals.html</loc>
+    <lastmod>2024-02-17T16:24:32.476Z</lastmod>
+  </url>
+  <url>
+    <loc>https://acarpignani.github.io/notebook/loops.html</loc>
+    <lastmod>2024-02-17T16:24:32.519Z</lastmod>
+  </url>
+  <url>
+    <loc>https://acarpignani.github.io/notebook/functions.html</loc>
+    <lastmod>2024-02-21T17:48:19.792Z</lastmod>
+  </url>
+  <url>
+    <loc>https://acarpignani.github.io/notebook/purrr-functions.html</loc>
+    <lastmod>2024-05-15T20:44:42.654Z</lastmod>
+  </url>
+  <url>
+    <loc>https://acarpignani.github.io/notebook/dplyr.html</loc>
+    <lastmod>2024-02-22T11:06:44.347Z</lastmod>
+  </url>
+  <url>
+    <loc>https://acarpignani.github.io/notebook/tidyr.html</loc>
+    <lastmod>2024-02-23T11:50:19.194Z</lastmod>
   </url>
   <url>
     <loc>https://acarpignani.github.io/notebook/intro-gg.html</loc>
     <lastmod>2024-02-21T11:26:40.567Z</lastmod>
   </url>
   <url>
-    <loc>https://acarpignani.github.io/notebook/purrr-functions.html</loc>
-    <lastmod>2024-05-15T20:44:42.654Z</lastmod>
+    <loc>https://acarpignani.github.io/notebook/ggplot-basics.html</loc>
+    <lastmod>2024-02-21T11:14:10.168Z</lastmod>
+  </url>
+  <url>
+    <loc>https://acarpignani.github.io/notebook/core-ggplot.html</loc>
+    <lastmod>2024-02-22T10:47:43.485Z</lastmod>
+  </url>
+  <url>
+    <loc>https://acarpignani.github.io/notebook/advanced-ggplot.html</loc>
+    <lastmod>2024-02-21T17:53:06.753Z</lastmod>
   </url>
   <url>
     <loc>https://acarpignani.github.io/notebook/practice-basics.html</loc>
@@ -51,25 +87,5 @@
   <url>
     <loc>https://acarpignani.github.io/notebook/practice-functions.html</loc>
     <lastmod>2024-05-15T20:29:56.127Z</lastmod>
-  </url>
-  <url>
-    <loc>https://acarpignani.github.io/notebook/lists.html</loc>
-    <lastmod>2024-02-17T16:24:32.519Z</lastmod>
-  </url>
-  <url>
-    <loc>https://acarpignani.github.io/notebook/data-frames.html</loc>
-    <lastmod>2024-02-17T16:24:32.476Z</lastmod>
-  </url>
-  <url>
-    <loc>https://acarpignani.github.io/notebook/loops.html</loc>
-    <lastmod>2024-02-17T16:24:32.519Z</lastmod>
-  </url>
-  <url>
-    <loc>https://acarpignani.github.io/notebook/dplyr.html</loc>
-    <lastmod>2024-02-22T11:06:44.347Z</lastmod>
-  </url>
-  <url>
-    <loc>https://acarpignani.github.io/notebook/tidyr.html</loc>
-    <lastmod>2024-02-23T11:50:19.194Z</lastmod>
   </url>
 </urlset>
