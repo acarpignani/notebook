@@ -1,86 +1,73 @@
 project:
-  type: website
+  type: book
   output-dir: docs
 
 page-navigation: false
 
-website:
+book:
   title: "R for Data Science"
+  subtitle: "Enhancement Class at The Bedford Sixth Form"
+  author: "Andrea Carpignani"
+  date: today
+  date-format: "DD MMMM YYYY"
   
-  navbar:
-    search: false
-    tools:
-      - icon: github
-        menu:
-          - text: "Source code"
-            url: "https://github.com/acarpignani/notebook"
-          - text: "Report a bug"
-            url: "https://github.com/acarpignani/notebook/issues"
-    
-    left: 
-      - text: "Intro"
-        file: index.qmd
-      - text: "R programming"
-        file: r-programming.qmd
-      - text: "Intro to ML"
-        file: intro-ml.qmd
-      - text: "Practice"
-        file: practice-basics.qmd
+  page-footer:
+    left: |
+      A. Carpignani -- R for Data Science
+    right: |
+      This book was build with <a href="https://quarto.org/">Quarto</a>.
   
-  sidebar:
+  site-url: "https://acarpignani.github.io/notebook/"
+  repo-url: "https://github.com/acarpignani/notebook/"
+  repo-branch: main
+  
+  chapters:
+    - index.qmd
     
-    - title: "R programming"
-      style: "floating"
-      search: false
-      collapse-level: 1
+    - part: "R programming"
+      chapters:
+        - r-basics.qmd
+        - vectors.qmd
+        - matrices.qmd
+        - lists.qmd
+        - data-frames.qmd
+        - in-and-out.qmd
 
-      contents:
-        - section: "Introduction to R programming"
-          contents:
-            - text: "Introduction"
-              file: r-programming.qmd
-            - r-basics.qmd
-            - vectors.qmd
-            - matrices.qmd
-            - lists.qmd
-            - data-frames.qmd
-            - in-and-out.qmd
+    - part: "Advanced R programming"
+      chapters:
+        - conditionals.qmd
+        - loops.qmd
+        - functions.qmd
+        - purrr-functions.qmd
+    
+    - part: "Data manipulation"
+      chapters:
+        - dplyr.qmd
+        - tidyr.qmd
+    
+    - part: "Data Visualisation"
+      chapters:
+        - intro-gg.qmd
+        - ggplot-basics.qmd
+        - core-ggplot.qmd
+        - advanced-ggplot.qmd
         
-        - section: "Basic R Programming"
-          contents:
-            - conditionals.qmd
-            - loops.qmd
-            - functions.qmd
-            - purrr-functions.qmd
-
-        - section: "Data Manipulation"
-          contents:
-            - dplyr.qmd
-            - tidyr.qmd
-            
-        - section: "Data Visualisation"
-          contents:
-            - intro-gg.qmd
-            - ggplot-basics.qmd
-            - core-ggplot.qmd
-            - advanced-ggplot.qmd
-
-    - title: "Practice"
-      contents:
+    - part: "Practice"
+      chapters:
         - practice-basics.qmd
         - practice-matrices.qmd
         - practice-data-frames.qmd
         - practice-control-flow.qmd
         - practice-functions.qmd
-        
 
 format:
   html:
     theme: [cosmo, custom.scss]
-    toc: true
+    toc: false
     html-math-method: katex
+    number-depth: 2
+    code-link: true
+
 
 editor: visual
-        
-date-format: "DD MMMM YYYY"
 

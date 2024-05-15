@@ -1,6 +1,6 @@
-# Practice 2: Matrices and Lists
+# Practice 2: Matrices and Lists {.unnumbered}
 
-### Answer the following questions using R
+### Answer the following questions using R {.unnumbered}
 
 1.  Create 2 vectors A and B, where A is $(1, 2, 3)$ and B is $(4, 5, 6)$. With these vectors, use the `cbind()` or `rbind()` function to create a 2 by 3 matrix from the vectors.\
     **Tip.** You will need to figure out which of these binding functions is the correct choice.

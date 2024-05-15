@@ -1,22 +1,14 @@
----
-title: "R for Data Science"
-subtitle: "The Bedford Sixth Form"
-author: "Andrea Carpignani"
-date: today
-date-format: "DD MMMM YYYY"
----
-
-## Welcome
+## Welcome {.unnumbered}
 
 This is the notebook associated with the enhancement class **R for Data Science** at **The Bedford Sixth Form**.
 
 In this web page you can find all the topics that we have done (or that we are going to do) in the enhancement class, and more. Sometimes, in fact, we might run out of time or focus more on certain aspects, depending on the interests of the students. However here I shall try to keep things simple and as complete as I can. The idea is that whoever misses a lesson, or wants to delve into a specific aspect can either find the answer in this website or find a link pointing to someone much more expert and skilled than me that can answer the question.
 
-## Basic bibliography
+## Basic bibliography {.unnumbered}
 
 I have used a myriad of resources to create this enhancement class, and I am sure that I cannot quote them all in a single shot, because they are really too many. However, I will try to keep the bibliography up-to-date by adding the references to the books, videos, screen-casts etc, that I take inspiration from. If you notice that I have forgotten any, please do open an issue on github and/or submit a pull request. If you are comfortable with neither, just drop me a line, and I'll fix it.
 
-### R programming
+### R programming {.unnumbered}
 
 -   H Wickham, M Çetinkaya-Rundel, G Grolemund. *R for Data Science*. O'Reilly (2nd Ed)
 
@@ -32,19 +24,19 @@ I have used a myriad of resources to create this enhancement class, and I am sur
 
 -   P Delgaard. *Introductory Statistics with R*. Springer (2nd Ed)
 
-### Machine Learning
+### Machine Learning {.unnumbered}
 
 -   G James, D Witten, T Hastie, R Tibshirani. *An Introduction to Statistical Learning*. Springer (2nd Ed)
 
 -   T Hastie, R Tibshirani, J Friedman. *The Elements of Statistical Learning*. Springer (2nd Ed)
 
-### Data sets sources
+### Data sets sources {.unnumbered}
 
 -   [TidyTuesday, a weekly data project in R from the R4DS online learning community](https://github.com/rfordatascience/tidytuesday)
 -   [UC Irving Machine Learning Repository](https://archive.ics.uci.edu/)
 -   [Kaggle](https://www.kaggle.com/)
 
-## Acknowledgments
+## Acknowledgments {.unnumbered}
 
 I have always been interested in data science, and working with R has massively enhanced this interest, by offering a magnificent tool, easy to learn, robust and beautifully open source. However, if my interest for data science with R has exploded, it is mostly thanks to the admirable work of **Hadley Wickham**, who has created the beautiful **ggplot** package and then the magnificent **tidyverse**. His work, his passion and his knowledge are absolutely inspiring.
 

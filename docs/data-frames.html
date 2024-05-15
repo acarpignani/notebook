@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R for Data Science</title>
+<title>R for Data Science - 5&nbsp; Data Frames</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,11 +74,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -104,81 +104,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">R for Data Science</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Intro</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./r-programming.html" aria-current="page"> 
-<span class="menu-text">R programming</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./intro-ml.html"> 
-<span class="menu-text">Intro to ML</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./practice-basics.html"> 
-<span class="menu-text">Practice</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
-    <div class="dropdown">
-      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/acarpignani/notebook">
-            Source code
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/acarpignani/notebook/issues">
-            Report a bug
-            </a>
-          </li>
-      </ul>
-    </div>
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r-programming.html">Introduction to R programming</a></li><li class="breadcrumb-item"><a href="./data-frames.html">Data Frames</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r-basics.html">R programming</a></li><li class="breadcrumb-item"><a href="./data-frames.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Frames</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R for Data Science</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/acarpignani/notebook/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Introduction to R programming</span></a>
+ <span class="menu-text">R programming</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -186,137 +158,139 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to R</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./vectors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Vectors</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vectors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./matrices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Matrices</span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lists.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lists</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lists</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-frames.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Data Frames</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Frames</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./in-and-out.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting data in and out of R</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Getting data in and out of R</span></span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
- <span class="menu-text">Basic R Programming</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conditionals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Conditionals</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conditionals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./loops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Loops</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Functions with R</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Functions with R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./purrr-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">The <em>map</em> family</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The <em>map</em> family</span></span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
- <span class="menu-text">Data Manipulation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data transformation</span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data transformation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tidyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reshaping data sets</span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Reshaping data sets</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro-gg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The “Grammar of Graphics”</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ggplot-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to ggplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./core-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Plotting elegant graphs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./advanced-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Advanced topics</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
- <span class="menu-text">Data Visualisation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro-gg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">The “Grammar of Graphics”</span></a>
+  <a href="./practice-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice 1: Introduction to R programming</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ggplot-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to ggplot</span></a>
+  <a href="./practice-matrices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice 2: Matrices and Lists</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./core-ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Plotting elegant graphs</span></a>
+  <a href="./practice-data-frames.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice 3: Data Frames</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advanced-ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced topics</span></a>
+  <a href="./practice-control-flow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice 4: Control structures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./practice-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice 5: Functions</span></a>
   </div>
 </li>
       </ul>
@@ -326,38 +300,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#data-frames" id="toc-data-frames" class="nav-link active" data-scroll-target="#data-frames">Data Frames</a>
-  <ul class="collapse">
-  <li><a href="#installing-and-loading-packages-in-r" id="toc-installing-and-loading-packages-in-r" class="nav-link" data-scroll-target="#installing-and-loading-packages-in-r">Installing and loading packages in R</a>
-  <ul class="collapse">
-  <li><a href="#long-names-versus-short-names" id="toc-long-names-versus-short-names" class="nav-link" data-scroll-target="#long-names-versus-short-names">Long names versus short names</a></li>
-  </ul></li>
-  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse">The tidyverse</a></li>
-  <li><a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles">Tibbles</a></li>
-  <li><a href="#examples-of-data-sets" id="toc-examples-of-data-sets" class="nav-link" data-scroll-target="#examples-of-data-sets">Examples of data sets</a></li>
-  <li><a href="#factors" id="toc-factors" class="nav-link" data-scroll-target="#factors">Factors</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r-basics.html">R programming</a></li><li class="breadcrumb-item"><a href="./data-frames.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Frames</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Frames</span></h1>
+</div>
 
 
 
-<section id="data-frames" class="level1">
-<h1>Data Frames</h1>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
 <p>Data frames are used to store tabular data in R. They are an important type of object and are used in a variety of statistical modelling applications.</p>
 <p>The <strong>tidyverse</strong> meta-package has an enhanced version of data frame, called a <strong>tibble</strong> and an optimised set of functions designed to work effectively with data frames and tibbles.</p>
 <p>Before we continue, it is therefore necessary to install, and load, the <strong>tidyverse</strong>.</p>
-<section id="installing-and-loading-packages-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="installing-and-loading-packages-in-r">Installing and loading packages in R</h2>
+<section id="installing-and-loading-packages-in-r" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="installing-and-loading-packages-in-r"><span class="header-section-number">5.1</span> Installing and loading packages in R</h2>
 <p>Anyone can create new R packages, but only when packages satisfy certain strict rules are they stored on CRAN. This ensures that packages stored on CRAN are reliable, have documentation and there is a support in place for the users. To install a package that lives on CRAN it suffices to type on the console <code>install.packages("package_name")</code>. R will then install the package and all the dependencies needed to run the package.</p>
 <p>So, to install the whole <strong>tidyverse</strong> we just have to type <code>install.packages("tidyverse")</code>.</p>
 <p>To load a package (regardless of where it comes from), we need to use the command <code>library()</code>. So, to load the <strong>tidyverse</strong> we can just type in out script and run the code</p>
@@ -395,16 +365,16 @@ Tip
 </div>
 </section>
 </section>
-<section id="the-tidyverse" class="level2">
-<h2 class="anchored" data-anchor-id="the-tidyverse">The tidyverse</h2>
+<section id="the-tidyverse" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="the-tidyverse"><span class="header-section-number">5.2</span> The tidyverse</h2>
 <p><a href="https://www.tidyverse.org/"><img src="images/tidyverse.svg" alt="tidyverse" width="140" height="165"></a></p>
 <p>Quoting from the tidyverse home page:</p>
 <p><strong><em>The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.</em></strong></p>
 <p>As we have seen by loading the tidyverse, this meta-package is composed of 9 packages, each with a specific function, to make the code more readable, effective and data analysis more enjoyable.</p>
 <p>The first feature of the tidyverse that we want to get acquainted with is a <strong>tibble</strong>. Again, quoting from the tidyverse home page: “A tibble is a modern re-imagining of the data frame, keeping what time has proven to be effective, and throwing out what it has not. Tibbles are data.frames that are lazy and surly: they do less and complain more forcing you to confront problems earlier, typically leading to cleaner, more expressive code.”</p>
 </section>
-<section id="tibbles" class="level2">
-<h2 class="anchored" data-anchor-id="tibbles">Tibbles</h2>
+<section id="tibbles" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="tibbles"><span class="header-section-number">5.3</span> Tibbles</h2>
 <p>Tibbles are represented as a special type of bivariate data sets, where every column may store different type of objects, but the overall length of each column must be the same. Tibbles may be thought of as two-by-two matrices, where the rows represent different items, and each column represents the variables that are recorded, or measured, for each item. Thus tibbles are the object that correctly represents a data set.</p>
 <p>Tibbles are generally created by reading in a data set using the <code>readr</code> functions such as <code>read_csv()</code> or <code>read_delim()</code>. However, tibbles can also be created explicitly using the <code>tibble()</code> function. For example,</p>
 <div class="cell">
@@ -467,8 +437,8 @@ Tip
 </div>
 <p>Nevertheless, it should be quite evident that when the data set is big, this is not the best way to create a data set. Before exploring how to import data sets into R, however, it may be worth exploring a few data sets.</p>
 </section>
-<section id="examples-of-data-sets" class="level2">
-<h2 class="anchored" data-anchor-id="examples-of-data-sets">Examples of data sets</h2>
+<section id="examples-of-data-sets" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="examples-of-data-sets"><span class="header-section-number">5.4</span> Examples of data sets</h2>
 <p>R contains several examples of data sets, some of which particularly interesting because they are data sets of historical value, like Edgar Anderson’s <strong>Iris</strong> data set. To see which data sets are included in R, we can use the command <code>data()</code>. This opens a new tab in RStudio showing the list of data sets included in base R.</p>
 <p>Any of these data sets can be called simply typing their name on the console (or running the corresponding code in the R script). However, data sets stored in R cannot be changed, and in order to have the flexibility to make changes, we may wish to save a copy in the memory. However, since the base R saves data sets as <code>data.frame</code> type, we may wish to transform them into a tibble, with the command <code>as_tibble()</code>, like so:</p>
 <div class="cell">
@@ -629,8 +599,8 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <p>A quick look shows that most of these summaries is little informative. For example, the number of cylinders, <code>cyl</code>, really not helpful to understand what is going on. Same for the model, which only tells us that there are 234 data, bat what is the distribution of the models?</p>
 <p>To answer that, we need to explain R that some of these data are not just characters (or numbers), but they are “categorical data”, which R calls <strong>factors</strong>.</p>
 </section>
-<section id="factors" class="level2">
-<h2 class="anchored" data-anchor-id="factors">Factors</h2>
+<section id="factors" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="factors"><span class="header-section-number">5.5</span> Factors</h2>
 <p>Factors are categorical data, i.e.&nbsp;qualitative or non-numerical data. For instance, social class, primary diagnosis, tumor stage, Tanner stage of puberty, etc are all examples of categorical data. They are typically input using a numeric code, but they can also be stored as characters.</p>
 <p>Such variables should always be specified as <strong>factor</strong> in R. This is the data structure that (among other things) makes it possible to assign meaningful names to the categories, instead of reading them as mere strings of characters (such as IDs).</p>
 <p>The terminology is that a factor has a set of <strong>levels</strong> — say four levels for concreteness. Internally, a four-level factor consists of two items: (a) a vector of integers between 1 and 4, and (b) a character vector of length 4 containing strings describing what the four levels are. Let’s look at an example, before going back to the <code>mpg</code> data set.</p>
@@ -738,7 +708,6 @@ $ class        &lt;fct&gt; compact, compact, compact, compact, compact, compact,
 <p>This is actually much more informative.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1130,6 +1099,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>A. Carpignani – R for Data Science</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was build with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
 
 
 
