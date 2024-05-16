@@ -67,6 +67,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -322,8 +365,21 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>The datasets for this practice can be found <a href="https://github.com/acarpignani/notebook/tree/main/datasets">here</a>. To answer the questions you are expected to load the <strong>tidyverse</strong> and data frames are expected to be converted as tibbles. You may either wish to download and save the files into a directory and to read them into R from there, or you may equally pass the address to <code>read_csv()</code> which will read the dataset from remote.</p>
+<section id="answer-the-following-questions-using-r" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="answer-the-following-questions-using-r">Answer the following questions using R</h3>
+<ol type="1">
+<li>Load into R the dataset <code>sheep.csv</code> available <a href="https://raw.githubusercontent.com/acarpignani/notebook/main/datasets/sheep.csv">here</a> and store it into a variable named <code>sheep</code>. Using <code>summarise()</code> find the mean weight and height of the sheep. Using the function <code>lm</code> find the regression line of the weight against the height of the sheep.<br>
+<strong>Tip.</strong> The <code>lm</code> function has the following syntax: <code>lm(outcome ~ predictor, data = mydata)</code>.</li>
+<li>Load into R the dataset <code>01test.csv</code> available <a href="https://raw.githubusercontent.com/acarpignani/notebook/main/datasets/01test.csv">here</a> and store it into a variable named <code>cuboids</code>. The data represents the three dimensions of a set of cuboids. Add a column <code>volume</code> with the volume (<span class="math inline">V = xyz</span>) of all these cuboids. Filter for the cuboids with a volume smaller then or equal to 40,000. Calculate the average volume of the full dataset.</li>
+<li>Load the dataset <code>cells.csv</code> available <a href="https://raw.githubusercontent.com/acarpignani/notebook/main/datasets/cells.csv">here</a> and store it into a variable named <code>cells</code>. Change the variables <code>age</code>, <code>sex</code> and <code>weight</code> into factors. Run the <code>summary()</code> function on the modified dataset.</li>
+<li>Load the dataset <code>pressure.csv</code> available <a href="https://raw.githubusercontent.com/acarpignani/notebook/main/datasets/pressure.csv">here</a> and store it into a variable named <code>pressure</code>. Change the type of the columns <code>sex</code> and <code>smoker</code> to factor. Use the function <code>separate()</code> to split the column <code>blood_pressure</code> into two new columns <code>sys</code> (for systolic) and <code>dia</code> (for diastolic). Then convert the columns <code>sys</code> and <code>dia</code> into numbers using the function <code>as.double()</code>. Group the dataset by <code>sex</code> and <code>smoker</code> and calculate the average systolic and diastolic pressure by sex and smoker status.</li>
+<li>Load the dataset <code>worms.csv</code> available <a href="https://raw.githubusercontent.com/acarpignani/notebook/main/datasets/worms.csv">here</a> and store it into a variable named <code>worms</code>. Use the function <code>clean_names()</code> from the package <code>janitor</code> (install it, if you haven’t done it yet), to standardise the names of the columns. Convert the <code>vegetation</code> column to factor. Using the function <code>str_replace()</code> to replace the <code>.</code> sign in the <code>field_name</code> with a white space.<br>
+<strong>Tip.</strong> You need to be extra careful here because the sign <code>.</code> is actually a <em>reprex</em> so if you attempt substitute the pattern <code>"."</code> with replacement <code>" "</code> you’ll get something quite unexpected. To pass the symbol <code>.</code> as such you need to wrap it into square brackets.</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
